@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.env
+.env.*
+data/
+artifacts/
+*.wav
+*.flac
+*.mp3
+*.zip
+*.pt
+*.pkl
