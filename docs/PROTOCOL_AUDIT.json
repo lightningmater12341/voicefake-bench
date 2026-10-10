@@ -1,0 +1,117 @@
+{
+  "verified_date": "2026-10-10",
+  "validation": "official CM metadata only; no audio loaded and no models trained",
+  "dataset_doi": "https://doi.org/10.7488/ds/2555",
+  "dataset_license": "https://opendatacommons.org/licenses/by/1.0/",
+  "archive": {
+    "archive_url": "https://datashare.ed.ac.uk/server/api/core/bitstreams/a9f87c35-f055-4015-80e2-2fdff0d46269/content",
+    "archive_size_bytes": 7640952520,
+    "archive_md5_published": "30c98f11d8b2bc21f2c257bfd78bb5c5",
+    "full_archive_downloaded": false,
+    "audio_downloaded": false,
+    "range_bytes_transferred": 13851982
+  },
+  "sources": {
+    "train": {
+      "filename": "ASVspoof2019.LA.cm.train.trn.txt",
+      "sha256": "65a289e4009400b42bb4f1e47ac60938d93f7f595452d1f220d35defc3de8ab8",
+      "rows": 25380
+    },
+    "dev": {
+      "filename": "ASVspoof2019.LA.cm.dev.trl.txt",
+      "sha256": "2fedaebf1ba3ae1a9bb7d3ec916804ac237b4eee063a27fa92e6549f03d129c7",
+      "rows": 24844
+    },
+    "eval": {
+      "filename": "ASVspoof2019.LA.cm.eval.trl.txt",
+      "sha256": "84fce576efff092269a0a6ad247d2e9f2f7b4d4e25a4545efb2518da92708036",
+      "rows": 71237
+    }
+  },
+  "selection": {
+    "algorithm": "sha256-ranking-v1",
+    "seed": 42,
+    "per_split_label_attack_cap": 100,
+    "mode": "subset"
+  },
+  "full_input_audit": {
+    "rows": 121461,
+    "speakers": 107,
+    "spoofing_methods": [
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06",
+      "A07",
+      "A08",
+      "A09",
+      "A10",
+      "A11",
+      "A12",
+      "A13",
+      "A14",
+      "A15",
+      "A16",
+      "A17",
+      "A18",
+      "A19"
+    ],
+    "counts": {
+      "dev": {
+        "bonafide": 2548,
+        "spoof": 22296
+      },
+      "eval": {
+        "bonafide": 7355,
+        "spoof": 63882
+      },
+      "train": {
+        "bonafide": 2580,
+        "spoof": 22800
+      }
+    }
+  },
+  "selected_audit": {
+    "rows": 2800,
+    "speakers": 104,
+    "spoofing_methods": [
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06",
+      "A07",
+      "A08",
+      "A09",
+      "A10",
+      "A11",
+      "A12",
+      "A13",
+      "A14",
+      "A15",
+      "A16",
+      "A17",
+      "A18",
+      "A19"
+    ],
+    "counts": {
+      "dev": {
+        "bonafide": 100,
+        "spoof": 600
+      },
+      "eval": {
+        "bonafide": 100,
+        "spoof": 1300
+      },
+      "train": {
+        "bonafide": 100,
+        "spoof": 600
+      }
+    }
+  },
+  "manifest_sha256": "239b0690f1a2afe608228efe588916f7d517afc58d0fada0c56998cbd5f98d02",
+  "real_input_reordering_verified": true
+}

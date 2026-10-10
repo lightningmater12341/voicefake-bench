@@ -6,7 +6,7 @@ A reproducible ML benchmark for distinguishing genuine speech from synthetic or 
 
 ## Current stage
 
-Day 1: benchmark design and dataset-manifest validation. No models have been trained and no detection results are available yet. This repository is being built in small, tested daily increments; the [roadmap](docs/ROADMAP.md) records what comes next.
+Day 2: official protocol import, provenance tracking, and reproducible subset manifests. No models have been trained and no detection results are available yet. This repository is being built in small, tested daily increments; the [roadmap](docs/ROADMAP.md) records what comes next.
 
 ## What will be compared
 
@@ -19,17 +19,17 @@ All models will use the same data partitions and evaluation conditions. A small 
 
 ## Dataset and evaluation
 
-The planned starting dataset is **ASVspoof 2019 Logical Access (LA)**, which includes text-to-speech and voice-conversion attacks. Its official train, development, and evaluation partitions separate speakers, and evaluation includes previously unseen spoofing algorithms. See the [official dataset record](https://doi.org/10.7488/ds/2555).
+The starting dataset is **ASVspoof 2019 Logical Access (LA)**, which includes text-to-speech and voice-conversion attacks. Its official train, development, and evaluation partitions separate speakers, and evaluation includes previously unseen spoofing algorithms. See the [official dataset record](https://doi.org/10.7488/ds/2555).
 
 We will preserve those partitions, fit preprocessing only on training data, select models and decision thresholds on development data, then freeze the experiment before scoring evaluation data. Subsets used for laptop experiments will be documented as subsets, not full challenge results.
 
 Planned metrics: ROC-AUC, equal error rate, and fake-speech recall at a threshold selected to target a 1% false-positive rate on development data. The actual evaluation false-positive rate will also be reported. Accuracy alone can hide failures when class sizes differ.
 
-The complete LA archive is about 7.12 GB. Audio is kept outside Git; day 2 will document storage, licensing, and a manageable subset strategy. The older dataset is a starting benchmark and does not establish performance on current commercial voice generators.
+The complete LA archive is about 7.12 GiB. [Dataset setup and terms](docs/DATASET.md) document storage, licensing, and a manageable subset strategy. Official metadata has been audited; audio is kept outside Git. The older dataset is a starting benchmark and does not establish performance on current commercial voice generators.
 
 ## Run today's component
 
-Requires Python 3.10 or newer. The current validator uses only the Python standard library; audio/ML dependencies will be added with the components that need them.
+Requires Python 3.10 or newer. The current metadata tools use only the Python standard library; audio/ML dependencies will be added with the components that need them.
 
 From the repository root:
 
@@ -39,6 +39,8 @@ python -m voicefake --help
 python -m voicefake validate-manifest path/to/manifest.csv
 python -m unittest discover -s tests -v
 ```
+
+Use `python -m voicefake import-protocols --help` for the new importer and [the dataset recipe](docs/DATASET.md) for a complete command. It preserves official partitions, checks all source metadata before sampling, and writes a manifest plus a provenance sidecar. The default smoke subset contains 2,800 entries; it is not a model-performance result.
 
 The manifest schema is:
 
