@@ -6,7 +6,7 @@ A reproducible ML benchmark for distinguishing genuine speech from synthetic or 
 
 ## Current stage
 
-Day 2: official protocol import, provenance tracking, and reproducible subset manifests. No models have been trained and no detection results are available yet. This repository is being built in small, tested daily increments; the [roadmap](docs/ROADMAP.md) records what comes next.
+Day 3: audio loading, a fixed processing recipe, and a real-clip smoke audit. No models have been trained and no detection results are available yet. This repository is being built in small, tested daily increments; the [roadmap](docs/ROADMAP.md) records what comes next.
 
 ## What will be compared
 
@@ -29,18 +29,21 @@ The complete LA archive is about 7.12 GiB. [Dataset setup and terms](docs/DATASE
 
 ## Run today's component
 
-Requires Python 3.10 or newer. The current metadata tools use only the Python standard library; audio/ML dependencies will be added with the components that need them.
+Requires Python 3.10 or newer. Metadata tools use only the Python standard library. Audio loading uses the optional audio dependency group; ML dependencies will be added with the components that need them.
 
 From the repository root:
 
 ```bash
-python -m pip install -e .
+python -m pip install -e ".[audio]"
 python -m voicefake --help
 python -m voicefake validate-manifest path/to/manifest.csv
+python -m voicefake inspect-audio path/to/recording.flac --config configs/audio.json
 python -m unittest discover -s tests -v
 ```
 
 Use `python -m voicefake import-protocols --help` for the new importer and [the dataset recipe](docs/DATASET.md) for a complete command. It preserves official partitions, checks all source metadata before sampling, and writes a manifest plus a provenance sidecar. The default smoke subset contains 2,800 entries; it is not a model-performance result.
+
+The [audio recipe](docs/AUDIO.md) defines mono conversion, 16 kHz resampling, silence/volume handling, and deterministic duration limits. The [real-clip audit](docs/AUDIO_SMOKE_AUDIT.json) records 14 successfully loaded official train/dev clips and repeatable decoding. All 30 current tests pass. No evaluation audio has been processed and no detector has been trained.
 
 The manifest schema is:
 

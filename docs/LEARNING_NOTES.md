@@ -35,3 +35,21 @@ Future milestones will append their own explanations, actual observations, and l
 **Interview answer today:** "I can reproduce my dataset selection exactly and show which source files produced it. I preserve official splits and check leakage before sampling. The current subset is for pipeline development; performance experiments are still ahead."
 
 **Try explaining:** Why does changing the cap affect class prevalence? What is the difference between a source-file hash and an audio-content hash?
+
+## Day 3 — make audio processing explicit
+
+**What changed:** The loader now reads local recordings, averages channels to mono, resamples when needed, and applies a documented duration rule. The same processing applies to both labels. All 14 official train/dev smoke clips loaded successfully, repeated decoding was identical, and the full test suite passes 30 tests. No features or models have been built yet.
+
+**What does 16 kHz mean?** The waveform contains 16,000 time samples each second. At this rate, its Nyquist frequency is 8 kHz. A consistent sample rate makes later feature windows correspond to the same duration and frequency range for every recording.
+
+**Why filtering when downsampling?** Simply dropping samples can fold high-frequency energy into lower frequencies, called aliasing. The polyphase FIR resampler applies low-pass filtering as part of sample-rate conversion. A test checks that a 12 kHz tone is suppressed when reducing 48 kHz audio to 16 kHz.
+
+**Why preserve silence and volume?** Trimming or normalizing is another modeling choice that could remove useful information or create shortcuts. This first recipe retains original silent segments and amplitude, then documents the choice. It does not claim those choices are universally best. Completely zero-energy signals are rejected because they cannot provide a useful waveform.
+
+**Why not pad every clip?** The planned summary features can handle different clip durations. Padding would add artificial silence, and repeated padding could add artificial periodic patterns. Short clips retain their actual length; recordings longer than 10 seconds are center-cropped deterministically. Clips shorter than 0.25 seconds fail explicitly instead of being silently dropped.
+
+**What did real clips test?** Actual dataset decoding and repeatability. Every selected clip was already mono at 16 kHz and shorter than 10 seconds, so crop and resampling behavior was tested with controlled signal fixtures instead. A small smoke check is not proof that every corpus file is valid.
+
+**Interview answer today:** "I made preprocessing reproducible before extracting features. I record the source properties, resampling and crop decisions, library versions, and waveform fingerprints. The current check establishes that the loader works; it says nothing yet about fake-voice detection accuracy."
+
+**Try explaining:** What happens to a 12 kHz tone if you downsample without filtering? How could padding or silence trimming affect a detector? Why should waveform hashes be interpreted alongside software versions?

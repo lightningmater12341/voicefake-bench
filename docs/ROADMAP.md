@@ -6,7 +6,7 @@ Each milestone is one small, meaningful daily increment. A milestone can take mo
 | --- | --- | --- | --- |
 | 1 | Define benchmark, create Python package, validate manifest metadata | Leakage/metadata tests and CLI check | Complete |
 | 2 | Document dataset terms and storage; import official LA protocols and deterministic subset manifests | Official metadata audited: 121,461 records; reproducible 2,800-entry subset; 18 tests pass | Complete |
-| 3 | Load audio and establish sample-rate/duration/silence rules | Real audio smoke check and recorded processing settings | Planned |
+| 3 | Load audio and establish sample-rate/duration/silence rules | 14 official train/dev clips decode repeatably; processing recipe and runtime recorded; 30 tests pass | Complete |
 | 4 | Extract and cache MFCC summary features | Shapes, finite values, training-only preprocessing | Planned |
 | 5 | Add majority-class and logistic-regression baselines | Reproducible training and development metrics | Planned |
 | 6 | Add SVM and random forest with a bounded search | Same data/features; comparable development outputs | Planned |

@@ -1,0 +1,264 @@
+{
+  "verified_date": "2026-10-11",
+  "purpose": "Official train/dev waveform-loading smoke check; no features, models, or evaluation scoring",
+  "dataset_doi": "https://doi.org/10.7488/ds/2555",
+  "dataset_license": "https://opendatacommons.org/licenses/by/1.0/",
+  "manifest_audit": {
+    "rows": 14,
+    "speakers": 10,
+    "spoofing_methods": [
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06"
+    ],
+    "counts": {
+      "dev": {
+        "bonafide": 1,
+        "spoof": 6
+      },
+      "eval": {
+        "bonafide": 0,
+        "spoof": 0
+      },
+      "train": {
+        "bonafide": 1,
+        "spoof": 6
+      }
+    }
+  },
+  "parent_smoke_manifest_sha256": "239b0690f1a2afe608228efe588916f7d517afc58d0fada0c56998cbd5f98d02",
+  "audio_config_sha256": "925b1905d873c2ff4b9cd8a8db5c42ffad87fbbb80080e09c6258d850e0628a8",
+  "config": {
+    "schema_version": 1,
+    "target_sample_rate": 16000,
+    "min_duration_seconds": 0.25,
+    "max_duration_seconds": 10.0,
+    "max_source_duration_seconds": 120.0
+  },
+  "policies": {
+    "mono": "channel_mean",
+    "resampling": "polyphase_kaiser_5",
+    "resampling_boundary": "constant_zero",
+    "duration": "center_crop_no_padding",
+    "silence": "retain",
+    "amplitude": "preserve_no_normalization_or_clipping"
+  },
+  "runtime": {
+    "python": "3.14.7",
+    "system": "Windows",
+    "machine": "AMD64",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "soundfile": "0.13.1",
+      "cffi": "2.1.1",
+      "pycparser": "3.11"
+    },
+    "libsndfile": "1.2.2"
+  },
+  "acquisition": {
+    "archive_url": "https://datashare.ed.ac.uk/server/api/core/bitstreams/a9f87c35-f055-4015-80e2-2fdff0d46269/content",
+    "archive_size_bytes": 7640952520,
+    "range_bytes_transferred": 13813561,
+    "selection": "lexicographically first smoke-manifest path per train/dev label/attack stratum",
+    "evaluation_audio_acquired": false
+  },
+  "observed": {
+    "clips": 14,
+    "native_encoding": "16 kHz mono FLAC PCM_16 for all checked clips",
+    "duration_min_seconds": 0.986,
+    "duration_max_seconds": 5.546,
+    "clips_cropped": 0,
+    "clips_resampled": 0,
+    "total_audio_bytes_acquired": 745251,
+    "repeated_decoding_identical": true
+  },
+  "checks": [
+    {
+      "filename": "LA_D_1086391.flac",
+      "split": "dev",
+      "label": "bonafide",
+      "attack_id": "-",
+      "source_frames": 38761,
+      "output_frames": 38761,
+      "source_duration_seconds": 2.4225625,
+      "cropped": false,
+      "resampled": false,
+      "file_sha256": "fbdaba89c82e49d08d928c758a1da4c38348b664a2abc4028294334c99837542",
+      "processed_float32_le_sha256": "05d5f141440f2d0f6a04a2862b3a6ffb4d36b194a7f4aaac906a1e4582e028cd"
+    },
+    {
+      "filename": "LA_D_1035474.flac",
+      "split": "dev",
+      "label": "spoof",
+      "attack_id": "A01",
+      "source_frames": 19727,
+      "output_frames": 19727,
+      "source_duration_seconds": 1.2329375,
+      "cropped": false,
+      "resampled": false,
+      "file_sha256": "57fc9082b66ab94a6ce38b858ada6fe42cea16557df9c72e19cf4e513c900bb4",
+      "processed_float32_le_sha256": "a6332a47e09d062cc9607fc1814bc77912dcf2f818490070ba2201e0a25527ab"
+    },
+    {
+      "filename": "LA_D_1022459.flac",
+      "split": "dev",
+      "label": "spoof",
+      "attack_id": "A02",
+      "source_frames": 43063,
+      "output_frames": 43063,
+      "source_duration_seconds": 2.6914375,
+      "cropped": false,
+      "resampled": false,
+      "file_sha256": "efb14c8c2be0e61a3d30af26a3c2cef8f5e3650d53757f233330f2b207b2e06d",
+      "processed_float32_le_sha256": "84b2133b13ed0b29ec640cb404684ae0726828640f084f07db7e28484dd951ba"
+    },
+    {
+      "filename": "LA_D_1042957.flac",
+      "split": "dev",
+      "label": "spoof",
+      "attack_id": "A03",
+      "source_frames": 39236,
+      "output_frames": 39236,
+      "source_duration_seconds": 2.45225,
+      "cropped": false,
+      "resampled": false,
+      "file_sha256": "3e26df3c54616ed5cd37a877b16aa8c2a7aaa36d243be7bca9aeeaa2c0d76c22",
+      "processed_float32_le_sha256": "edcc293f047f78bbc3b7988354a1bae244291fcbc74a7159d363239b15f92564"
+    },
+    {
+      "filename": "LA_D_1185773.flac",
+      "split": "dev",
+      "label": "spoof",
+      "attack_id": "A04",
+      "source_frames": 15776,
+      "output_frames": 15776,
+      "source_duration_seconds": 0.986,
+      "cropped": false,
+      "resampled": false,
+      "file_sha256": "c2a38f8b84d345d2b537e411670688db0493725768d744728d03592e8628b8a7",
+      "processed_float32_le_sha256": "10ed30081ca2e748c8186255fed3b2a3c82091474f2b3fd11506dc2692411dd1"
+    },
+    {
+      "filename": "LA_D_1061499.flac",
+      "split": "dev",
+      "label": "spoof",
+      "attack_id": "A05",
+      "source_frames": 42362,
+      "output_frames": 42362,
+      "source_duration_seconds": 2.647625,
+      "cropped": false,
+      "resampled": false,
+      "file_sha256": "2fdf43184cef654dac3e4ecc82728a912303abd6016b9b5f6f27a1f4e516bca3",
+      "processed_float32_le_sha256": "b63ba51fc1ef06d24ae9e67ac80c58f40ef788857c69c9e1737d3cc49b6f6905"
+    },
+    {
+      "filename": "LA_D_1254187.flac",
+      "split": "dev",
+      "label": "spoof",
+      "attack_id": "A06",
+      "source_frames": 71595,
+      "output_frames": 71595,
+      "source_duration_seconds": 4.4746875,
+      "cropped": false,
+      "resampled": false,
+      "file_sha256": "afda6b6068444037043aefd5ef1b26eb001254ed01aaf9909d80137373fbcb76",
+      "processed_float32_le_sha256": "c82006de4be1ea2c428c95295bbd4c9eb63cbbdc204721839a1ca3493f2acab2"
+    },
+    {
+      "filename": "LA_T_1007571.flac",
+      "split": "train",
+      "label": "bonafide",
+      "attack_id": "-",
+      "source_frames": 66190,
+      "output_frames": 66190,
+      "source_duration_seconds": 4.136875,
+      "cropped": false,
+      "resampled": false,
+      "file_sha256": "7ce1a976a94578361eaada4dac804652c56579cc09cf676c81e60c01036f2005",
+      "processed_float32_le_sha256": "f82eb8d9342ee2240df48dd69b6d598ef46ee8dab2afcc7a4f49ef1dd6e79f42"
+    },
+    {
+      "filename": "LA_T_1035222.flac",
+      "split": "train",
+      "label": "spoof",
+      "attack_id": "A01",
+      "source_frames": 60063,
+      "output_frames": 60063,
+      "source_duration_seconds": 3.7539375,
+      "cropped": false,
+      "resampled": false,
+      "file_sha256": "6ca3b8c4d053e35248107ce99c9c86da3449658e156b1942078b350eef78f62c",
+      "processed_float32_le_sha256": "32cf81d0d0e395590169b4f947b0230ea6ec9e85e732d05caa68e132f2fb3499"
+    },
+    {
+      "filename": "LA_T_1032598.flac",
+      "split": "train",
+      "label": "spoof",
+      "attack_id": "A02",
+      "source_frames": 65086,
+      "output_frames": 65086,
+      "source_duration_seconds": 4.067875,
+      "cropped": false,
+      "resampled": false,
+      "file_sha256": "cc1e8f23f663994e77937b1058a12b8be616b6a9fd13d2714feb747d3fb6b06d",
+      "processed_float32_le_sha256": "a06113eaeb91d9d9a55e8e12e8003d27e839d12dcbad6a053bdbe9350786be89"
+    },
+    {
+      "filename": "LA_T_1018227.flac",
+      "split": "train",
+      "label": "spoof",
+      "attack_id": "A03",
+      "source_frames": 37892,
+      "output_frames": 37892,
+      "source_duration_seconds": 2.36825,
+      "cropped": false,
+      "resampled": false,
+      "file_sha256": "36c82c0a31cfb39e47f0fc035d2058ebd56a54c4d0937e0bc8f82cfe17390dfc",
+      "processed_float32_le_sha256": "e10c41aa1ed2c50aa64f1552048d06562fc0c6107c703e79a42ead435019a006"
+    },
+    {
+      "filename": "LA_T_1116030.flac",
+      "split": "train",
+      "label": "spoof",
+      "attack_id": "A04",
+      "source_frames": 17089,
+      "output_frames": 17089,
+      "source_duration_seconds": 1.0680625,
+      "cropped": false,
+      "resampled": false,
+      "file_sha256": "8cb20a6472015bad375759ecdf1fbf91613f36dc99e3db4a9f3432b936ba0a53",
+      "processed_float32_le_sha256": "771926bab9e1b96a4a18fde0d3eded7eff923b5ddc7d3c9feff926fe51308764"
+    },
+    {
+      "filename": "LA_T_1053692.flac",
+      "split": "train",
+      "label": "spoof",
+      "attack_id": "A05",
+      "source_frames": 66203,
+      "output_frames": 66203,
+      "source_duration_seconds": 4.1376875,
+      "cropped": false,
+      "resampled": false,
+      "file_sha256": "5c64d83415bbdd4f85bb072e3e2ccf826e61f02d54bbe1bb4b8c28c6aaa0d5c4",
+      "processed_float32_le_sha256": "236ffadd36977e95a3850db79a126cb26029cf807c17fb1f32c528aa949fc585"
+    },
+    {
+      "filename": "LA_T_1136677.flac",
+      "split": "train",
+      "label": "spoof",
+      "attack_id": "A06",
+      "source_frames": 88736,
+      "output_frames": 88736,
+      "source_duration_seconds": 5.546,
+      "cropped": false,
+      "resampled": false,
+      "file_sha256": "23003e63d70e16991a4bef0f6280e6387f4da0c36382ca0dc15fe23620b3b598",
+      "processed_float32_le_sha256": "3e073fa985e6460ac2c12d37a7bc8fada78615c2311493482ecda361fe32a524"
+    }
+  ],
+  "model_performance_results": false
+}

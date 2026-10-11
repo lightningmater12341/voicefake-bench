@@ -21,17 +21,26 @@ def main() -> int:
                            help="Cap per split/label/attack (default: 100)")
     selection.add_argument("--all", action="store_true", help="Include all protocol records")
     importer.add_argument("--seed", type=int, default=42, help="Subset ranking seed (default: 42)")
+    inspector = commands.add_parser("inspect-audio", help="Decode and audit a local recording")
+    inspector.add_argument("path", help="Path to a local audio file")
+    inspector.add_argument("--config", help="Audio configuration JSON; otherwise use documented defaults")
     args = parser.parse_args()
     try:
         if args.command == "validate-manifest":
             result = validate_manifest(args.path)
-        else:
+        elif args.command == "import-protocols":
             result = build_manifest(
                 {split: getattr(args, split) for split in ("train", "dev", "eval")},
                 args.output, None if args.all else args.per_stratum, args.seed,
             )
+        else:
+            from .audio import AudioConfig, load_audio
+            config = AudioConfig.from_json(args.config) if args.config else AudioConfig()
+            _, result = load_audio(args.path, config)
+    except ImportError:
+        parser.exit(status=2, message="Audio support requires: python -m pip install -e \".[audio]\"\n")
     except (OSError, ValueError) as exc:
-        parser.exit(status=2, message=f"Dataset metadata check failed: {exc}\n")
+        parser.exit(status=2, message=f"Input validation failed: {exc}\n")
     print(json.dumps(result, indent=2))
     return 0
 

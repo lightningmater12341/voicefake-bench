@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "target_sample_rate": 16000,
+  "min_duration_seconds": 0.25,
+  "max_duration_seconds": 10.0,
+  "max_source_duration_seconds": 120.0
+}
