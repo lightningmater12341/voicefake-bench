@@ -53,3 +53,23 @@ Future milestones will append their own explanations, actual observations, and l
 **Interview answer today:** "I made preprocessing reproducible before extracting features. I record the source properties, resampling and crop decisions, library versions, and waveform fingerprints. The current check establishes that the loader works; it says nothing yet about fake-voice detection accuracy."
 
 **Try explaining:** What happens to a 12 kHz tone if you downsample without filtering? How could padding or silence trimming affect a detector? Why should waveform hashes be interpreted alongside software versions?
+
+## Day 4 — turn sound into comparable numbers
+
+**What changed:** Each processed clip now becomes 40 numbers: 20 MFCC means and 20 standard deviations. The 14 official smoke clips produced finite vectors, and a second pass reused every cache entry with identical results. All 42 tests pass; there is still no trained detector.
+
+**What is an MFCC?** We break speech into short frames, measure frequency-band energy on a mel scale, take a logarithm, and use a cosine transform to summarize the shape of that energy distribution. These are fixed signal-processing calculations. A later classifier learns which patterns are associated with genuine or spoofed examples.
+
+**Why mean and standard deviation?** Different clips have different numbers of frames. Pooling each coefficient gives a fixed-size vector: its typical value and how much it varies. This is inexpensive and explainable, but pooling loses frame order and detailed timing information.
+
+**Why specify every setting?** "MFCC features" is not a complete recipe. Window size, frequency scale, energy floor, DCT normalization, retained coefficients, and pooling all affect the values. Our configuration and processing notes make those choices reviewable.
+
+**Why retain c0?** It contains overall log-energy-scale information. A mathematical test confirms that multiplying amplitude by two shifts c0 by the expected amount while the other coefficients stay unchanged when the energy floor is inactive. That also highlights a limitation: a model may use volume-related information, so later failure analysis matters.
+
+**Why cache by content?** A filename can stay the same while its audio changes. Source hashes, processing settings, source code, and runtime versions identify the calculation. A matching validated cache entry avoids another decode and feature pass; a changed source or recipe cannot silently reuse stale numbers.
+
+**Where could leakage happen next?** Computing fixed per-clip means is not fitting a dataset-wide scaler. Standardizing feature columns across all partitions would be a learned preprocessing mistake. The later model pipeline must learn its scaling on training data only. Labels and speaker/method IDs remain metadata, not numeric predictors.
+
+**Interview answer today:** "I can turn variable-length speech into a reproducible 40-dimensional representation and show that my caches reuse only matching inputs and settings. I have verified the feature pipeline, and the next step is a baseline on a larger training/development sample."
+
+**Try explaining:** What information does mean/std pooling discard? Why can the same filename need a fresh cache entry? How is a fixed per-clip summary different from fitting a scaler on the whole dataset?

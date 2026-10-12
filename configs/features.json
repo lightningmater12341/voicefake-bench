@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "sample_rate": 16000,
+  "frame_length": 400,
+  "hop_length": 160,
+  "n_fft": 512,
+  "n_mels": 40,
+  "n_mfcc": 20,
+  "fmin_hz": 20.0,
+  "fmax_hz": 7600.0,
+  "log_floor": 1e-12
+}

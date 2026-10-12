@@ -24,6 +24,14 @@ def main() -> int:
     inspector = commands.add_parser("inspect-audio", help="Decode and audit a local recording")
     inspector.add_argument("path", help="Path to a local audio file")
     inspector.add_argument("--config", help="Audio configuration JSON; otherwise use documented defaults")
+    extractor = commands.add_parser("extract-features", help="Cache MFCC summaries and index a manifest")
+    extractor.add_argument("--manifest", required=True)
+    extractor.add_argument("--audio-root", required=True)
+    extractor.add_argument("--cache-dir", required=True)
+    extractor.add_argument("--output", required=True, help="New JSON feature-index path")
+    extractor.add_argument("--audio-config", help="Audio processing JSON")
+    extractor.add_argument("--feature-config", help="Feature recipe JSON")
+    extractor.add_argument("--allow-eval", action="store_true", help="Allow evaluation audio after experiment freeze")
     args = parser.parse_args()
     try:
         if args.command == "validate-manifest":
@@ -33,10 +41,18 @@ def main() -> int:
                 {split: getattr(args, split) for split in ("train", "dev", "eval")},
                 args.output, None if args.all else args.per_stratum, args.seed,
             )
-        else:
+        elif args.command == "inspect-audio":
             from .audio import AudioConfig, load_audio
             config = AudioConfig.from_json(args.config) if args.config else AudioConfig()
             _, result = load_audio(args.path, config)
+        else:
+            from .audio import AudioConfig
+            from .features import FeatureConfig
+            from .feature_cache import extract_manifest
+            audio_config = AudioConfig.from_json(args.audio_config) if args.audio_config else AudioConfig()
+            feature_config = FeatureConfig.from_json(args.feature_config) if args.feature_config else FeatureConfig()
+            result = extract_manifest(args.manifest, args.audio_root, args.cache_dir, args.output,
+                                      audio_config, feature_config, args.allow_eval)
     except ImportError:
         parser.exit(status=2, message="Audio support requires: python -m pip install -e \".[audio]\"\n")
     except (OSError, ValueError) as exc:

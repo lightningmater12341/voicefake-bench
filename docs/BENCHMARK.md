@@ -22,6 +22,8 @@ A small subset is suitable for pipeline checks. It must not be described as a fu
 
 Start with a majority-class sanity baseline. Compare logistic regression, RBF SVM, and random forest on the same MFCC mean/std features. Specify sample rate, framing, feature count, silence treatment, and input-duration policy before running features. Log these choices in a configuration file.
 
+The implemented [feature recipe](FEATURES.md) uses 20 MFCC means and 20 population standard deviations, with fixed 25 ms frames and 10 ms hops at 16 kHz. It fits no corpus statistics. Any later scaling must be fitted on training features only. The current 14-clip feature check is a pipeline smoke test; expand the training/development sample before model-performance reporting.
+
 Use a small predefined hyperparameter search and development data for model selection. Keep feature/model training separate from inference. Freeze configurations, model artifacts, and thresholds before evaluating the final partition.
 
 ## Metrics

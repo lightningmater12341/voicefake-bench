@@ -1,0 +1,88 @@
+{
+  "verified_date": "2026-10-12",
+  "purpose": "MFCC extraction and cache-reuse smoke check; not model performance",
+  "dataset_doi": "https://doi.org/10.7488/ds/2555",
+  "dataset_license": "https://opendatacommons.org/licenses/by/1.0/",
+  "extractor_version": "mfcc-summary-v1",
+  "manifest_sha256": "1aef4b421fa55e42330e0b388e554c09380d5273ce3da0e92a30f21eb2a952cf",
+  "manifest_audit": {
+    "rows": 14,
+    "speakers": 10,
+    "spoofing_methods": [
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06"
+    ],
+    "counts": {
+      "dev": {
+        "bonafide": 1,
+        "spoof": 6
+      },
+      "eval": {
+        "bonafide": 0,
+        "spoof": 0
+      },
+      "train": {
+        "bonafide": 1,
+        "spoof": 6
+      }
+    }
+  },
+  "audio_config": {
+    "schema_version": 1,
+    "target_sample_rate": 16000,
+    "min_duration_seconds": 0.25,
+    "max_duration_seconds": 10.0,
+    "max_source_duration_seconds": 120.0
+  },
+  "feature_config": {
+    "schema_version": 1,
+    "sample_rate": 16000,
+    "frame_length": 400,
+    "hop_length": 160,
+    "n_fft": 512,
+    "n_mels": 40,
+    "n_mfcc": 20,
+    "fmin_hz": 20.0,
+    "fmax_hz": 7600.0,
+    "log_floor": 1e-12
+  },
+  "runtime": {
+    "python": "3.14.7",
+    "system": "Windows",
+    "machine": "AMD64",
+    "libsndfile": "1.2.2",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "soundfile": "0.13.1"
+    }
+  },
+  "source_code_sha256": {
+    "audio.py": "ec63f83c71656fa47ebe8079cef56929e20a8fb614582b735425b24d85e5a559",
+    "features.py": "202624514b7ac9b7b0fdcd76f01020acb617fe7e8d9336bd1f738bd2413cb68a",
+    "feature_cache.py": "1ab1c477ed42d92e2af177505f94572ce14e17d3cd4e262ce425b8fecaa4307a"
+  },
+  "observed": {
+    "feature_matrix_shape": [
+      14,
+      40
+    ],
+    "dtype": "float32",
+    "all_values_finite": true,
+    "initial_cache_hits": 0,
+    "replay_cache_hits": 14,
+    "identical_vectors_on_replay": true,
+    "mfcc_frames_min": 97,
+    "mfcc_frames_max": 553,
+    "feature_matrix_float32_le_sha256": "b57dfeecab381953bf12721b71fbb635a326b935c7b93319df187ea44ff14d39"
+  },
+  "unit_tests_passed": 42,
+  "learned_preprocessing_fitted": false,
+  "models_trained": false,
+  "evaluation_audio_processed": false,
+  "cached_features_published": false
+}
