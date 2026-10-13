@@ -73,3 +73,23 @@ Future milestones will append their own explanations, actual observations, and l
 **Interview answer today:** "I can turn variable-length speech into a reproducible 40-dimensional representation and show that my caches reuse only matching inputs and settings. I have verified the feature pipeline, and the next step is a baseline on a larger training/development sample."
 
 **Try explaining:** What information does mean/std pooling discard? Why can the same filename need a fresh cache entry? How is a fixed per-clip summary different from fitting a scaler on the whole dataset?
+
+## Day 5 — measure a baseline and read its mistakes
+
+**What changed:** The local dataset expanded to 700 training and 700 development clips, with 100 genuine and 600 spoof clips in each partition. The first models are a majority-class reference and logistic regression on the same 40 features. Repeated fits and restored-model predictions match; all 51 tests pass.
+
+**What does the majority reference teach us?** Calling every voice fake gets 85.71% raw accuracy because 600 of 700 development clips are spoofed. It also falsely flags every genuine voice. Balanced accuracy gives each class equal weight, exposing this reference's 50% result.
+
+**What does logistic regression learn?** It learns weights for the feature columns and an intercept, producing a score through the logistic function. StandardScaler first puts feature columns on comparable scales. Both the scaling statistics and model weights are fitted using training data only.
+
+**Why class weighting?** There are six times as many spoof examples as genuine examples. The balanced setting uses training counts to give the two classes equal total weight in the training objective. That choice changes the tradeoff; it does not automatically maximize raw accuracy or calibrate the scores.
+
+**What happened on development?** Logistic regression achieved 78.92% balanced accuracy, recognizing 72 of 100 genuine clips and 515 of 600 spoof clips. It falsely flagged 28 genuine clips and missed 85 spoof clips at the predefined 0.5 threshold. Its raw accuracy was 83.86%, below the majority reference's 85.71%. Reporting the confusion matrix makes that tradeoff visible.
+
+**Why leave these imperfect results in the project?** A benchmark measures a starting point and its failure modes. Selecting or hiding results to make the first model look impressive would defeat that purpose. Same-data comparisons and later operating-point analysis can establish what actually improves.
+
+**Why keep development separate?** Today's model settings were chosen before inspecting its scores. Future model selection may use development results, which means those results remain provisional. The held-out evaluation partition must stay separate from those choices.
+
+**Interview answer today:** "My first baseline is reproducible, and its confusion matrix shows a meaningful weakness: it falsely flags 28% of genuine development clips at the default threshold. I compare against a majority reference to show why raw accuracy is misleading under imbalance. The next steps are same-data model comparisons and a carefully selected operating point."
+
+**Try explaining:** Why can a model with lower raw accuracy be more useful here? What does class weighting change? Why do we need a final partition after using development results to choose models?

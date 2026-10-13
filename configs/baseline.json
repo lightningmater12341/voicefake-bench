@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "C": 1.0,
+  "max_iter": 2000,
+  "tolerance": 0.0001,
+  "class_weight": "balanced",
+  "seed": 42,
+  "min_class_count": 20
+}

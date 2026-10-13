@@ -8,7 +8,7 @@ Each milestone is one small, meaningful daily increment. A milestone can take mo
 | 2 | Document dataset terms and storage; import official LA protocols and deterministic subset manifests | Official metadata audited: 121,461 records; reproducible 2,800-entry subset; 18 tests pass | Complete |
 | 3 | Load audio and establish sample-rate/duration/silence rules | 14 official train/dev clips decode repeatably; processing recipe and runtime recorded; 30 tests pass | Complete |
 | 4 | Extract and cache MFCC summary features | 14 × 40 finite feature matrix; identical cache replay; no fitted preprocessing; 42 tests pass | Complete |
-| 5 | Add majority-class and logistic-regression baselines | Reproducible training and development metrics | Planned |
+| 5 | Add majority-class and logistic-regression baselines | 700 train + 700 dev clips; actual majority/logistic metrics; identical repeat scores; 51 tests pass | Complete |
 | 6 | Add SVM and random forest with a bounded search | Same data/features; comparable development outputs | Planned |
 | 7 | Implement EER, ROC-AUC, and development-selected operating threshold | Edge-case metric checks; positive label and tie policy | Planned |
 | 8 | Audit recording hashes and data leakage | Duplicate-content report and source-partition checks | Planned |

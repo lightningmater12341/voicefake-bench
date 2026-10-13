@@ -6,7 +6,7 @@ A reproducible ML benchmark for distinguishing genuine speech from synthetic or 
 
 ## Current stage
 
-Day 4: fixed MFCC summaries, content-keyed caching, and a real-feature smoke audit. No models have been trained and no detection results are available yet. This repository is being built in small, tested daily increments; the [roadmap](docs/ROADMAP.md) records what comes next.
+Day 5: majority-class and logistic-regression baselines trained on 700 official training clips and scored on 700 development clips. The first [development results](docs/BASELINES.md) are available: logistic regression reached **78.92% balanced accuracy** at an untuned 0.5 threshold. Final evaluation and audio-degradation experiments are still ahead. This repository is being built in small, tested daily increments; the [roadmap](docs/ROADMAP.md) records what comes next.
 
 ## What will be compared
 
@@ -29,12 +29,12 @@ The complete LA archive is about 7.12 GiB. [Dataset setup and terms](docs/DATASE
 
 ## Run today's component
 
-Requires Python 3.10 or newer. Metadata tools use only the Python standard library. Audio loading and MFCC extraction use the optional audio dependency group; ML dependencies will be added with the components that need them.
+Requires Python 3.10 or newer. Metadata tools use only the Python standard library. Audio loading and MFCC extraction use the optional audio group; the baseline runner also uses the models group.
 
 From the repository root:
 
 ```bash
-python -m pip install -e ".[audio]"
+python -m pip install -e ".[audio,models]"
 python -m voicefake --help
 python -m voicefake validate-manifest path/to/manifest.csv
 python -m voicefake inspect-audio path/to/recording.flac --config configs/audio.json
@@ -43,7 +43,7 @@ python -m unittest discover -s tests -v
 
 Use `python -m voicefake import-protocols --help` for the new importer and [the dataset recipe](docs/DATASET.md) for a complete command. It preserves official partitions, checks all source metadata before sampling, and writes a manifest plus a provenance sidecar. The default smoke subset contains 2,800 entries; it is not a model-performance result.
 
-The [audio recipe](docs/AUDIO.md) defines mono conversion, 16 kHz resampling, silence/volume handling, and deterministic duration limits. The [real-clip audit](docs/AUDIO_SMOKE_AUDIT.json) records 14 successfully loaded official train/dev clips and repeatable decoding. The [feature recipe](docs/FEATURES.md) converts each clip into 40 MFCC summary values and caches them with provenance checks. The [feature smoke audit](docs/FEATURE_SMOKE_AUDIT.json) records a finite 14 × 40 matrix and 14 identical cache reuses. All 42 current tests pass. No evaluation audio has been processed and no detector has been trained.
+The [audio recipe](docs/AUDIO.md) defines mono conversion, 16 kHz resampling, silence/volume handling, and deterministic duration limits. The [real-clip audit](docs/AUDIO_SMOKE_AUDIT.json) records 14 successfully loaded official train/dev clips and repeatable decoding. The [feature recipe](docs/FEATURES.md) converts each clip into 40 MFCC summary values and caches them with provenance checks. The [feature smoke audit](docs/FEATURE_SMOKE_AUDIT.json) records a finite 14 × 40 matrix and 14 identical cache reuses. The [baseline recipe](docs/BASELINES.md) expands the real data to 1,400 clips and fits scaling on training features only. All 51 current tests pass; repeated fits and saved-model predictions match. No evaluation audio has been processed.
 
 The manifest schema is:
 

@@ -12,6 +12,7 @@ dependencies = []
 
 [project.optional-dependencies]
 audio = ["numpy>=1.26,<3", "scipy>=1.14,<2", "soundfile>=0.13.1,<0.14"]
+models = ["scikit-learn>=1.6,<2"]
 
 [project.scripts]
 voicefake = "voicefake.__main__:main"

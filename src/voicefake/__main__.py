@@ -32,6 +32,12 @@ def main() -> int:
     extractor.add_argument("--audio-config", help="Audio processing JSON")
     extractor.add_argument("--feature-config", help="Feature recipe JSON")
     extractor.add_argument("--allow-eval", action="store_true", help="Allow evaluation audio after experiment freeze")
+    trainer = commands.add_parser("train-baselines", help="Fit majority and logistic train/dev baselines")
+    trainer.add_argument("--index", required=True, help="Feature index JSON")
+    trainer.add_argument("--manifest", required=True, help="Matching train/dev source CSV")
+    trainer.add_argument("--cache-dir", required=True)
+    trainer.add_argument("--output-dir", required=True, help="New local baseline run directory")
+    trainer.add_argument("--config", help="Baseline configuration JSON")
     args = parser.parse_args()
     try:
         if args.command == "validate-manifest":
@@ -45,7 +51,7 @@ def main() -> int:
             from .audio import AudioConfig, load_audio
             config = AudioConfig.from_json(args.config) if args.config else AudioConfig()
             _, result = load_audio(args.path, config)
-        else:
+        elif args.command == "extract-features":
             from .audio import AudioConfig
             from .features import FeatureConfig
             from .feature_cache import extract_manifest
@@ -53,8 +59,13 @@ def main() -> int:
             feature_config = FeatureConfig.from_json(args.feature_config) if args.feature_config else FeatureConfig()
             result = extract_manifest(args.manifest, args.audio_root, args.cache_dir, args.output,
                                       audio_config, feature_config, args.allow_eval)
+        else:
+            from .baselines import BaselineConfig, run_baselines
+            config = BaselineConfig.from_json(args.config) if args.config else BaselineConfig()
+            result = run_baselines(args.index, args.manifest, args.cache_dir, args.output_dir, config)
     except ImportError:
-        parser.exit(status=2, message="Audio support requires: python -m pip install -e \".[audio]\"\n")
+        extras = "audio,models" if args.command == "train-baselines" else "audio"
+        parser.exit(status=2, message=f'Required support: python -m pip install -e ".[{extras}]"\n')
     except (OSError, ValueError) as exc:
         parser.exit(status=2, message=f"Input validation failed: {exc}\n")
     print(json.dumps(result, indent=2))

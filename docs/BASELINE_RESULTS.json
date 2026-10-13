@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "scope": "ASVspoof 2019 LA train/development subset; known attacks only",
+  "positive_label": "spoof=1; bonafide=0",
+  "config": {
+    "schema_version": 1,
+    "C": 1.0,
+    "max_iter": 2000,
+    "tolerance": 0.0001,
+    "class_weight": "balanced",
+    "seed": 42,
+    "min_class_count": 20
+  },
+  "model_definitions": {
+    "majority": "most-frequent training class",
+    "logistic": "float64 cast + training-fitted StandardScaler + L2 logistic regression, lbfgs"
+  },
+  "source_manifest_sha256": "6656418785ebae485a73a317a4168323d482115b91891a9fed16a21f17210d71",
+  "feature_index_sha256": "4d06710d6aec5de572a2f0cd3a564d2493a3ef2974e60a90f8a9d3bdf86467ba",
+  "manifest_audit": {
+    "rows": 1400,
+    "speakers": 40,
+    "spoofing_methods": [
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06"
+    ],
+    "counts": {
+      "dev": {
+        "bonafide": 100,
+        "spoof": 600
+      },
+      "eval": {
+        "bonafide": 0,
+        "spoof": 0
+      },
+      "train": {
+        "bonafide": 100,
+        "spoof": 600
+      }
+    }
+  },
+  "feature_names": [
+    "mfcc_mean_00",
+    "mfcc_mean_01",
+    "mfcc_mean_02",
+    "mfcc_mean_03",
+    "mfcc_mean_04",
+    "mfcc_mean_05",
+    "mfcc_mean_06",
+    "mfcc_mean_07",
+    "mfcc_mean_08",
+    "mfcc_mean_09",
+    "mfcc_mean_10",
+    "mfcc_mean_11",
+    "mfcc_mean_12",
+    "mfcc_mean_13",
+    "mfcc_mean_14",
+    "mfcc_mean_15",
+    "mfcc_mean_16",
+    "mfcc_mean_17",
+    "mfcc_mean_18",
+    "mfcc_mean_19",
+    "mfcc_std_00",
+    "mfcc_std_01",
+    "mfcc_std_02",
+    "mfcc_std_03",
+    "mfcc_std_04",
+    "mfcc_std_05",
+    "mfcc_std_06",
+    "mfcc_std_07",
+    "mfcc_std_08",
+    "mfcc_std_09",
+    "mfcc_std_10",
+    "mfcc_std_11",
+    "mfcc_std_12",
+    "mfcc_std_13",
+    "mfcc_std_14",
+    "mfcc_std_15",
+    "mfcc_std_16",
+    "mfcc_std_17",
+    "mfcc_std_18",
+    "mfcc_std_19"
+  ],
+  "feature_config": {
+    "schema_version": 1,
+    "sample_rate": 16000,
+    "frame_length": 400,
+    "hop_length": 160,
+    "n_fft": 512,
+    "n_mels": 40,
+    "n_mfcc": 20,
+    "fmin_hz": 20.0,
+    "fmax_hz": 7600.0,
+    "log_floor": 1e-12
+  },
+  "feature_source_code_sha256": {
+    "audio.py": "ec63f83c71656fa47ebe8079cef56929e20a8fb614582b735425b24d85e5a559",
+    "features.py": "202624514b7ac9b7b0fdcd76f01020acb617fe7e8d9336bd1f738bd2413cb68a",
+    "feature_cache.py": "1ab1c477ed42d92e2af177505f94572ce14e17d3cd4e262ce425b8fecaa4307a"
+  },
+  "model_input_dtype": "float64",
+  "audio_config": {
+    "schema_version": 1,
+    "target_sample_rate": 16000,
+    "min_duration_seconds": 0.25,
+    "max_duration_seconds": 10.0,
+    "max_source_duration_seconds": 120.0
+  },
+  "feature_runtime": {
+    "python": "3.14.7",
+    "system": "Windows",
+    "machine": "AMD64",
+    "libsndfile": "1.2.2",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "soundfile": "0.13.1"
+    }
+  },
+  "model_runtime": {
+    "scikit-learn": "1.9.1",
+    "joblib": "1.6.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "threadpoolctl": "3.7.0"
+  },
+  "trainer_source_sha256": "ee28b323005c28a8b4c033b9fd0f95a645891f2c76278cffd0c2e696b2bf1e68",
+  "metrics": {
+    "majority": {
+      "train": {
+        "samples": 700,
+        "confusion_matrix": [
+          [
+            0,
+            100
+          ],
+          [
+            0,
+            600
+          ]
+        ],
+        "accuracy": 0.8571428571428571,
+        "balanced_accuracy": 0.5,
+        "genuine_recall": 0.0,
+        "spoof_recall": 1.0,
+        "false_positive_rate": 1.0,
+        "spoof_precision": 0.8571428571428571,
+        "spoof_f1": 0.9230769230769231
+      },
+      "dev": {
+        "samples": 700,
+        "confusion_matrix": [
+          [
+            0,
+            100
+          ],
+          [
+            0,
+            600
+          ]
+        ],
+        "accuracy": 0.8571428571428571,
+        "balanced_accuracy": 0.5,
+        "genuine_recall": 0.0,
+        "spoof_recall": 1.0,
+        "false_positive_rate": 1.0,
+        "spoof_precision": 0.8571428571428571,
+        "spoof_f1": 0.9230769230769231
+      }
+    },
+    "logistic": {
+      "train": {
+        "samples": 700,
+        "confusion_matrix": [
+          [
+            89,
+            11
+          ],
+          [
+            84,
+            516
+          ]
+        ],
+        "accuracy": 0.8642857142857143,
+        "balanced_accuracy": 0.875,
+        "genuine_recall": 0.89,
+        "spoof_recall": 0.86,
+        "false_positive_rate": 0.11,
+        "spoof_precision": 0.9791271347248577,
+        "spoof_f1": 0.9157054125998225
+      },
+      "dev": {
+        "samples": 700,
+        "confusion_matrix": [
+          [
+            72,
+            28
+          ],
+          [
+            85,
+            515
+          ]
+        ],
+        "accuracy": 0.8385714285714285,
+        "balanced_accuracy": 0.7891666666666666,
+        "genuine_recall": 0.72,
+        "spoof_recall": 0.8583333333333333,
+        "false_positive_rate": 0.28,
+        "spoof_precision": 0.9484346224677717,
+        "spoof_f1": 0.9011373578302713
+      }
+    }
+  },
+  "decision_rule": "spoof probability >= 0.5; untuned",
+  "logistic_iterations": [
+    26
+  ],
+  "scaler_fit_rows": 700,
+  "scaler_fit_split": "train",
+  "scaler_training_statistics_verified": true,
+  "development_used_for_fit": false,
+  "evaluation_audio_processed": false,
+  "hyperparameter_search_performed": false,
+  "operating_threshold_selected": false,
+  "local_artifact_sha256": {
+    "development_predictions.npz": "d2a3bb8bd485e4e66efc2643574358f9f202b4e141c86dda2e7b16959559d881",
+    "logistic.joblib": "146f63be3e332d557e02f4567aebc280d3e2f5b5ac76d851f8166ff3323f7ac2",
+    "majority.joblib": "ff80076687800599c7fb6bacb17961ba8388a292a7852a4ea56aea24a08f9636"
+  },
+  "verified_date": "2026-10-13",
+  "dataset_doi": "https://doi.org/10.7488/ds/2555",
+  "dataset_license": "https://opendatacommons.org/licenses/by/1.0/",
+  "data_acquisition": {
+    "archive_url": "https://datashare.ed.ac.uk/server/api/core/bitstreams/a9f87c35-f055-4015-80e2-2fdff0d46269/content",
+    "full_archive_downloaded": false,
+    "parent_manifest_sha256": "239b0690f1a2afe608228efe588916f7d517afc58d0fada0c56998cbd5f98d02",
+    "manifest_sha256": "6656418785ebae485a73a317a4168323d482115b91891a9fed16a21f17210d71",
+    "selection": {
+      "algorithm": "sha256-ranking-v1",
+      "seed": 42,
+      "per_split_label_attack_cap": 100,
+      "splits": [
+        "train",
+        "dev"
+      ],
+      "rule": "retain all train/dev entries from the day-2 subset; no further sampling"
+    },
+    "official_protocol_sources": {
+      "train": {
+        "filename": "ASVspoof2019.LA.cm.train.trn.txt",
+        "sha256": "65a289e4009400b42bb4f1e47ac60938d93f7f595452d1f220d35defc3de8ab8",
+        "rows": 25380
+      },
+      "dev": {
+        "filename": "ASVspoof2019.LA.cm.dev.trl.txt",
+        "sha256": "2fedaebf1ba3ae1a9bb7d3ec916804ac237b4eee063a27fa92e6549f03d129c7",
+        "rows": 24844
+      },
+      "eval": {
+        "filename": "ASVspoof2019.LA.cm.eval.trl.txt",
+        "sha256": "84fce576efff092269a0a6ad247d2e9f2f7b4d4e25a4545efb2518da92708036",
+        "rows": 71237
+      }
+    },
+    "clips": 1400,
+    "clips_reused": 14,
+    "audio_bytes": 86733549,
+    "range_bytes_transferred": 100387861,
+    "all_crc_checks_passed": true,
+    "evaluation_audio_acquired": false
+  },
+  "validation": {
+    "unit_tests_passed": 51,
+    "repeated_fit_metrics_identical": true,
+    "repeated_fit_scores_identical": true,
+    "reloaded_pipeline_scores_match": true,
+    "development_logistic_scores_float64_sha256": "cac2c5be910fdfb83a08232809d809f3de7daef6ea537036e36ffdcf1b5fa2c7",
+    "dependency_check_passed": true
+  },
+  "trained_binaries_published": false,
+  "raw_audio_published": false,
+  "cached_features_published": false,
+  "limitations": [
+    "Development subset of known A01-A06 methods; no unseen-method or final evaluation claim",
+    "100 genuine development clips give 1-clip false-positive-rate resolution",
+    "The 0.5 score threshold is predefined and untuned; low-FPR operating-point analysis is a later milestone",
+    "Dataset-wide decoded-content duplicate audit and confidence intervals remain planned"
+  ]
+}
