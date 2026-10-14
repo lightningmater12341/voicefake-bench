@@ -38,6 +38,12 @@ def main() -> int:
     trainer.add_argument("--cache-dir", required=True)
     trainer.add_argument("--output-dir", required=True, help="New local baseline run directory")
     trainer.add_argument("--config", help="Baseline configuration JSON")
+    comparison = commands.add_parser("compare-models", help="Bounded SVM/forest search on the baseline train/dev features")
+    comparison.add_argument("--index", required=True)
+    comparison.add_argument("--manifest", required=True)
+    comparison.add_argument("--cache-dir", required=True)
+    comparison.add_argument("--output-dir", required=True, help="New local comparison run directory")
+    comparison.add_argument("--config", help="Comparison configuration JSON")
     args = parser.parse_args()
     try:
         if args.command == "validate-manifest":
@@ -59,12 +65,16 @@ def main() -> int:
             feature_config = FeatureConfig.from_json(args.feature_config) if args.feature_config else FeatureConfig()
             result = extract_manifest(args.manifest, args.audio_root, args.cache_dir, args.output,
                                       audio_config, feature_config, args.allow_eval)
-        else:
+        elif args.command == "train-baselines":
             from .baselines import BaselineConfig, run_baselines
             config = BaselineConfig.from_json(args.config) if args.config else BaselineConfig()
             result = run_baselines(args.index, args.manifest, args.cache_dir, args.output_dir, config)
+        else:
+            from .comparison import ComparisonConfig, run_comparison
+            config = ComparisonConfig.from_json(args.config) if args.config else ComparisonConfig()
+            result = run_comparison(args.index, args.manifest, args.cache_dir, args.output_dir, config)
     except ImportError:
-        extras = "audio,models" if args.command == "train-baselines" else "audio"
+        extras = "audio,models" if args.command in ("train-baselines", "compare-models") else "audio"
         parser.exit(status=2, message=f'Required support: python -m pip install -e ".[{extras}]"\n')
     except (OSError, ValueError) as exc:
         parser.exit(status=2, message=f"Input validation failed: {exc}\n")

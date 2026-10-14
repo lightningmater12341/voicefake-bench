@@ -1,6 +1,6 @@
 # Experiment design, version 0.1
 
-This is a prospective design. It contains no measured performance claims.
+This design records the experiment boundaries. Measured development results are linked below; final evaluation remains prospective.
 
 ## Question and task
 
@@ -23,6 +23,8 @@ A small subset is suitable for pipeline checks. It must not be described as a fu
 Start with a majority-class sanity baseline. Compare logistic regression, RBF SVM, and random forest on the same MFCC mean/std features. Specify sample rate, framing, feature count, silence treatment, and input-duration policy before running features. Log these choices in a configuration file.
 
 The implemented [feature recipe](FEATURES.md) uses 20 MFCC means and 20 population standard deviations, with fixed 25 ms frames and 10 ms hops at 16 kHz. It fits no corpus statistics. Any later scaling must be fitted on training features only. The initial 14-clip check established the feature pipeline. The first [baseline experiment](BASELINES.md) now uses 700 training and 700 development clips from the original deterministic subset, with a training-fitted scaler and predefined logistic settings. Its results are development measurements; evaluation data stays unused until the later reporting milestone.
+
+The implemented [model comparison](MODEL_COMPARISON.md) uses six predefined RBF SVM candidates and four random-forest candidates on the exact Day 5 data/features. Each fits training data only; development balanced accuracy selects settings, with first-declared-candidate ties. Logistic remains a fixed reference, so optimization effort differs. SVM decisions use signed margins at zero; probability-model decisions use 0.5, with threshold ties assigned to spoof. These operating points are untuned and development scores are provisional after selection.
 
 Use a small predefined hyperparameter search and development data for model selection. Keep feature/model training separate from inference. Freeze configurations, model artifacts, and thresholds before evaluating the final partition.
 

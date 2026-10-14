@@ -93,3 +93,25 @@ Future milestones will append their own explanations, actual observations, and l
 **Interview answer today:** "My first baseline is reproducible, and its confusion matrix shows a meaningful weakness: it falsely flags 28% of genuine development clips at the default threshold. I compare against a majority reference to show why raw accuracy is misleading under imbalance. The next steps are same-data model comparisons and a carefully selected operating point."
 
 **Try explaining:** Why can a model with lower raw accuracy be more useful here? What does class weighting change? Why do we need a final partition after using development results to choose models?
+
+## Day 6 — compare models and explain the tradeoff
+
+**What changed:** We tried six RBF SVM settings and four random-forest settings using the exact Day 5 training/development clips and MFCC features. Every candidate fits training data only. The small grid, decision rules and selection metric were fixed before scoring. All 58 tests pass; the real-data search repeats exactly, and restored models reproduce the saved development scores.
+
+**What does an RBF SVM add?** Logistic regression draws a linear boundary in standardized feature space. The RBF kernel lets an SVM express a curved boundary through similarity to training examples. C controls the penalty for training errors: a smaller C regularizes more strongly. Gamma controls how local the similarity is. Scaling matters because distances depend on feature units; learning the scaler from development data would leak information into fitting.
+
+**What does a random forest add?** It averages many decision trees trained using bootstrap samples and random feature choices. Trees split individual columns and do not need standardization. Depth and minimum leaf size control how detailed the splits become. A seed makes the random choices repeatable; it does not guarantee generalization.
+
+**How did we choose settings?** Within each family we selected the highest development balanced accuracy, keeping the first listed setting on an exact tie. The selected SVM uses C=0.1 and gamma=scale; the selected forest uses depth 12 and minimum leaf size 3. Logistic kept its earlier fixed settings, so this is a bounded benchmark comparison rather than an exhaustive or equally tuned contest.
+
+**What happened?** SVM reached 84.25% development balanced accuracy, compared with logistic's 78.92% and forest's 76.83%. SVM falsely flagged 10 of 100 genuine clips and detected 471 of 600 spoofs. Logistic falsely flagged 28 genuine clips but detected more spoofs: 515 of 600. The model with the best balanced accuracy did not win on every measure.
+
+**Why not choose the forest's 88.14% raw accuracy?** It falsely flagged 39% of genuine development voices. There are six times as many spoof clips, so raw accuracy rewards the majority class heavily. Its 98.33% training balanced accuracy also drops to 76.83% on development, which is consistent with overfitting this sample.
+
+**Are the scores interchangeable?** No. SVM emits a signed margin, with zero as today's decision boundary. Logistic and forest emit spoof probabilities, with 0.5 as today's boundary. Higher means more evidence of spoof for all three, but neither their magnitudes nor their confidence interpretations are interchangeable. We have not calibrated probabilities or chosen a low-false-positive threshold yet.
+
+**Why can't I call this the final result?** We used development scores to choose parameters and a model, so development is part of the selection process. It contains known attack methods and only 100 genuine examples. We must keep the evaluation partition untouched until settings and thresholds are frozen, then measure generalization there.
+
+**Interview answer today:** "I compared three classical classifiers on identical speech features and official speaker-separated data. A small predefined search selected SVM by development balanced accuracy, but its confusion matrix shows the cost: fewer false alarms and more missed spoofs than logistic regression at their default thresholds. I record every candidate and preserve evaluation data for a later frozen experiment."
+
+**Try explaining:** Why does SVM need scaling while trees do not? Why is a margin not a probability? How can the best raw accuracy hide worse false alarms? Why do parameter selection results need a separate final evaluation?

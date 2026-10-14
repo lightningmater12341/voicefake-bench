@@ -6,7 +6,7 @@ A reproducible ML benchmark for distinguishing genuine speech from synthetic or 
 
 ## Current stage
 
-Day 5: majority-class and logistic-regression baselines trained on 700 official training clips and scored on 700 development clips. The first [development results](docs/BASELINES.md) are available: logistic regression reached **78.92% balanced accuracy** at an untuned 0.5 threshold. Final evaluation and audio-degradation experiments are still ahead. This repository is being built in small, tested daily increments; the [roadmap](docs/ROADMAP.md) records what comes next.
+Day 6: a bounded comparison of logistic regression, RBF SVM and random forest on the same 700 official training and 700 development clips. The selected SVM reached **84.25% development balanced accuracy** at an untuned margin threshold. Read [the complete comparison](docs/MODEL_COMPARISON.md) for candidate settings, confusion matrices and selection limits. Final evaluation and audio-degradation experiments are still ahead. This repository is being built in small, tested daily increments; the [roadmap](docs/ROADMAP.md) records what comes next.
 
 ## What will be compared
 
@@ -43,7 +43,7 @@ python -m unittest discover -s tests -v
 
 Use `python -m voicefake import-protocols --help` for the new importer and [the dataset recipe](docs/DATASET.md) for a complete command. It preserves official partitions, checks all source metadata before sampling, and writes a manifest plus a provenance sidecar. The default smoke subset contains 2,800 entries; it is not a model-performance result.
 
-The [audio recipe](docs/AUDIO.md) defines mono conversion, 16 kHz resampling, silence/volume handling, and deterministic duration limits. The [real-clip audit](docs/AUDIO_SMOKE_AUDIT.json) records 14 successfully loaded official train/dev clips and repeatable decoding. The [feature recipe](docs/FEATURES.md) converts each clip into 40 MFCC summary values and caches them with provenance checks. The [feature smoke audit](docs/FEATURE_SMOKE_AUDIT.json) records a finite 14 × 40 matrix and 14 identical cache reuses. The [baseline recipe](docs/BASELINES.md) expands the real data to 1,400 clips and fits scaling on training features only. All 51 current tests pass; repeated fits and saved-model predictions match. No evaluation audio has been processed.
+The [audio recipe](docs/AUDIO.md) defines mono conversion, 16 kHz resampling, silence/volume handling, and deterministic duration limits. The [real-clip audit](docs/AUDIO_SMOKE_AUDIT.json) records 14 successfully loaded official train/dev clips and repeatable decoding. The [feature recipe](docs/FEATURES.md) converts each clip into 40 MFCC summary values and caches them with provenance checks. The [feature smoke audit](docs/FEATURE_SMOKE_AUDIT.json) records a finite 14 × 40 matrix and 14 identical cache reuses. The [baseline recipe](docs/BASELINES.md) expands the real data to 1,400 clips and fits scaling on training features only. The [bounded model comparison](docs/MODEL_COMPARISON.md) reuses that exact sample and verifies every candidate and selected model. All 58 current tests pass; repeated fits and saved-model predictions match. No evaluation audio has been processed.
 
 The manifest schema is:
 
