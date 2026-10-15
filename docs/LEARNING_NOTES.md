@@ -115,3 +115,25 @@ Future milestones will append their own explanations, actual observations, and l
 **Interview answer today:** "I compared three classical classifiers on identical speech features and official speaker-separated data. A small predefined search selected SVM by development balanced accuracy, but its confusion matrix shows the cost: fewer false alarms and more missed spoofs than logistic regression at their default thresholds. I record every candidate and preserve evaluation data for a later frozen experiment."
 
 **Try explaining:** Why does SVM need scaling while trees do not? Why is a margin not a probability? How can the best raw accuracy hide worse false alarms? Why do parameter selection results need a separate final evaluation?
+
+## Day 7 — ranking quality and a useful decision boundary
+
+**What changed:** We measured ROC-AUC and a documented interpolated EER from the existing Day 6 scores, then selected a threshold for each existing model using genuine development scores only. No models were refitted and no evaluation audio was touched. All 70 tests pass, and replay produces the identical metric report.
+
+**What does ROC-AUC mean?** It measures how often a spoof receives a higher score than a genuine example, counting an equal-score pair as half a win. It looks across thresholds, so a high AUC does not guarantee good recall at the very low false-positive rate we care about. Random forest has AUC 0.918183 versus SVM's 0.902800, yet SVM detects more spoofs at our selected operating points.
+
+**What does EER mean?** It is where the false-positive and false-negative rates meet along the ROC curve. Our implementation groups identical scores and linearly interpolates between adjacent empirical points. A virtual crossing can lie between achievable decisions, so we report the interpolated rate and its bracket rather than pretending it supplies a deployable threshold. Forest's development EER is 15.33%, SVM's is 18.00%, and logistic's is 21.00%, under this convention.
+
+**How did we pick the actual threshold?** With 100 genuine development examples and a 1% target, we permit at most one false alarm. Sort their scores and put the threshold just above the second-highest score. Any scores tied at that boundary are excluded together. The selector never sees spoof scores. A saved rule classifies score >= threshold as spoof and can be applied later without recomputing its cutoff.
+
+**Why does a tie matter?** Two genuine clips can have the same score. We cannot allow one and exclude the other by row order when the model gave them the same evidence. Keeping the entire boundary block excluded may use less than the allowed error budget. The constant majority reference illustrates this: every score is 1, so its selected threshold flags nothing and detects no spoofs.
+
+**What happened at the selected point?** SVM flags one of 100 genuine clips and detects 401 of 600 spoof clips: 1% empirical FPR and 66.83% spoof recall. It misses 199 spoofs. At its default threshold it detected 471 spoofs but falsely flagged ten genuine clips. Reducing false alarms sacrifices detections. Forest detects 385 spoofs at one false alarm; logistic detects 235.
+
+**Can I promise a 1% false-positive rate?** No. This is the rate on the small development sample used to select the threshold. Different speakers, methods and recording conditions can change it. Even 99 genuine clips would have an integer budget of zero at a 1% target. We must carry the saved threshold unchanged to the later frozen evaluation and report what actually happens there.
+
+**Why check score provenance?** A metric is meaningless if scores and labels refer to different clips or row orders. The runner checks the source manifest and score-file hashes, label order, positive orientation and reproduction of the original default-threshold metrics. It can calculate today's report without loading audio or deserializing model binaries.
+
+**Interview answer today:** "I separate global ranking quality from behavior at a chosen operating point. My forest has the best development AUC, but SVM detects more spoofs when each model is limited to one false alarm among 100 genuine development clips. Thresholds are selected from genuine development scores alone, ties stay together, and I do not claim that this small sample establishes the same rate in production."
+
+**Try explaining:** Why might a higher AUC fail to give higher low-FPR recall? Why can an interpolated EER lack a single usable threshold? Why does one false alarm among 100 development clips fail to establish a population guarantee? What would go wrong if you recalculated the threshold on evaluation genuine scores?

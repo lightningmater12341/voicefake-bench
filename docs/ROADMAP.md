@@ -10,7 +10,7 @@ Each milestone is one small, meaningful daily increment. A milestone can take mo
 | 4 | Extract and cache MFCC summary features | 14 × 40 finite feature matrix; identical cache replay; no fitted preprocessing; 42 tests pass | Complete |
 | 5 | Add majority-class and logistic-regression baselines | 700 train + 700 dev clips; actual majority/logistic metrics; identical repeat scores; 51 tests pass | Complete |
 | 6 | Add SVM and random forest with a bounded search | Same 700 train + 700 dev and 40 features; ten candidates; repeated metrics/scores and restored predictions match; 58 tests pass | Complete |
-| 7 | Implement EER, ROC-AUC, and development-selected operating threshold | Edge-case metric checks; positive label and tie policy | Planned |
+| 7 | Implement EER, ROC-AUC, and development-selected operating threshold | Tie-grouped ROC/AUC and interpolated EER; genuine-only integer FPR budget; verified saved-score replay; 70 tests pass | Complete |
 | 8 | Audit recording hashes and data leakage | Duplicate-content report and source-partition checks | Planned |
 | 9 | Add fixed noise and bandwidth perturbations | Reproducibility and audio-property checks | Planned |
 | 10 | Add compression condition; freeze model/threshold/configuration choices | Codec/version record and frozen experiment specification | Planned |

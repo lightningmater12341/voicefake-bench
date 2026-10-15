@@ -30,9 +30,9 @@ Use a small predefined hyperparameter search and development data for model sele
 
 ## Metrics
 
-Report ROC-AUC and equal error rate (EER), with explicit positive-label orientation and interpolation conventions. EER is a descriptive curve metric, not the deployed threshold.
+Report ROC-AUC and equal error rate (EER), with explicit positive-label orientation and interpolation conventions. EER is a descriptive curve metric, not the deployed threshold. The implemented [metric recipe](METRICS.md) groups equal scores, integrates the empirical ROC by trapezoids, and linearly interpolates adjacent ROC points at FPR=FNR. An interpolated EER need not be attainable by one deterministic threshold; this convention is not claimed to match official challenge scoring.
 
-Select a threshold targeting at most 1% false-positive rate on development genuine speech, using a documented tie policy. Report realized development FPR, fake recall, and the number of genuine clips. Carry that threshold unchanged to evaluation, reporting both evaluation FPR and fake recall. Limited sample sizes constrain the resolution of a 1% target.
+Select a threshold targeting at most 1% false-positive rate on development genuine speech, using a documented tie policy. Report realized development FPR, fake recall, and the number of genuine clips. Carry that threshold unchanged to evaluation, reporting both evaluation FPR and fake recall. Limited sample sizes constrain the resolution of a 1% target. The implemented selector uses only genuine development scores: budget=floor(decimal target_fpr * genuine_count), then a saved float64 threshold immediately above the first excluded descending genuine score. It excludes the whole boundary tie block; score equal to the saved threshold is spoof. The metric runner verifies saved-score/manifest provenance and never selects from evaluation. These provisional thresholds and their realized development rates are recorded in the metric report; the full freeze remains milestone 10.
 
 Report per-attack fake recall with sample counts, plus runtime and hardware. A single aggregate metric can hide a detector that misses one generation method. Do not claim official challenge equivalence: t-DCF and the challenge's full operating assumptions are outside this first standalone-detector benchmark.
 

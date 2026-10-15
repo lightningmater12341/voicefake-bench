@@ -6,7 +6,7 @@ A reproducible ML benchmark for distinguishing genuine speech from synthetic or 
 
 ## Current stage
 
-Day 6: a bounded comparison of logistic regression, RBF SVM and random forest on the same 700 official training and 700 development clips. The selected SVM reached **84.25% development balanced accuracy** at an untuned margin threshold. Read [the complete comparison](docs/MODEL_COMPARISON.md) for candidate settings, confusion matrices and selection limits. Final evaluation and audio-degradation experiments are still ahead. This repository is being built in small, tested daily increments; the [roadmap](docs/ROADMAP.md) records what comes next.
+Day 7: ROC-AUC, equal error rate and genuine-only development threshold selection are implemented. At a selected **1% development false-positive rate**, SVM detected **66.83% of 600 spoof clips**; random forest had the stronger overall ROC-AUC but lower recall at that operating point. Read [the metric results and exact conventions](docs/METRICS.md). These are development measurements on a subset, not final evaluation results. This repository is being built in small, tested daily increments; the [roadmap](docs/ROADMAP.md) records what comes next.
 
 ## What will be compared
 
@@ -23,7 +23,7 @@ The starting dataset is **ASVspoof 2019 Logical Access (LA)**, which includes te
 
 We will preserve those partitions, fit preprocessing only on training data, select models and decision thresholds on development data, then freeze the experiment before scoring evaluation data. Subsets used for laptop experiments will be documented as subsets, not full challenge results.
 
-Planned metrics: ROC-AUC, equal error rate, and fake-speech recall at a threshold selected to target a 1% false-positive rate on development data. The actual evaluation false-positive rate will also be reported. Accuracy alone can hide failures when class sizes differ.
+Implemented metrics: ROC-AUC, linearly interpolated equal error rate, and fake-speech recall at a threshold selected from genuine development scores to target at most 1% empirical false-positive rate. The actual evaluation false-positive rate will also be reported. Accuracy alone can hide failures when class sizes differ.
 
 The complete LA archive is about 7.12 GiB. [Dataset setup and terms](docs/DATASET.md) document storage, licensing, and a manageable subset strategy. Official metadata has been audited; audio is kept outside Git. The older dataset is a starting benchmark and does not establish performance on current commercial voice generators.
 
@@ -43,7 +43,7 @@ python -m unittest discover -s tests -v
 
 Use `python -m voicefake import-protocols --help` for the new importer and [the dataset recipe](docs/DATASET.md) for a complete command. It preserves official partitions, checks all source metadata before sampling, and writes a manifest plus a provenance sidecar. The default smoke subset contains 2,800 entries; it is not a model-performance result.
 
-The [audio recipe](docs/AUDIO.md) defines mono conversion, 16 kHz resampling, silence/volume handling, and deterministic duration limits. The [real-clip audit](docs/AUDIO_SMOKE_AUDIT.json) records 14 successfully loaded official train/dev clips and repeatable decoding. The [feature recipe](docs/FEATURES.md) converts each clip into 40 MFCC summary values and caches them with provenance checks. The [feature smoke audit](docs/FEATURE_SMOKE_AUDIT.json) records a finite 14 × 40 matrix and 14 identical cache reuses. The [baseline recipe](docs/BASELINES.md) expands the real data to 1,400 clips and fits scaling on training features only. The [bounded model comparison](docs/MODEL_COMPARISON.md) reuses that exact sample and verifies every candidate and selected model. All 58 current tests pass; repeated fits and saved-model predictions match. No evaluation audio has been processed.
+The [audio recipe](docs/AUDIO.md) defines mono conversion, 16 kHz resampling, silence/volume handling, and deterministic duration limits. The [real-clip audit](docs/AUDIO_SMOKE_AUDIT.json) records 14 successfully loaded official train/dev clips and repeatable decoding. The [feature recipe](docs/FEATURES.md) converts each clip into 40 MFCC summary values and caches them with provenance checks. The [feature smoke audit](docs/FEATURE_SMOKE_AUDIT.json) records a finite 14 × 40 matrix and 14 identical cache reuses. The [baseline recipe](docs/BASELINES.md) expands the real data to 1,400 clips and fits scaling on training features only. The [bounded model comparison](docs/MODEL_COMPARISON.md) reuses that exact sample and verifies every candidate and selected model. The [metric runner](docs/METRICS.md) audits those saved scores and records ranking metrics and development-selected thresholds. All 70 current tests pass; repeated model and metric outputs match. No evaluation audio has been processed.
 
 The manifest schema is:
 

@@ -44,6 +44,11 @@ def main() -> int:
     comparison.add_argument("--cache-dir", required=True)
     comparison.add_argument("--output-dir", required=True, help="New local comparison run directory")
     comparison.add_argument("--config", help="Comparison configuration JSON")
+    scorer = commands.add_parser("score-development", help="Audit saved dev scores and select genuine-only FPR thresholds")
+    scorer.add_argument("--run-dir", required=True, help="Completed compare-models output directory")
+    scorer.add_argument("--manifest", required=True, help="Original train/dev source manifest")
+    scorer.add_argument("--output-dir", required=True, help="New local metric run directory")
+    scorer.add_argument("--config", help="Metric configuration JSON")
     args = parser.parse_args()
     try:
         if args.command == "validate-manifest":
@@ -69,12 +74,16 @@ def main() -> int:
             from .baselines import BaselineConfig, run_baselines
             config = BaselineConfig.from_json(args.config) if args.config else BaselineConfig()
             result = run_baselines(args.index, args.manifest, args.cache_dir, args.output_dir, config)
-        else:
+        elif args.command == "compare-models":
             from .comparison import ComparisonConfig, run_comparison
             config = ComparisonConfig.from_json(args.config) if args.config else ComparisonConfig()
             result = run_comparison(args.index, args.manifest, args.cache_dir, args.output_dir, config)
+        else:
+            from .metrics import MetricConfig, score_development
+            config = MetricConfig.from_json(args.config) if args.config else MetricConfig()
+            result = score_development(args.run_dir, args.manifest, args.output_dir, config)
     except ImportError:
-        extras = "audio,models" if args.command in ("train-baselines", "compare-models") else "audio"
+        extras = "audio,models" if args.command in ("train-baselines", "compare-models", "score-development") else "audio"
         parser.exit(status=2, message=f'Required support: python -m pip install -e ".[{extras}]"\n')
     except (OSError, ValueError) as exc:
         parser.exit(status=2, message=f"Input validation failed: {exc}\n")
