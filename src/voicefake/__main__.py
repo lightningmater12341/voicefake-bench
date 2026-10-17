@@ -49,6 +49,12 @@ def main() -> int:
     scorer.add_argument("--manifest", required=True, help="Original train/dev source manifest")
     scorer.add_argument("--output-dir", required=True, help="New local metric run directory")
     scorer.add_argument("--config", help="Metric configuration JSON")
+    auditor = commands.add_parser("audit-recordings", help="Audit official membership and exact train/dev audio duplicates")
+    for name in ("manifest", "audio-root", "protocol-reference", "index", "cache-dir", "output-dir"):
+        auditor.add_argument("--" + name, required=True)
+    for split in ("train", "dev", "eval"):
+        auditor.add_argument("--" + split + "-protocol", required=True, help="CM key; evaluation metadata only")
+    auditor.add_argument("--audio-config", help="Must match the existing feature recipe")
     args = parser.parse_args()
     try:
         if args.command == "validate-manifest":
@@ -78,17 +84,24 @@ def main() -> int:
             from .comparison import ComparisonConfig, run_comparison
             config = ComparisonConfig.from_json(args.config) if args.config else ComparisonConfig()
             result = run_comparison(args.index, args.manifest, args.cache_dir, args.output_dir, config)
-        else:
+        elif args.command == "score-development":
             from .metrics import MetricConfig, score_development
             config = MetricConfig.from_json(args.config) if args.config else MetricConfig()
             result = score_development(args.run_dir, args.manifest, args.output_dir, config)
+        else:
+            from .audio import AudioConfig
+            from .audit import audit_recordings
+            config = AudioConfig.from_json(args.audio_config) if args.audio_config else AudioConfig()
+            result = audit_recordings(args.manifest, args.audio_root,
+                                      {split: getattr(args, split + "_protocol") for split in ("train", "dev", "eval")},
+                                      args.protocol_reference, args.index, args.cache_dir, args.output_dir, config)
     except ImportError:
         extras = "audio,models" if args.command in ("train-baselines", "compare-models", "score-development") else "audio"
         parser.exit(status=2, message=f'Required support: python -m pip install -e ".[{extras}]"\n')
     except (OSError, ValueError) as exc:
         parser.exit(status=2, message=f"Input validation failed: {exc}\n")
     print(json.dumps(result, indent=2))
-    return 0
+    return 1 if args.command == "audit-recordings" and result["status"] != "pass" else 0
 
 
 if __name__ == "__main__":

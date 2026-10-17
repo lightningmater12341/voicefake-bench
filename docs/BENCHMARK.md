@@ -13,7 +13,7 @@ Use ASVspoof 2019 LA as the starting corpus. It is an established research datas
 - Preserve official train/dev/eval membership and speaker separation.
 - Store speaker ID and attack ID in manifests for auditing and breakdowns. Never use them or filenames as predictive features.
 - If sampling, select deterministically within each original partition and label/attack stratum; record seed, selection rule, counts, and manifest hash.
-- Run data-integrity checks before training. Reject shared recording IDs and speakers across partitions. Add content hashes during the audio-audit milestone.
+- Run data-integrity checks before training. Reject shared recording IDs and speakers across partitions. The implemented [recording audit](RECORDING_AUDIT.md) checks pinned official membership plus exact encoded, native decoded and processed waveform duplicates on the selected train/dev sample. It verifies the audio against the existing feature inputs, preserves findings for review, and never silently removes records. Exact hashing does not detect perceptual near-duplicates; evaluation content checks remain after experiment freeze.
 - Fit scaling and any learned transformations on training data only.
 
 A small subset is suitable for pipeline checks. It must not be described as a full ASVspoof result. Class balancing during sampling changes prevalence and must be reported.

@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "scope": "ASVspoof 2019 LA selected train/dev recordings; exact content only",
+  "source_manifest_sha256": "6656418785ebae485a73a317a4168323d482115b91891a9fed16a21f17210d71",
+  "manifest_audit": {
+    "rows": 1400,
+    "speakers": 40,
+    "spoofing_methods": [
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06"
+    ],
+    "counts": {
+      "dev": {
+        "bonafide": 100,
+        "spoof": 600
+      },
+      "eval": {
+        "bonafide": 0,
+        "spoof": 0
+      },
+      "train": {
+        "bonafide": 100,
+        "spoof": 600
+      }
+    }
+  },
+  "source_feature_index_sha256": "4d06710d6aec5de572a2f0cd3a564d2493a3ef2974e60a90f8a9d3bdf86467ba",
+  "protocol_reference_sha256": "d68417ceafaf52e0b5804dd2a3cd4ecbd52293f4bbd00eae6a13fc2a176b7684",
+  "sources": {
+    "train": {
+      "sha256": "65a289e4009400b42bb4f1e47ac60938d93f7f595452d1f220d35defc3de8ab8",
+      "rows": 25380
+    },
+    "dev": {
+      "sha256": "2fedaebf1ba3ae1a9bb7d3ec916804ac237b4eee063a27fa92e6549f03d129c7",
+      "rows": 24844
+    },
+    "eval": {
+      "sha256": "84fce576efff092269a0a6ad247d2e9f2f7b4d4e25a4545efb2518da92708036",
+      "rows": 71237
+    }
+  },
+  "full_source_metadata_audit": {
+    "rows": 121461,
+    "speakers": 107,
+    "spoofing_methods": [
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06",
+      "A07",
+      "A08",
+      "A09",
+      "A10",
+      "A11",
+      "A12",
+      "A13",
+      "A14",
+      "A15",
+      "A16",
+      "A17",
+      "A18",
+      "A19"
+    ],
+    "counts": {
+      "dev": {
+        "bonafide": 2548,
+        "spoof": 22296
+      },
+      "eval": {
+        "bonafide": 7355,
+        "spoof": 63882
+      },
+      "train": {
+        "bonafide": 2580,
+        "spoof": 22800
+      }
+    }
+  },
+  "official_rows_matched": 1400,
+  "full_source_speaker_separation_verified": true,
+  "audio_config": {
+    "schema_version": 1,
+    "target_sample_rate": 16000,
+    "min_duration_seconds": 0.25,
+    "max_duration_seconds": 10.0,
+    "max_source_duration_seconds": 120.0
+  },
+  "runtime": {
+    "python": "3.14.7",
+    "system": "Windows",
+    "machine": "AMD64",
+    "libsndfile": "1.2.2",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "soundfile": "0.13.1"
+    }
+  },
+  "feature_source_code_sha256": {
+    "audio.py": "ec63f83c71656fa47ebe8079cef56929e20a8fb614582b735425b24d85e5a559",
+    "features.py": "202624514b7ac9b7b0fdcd76f01020acb617fe7e8d9336bd1f738bd2413cb68a",
+    "feature_cache.py": "1ab1c477ed42d92e2af177505f94572ce14e17d3cd4e262ce425b8fecaa4307a"
+  },
+  "audit_source_sha256": {
+    "audit.py": "4ade8241c7b4a42ab8f8574a1e9fec2bea223ef9510cab44f6b95c4e9e153c57",
+    "audio.py": "ec63f83c71656fa47ebe8079cef56929e20a8fb614582b735425b24d85e5a559",
+    "manifest.py": "a284e6c52d4962e72b9c4c94ffb841156436a46ea67ce192e918d8c017c78549",
+    "protocols.py": "ba9b66570eb25e0ca05f0a606d9b4dc11c3237f0cf2b91806f73d12a07104667"
+  },
+  "fingerprint_convention": "waveform-v1: compact sorted JSON header + newline + C-order little-endian samples; signed zeros canonicalized",
+  "native_decode_dtype": "float64; original rate, frame count and channel order retained",
+  "processed_dtype": "float32; existing mono/resample/center-crop recipe",
+  "duplicate_summary": {
+    "encoded_sha256": {
+      "groups": 0,
+      "affected_recordings": 0,
+      "redundant_rows": 0,
+      "cross_split_groups": 0,
+      "within_split_groups": 0,
+      "label_conflict_groups": 0
+    },
+    "decoded_sha256": {
+      "groups": 0,
+      "affected_recordings": 0,
+      "redundant_rows": 0,
+      "cross_split_groups": 0,
+      "within_split_groups": 0,
+      "label_conflict_groups": 0
+    },
+    "processed_sha256": {
+      "groups": 0,
+      "affected_recordings": 0,
+      "redundant_rows": 0,
+      "cross_split_groups": 0,
+      "within_split_groups": 0,
+      "label_conflict_groups": 0
+    }
+  },
+  "status": "pass",
+  "cross_split_content_detected": false,
+  "contradictory_labels_detected": false,
+  "recordings_checked": 1400,
+  "feature_sources_and_waveforms_verified": 1400,
+  "encoded_bytes_checked": 86733549,
+  "resampled_recordings": 0,
+  "cropped_recordings": 1,
+  "evaluation_audio_processed": false,
+  "models_refitted": false,
+  "thresholds_changed": false,
+  "near_duplicate_detection_performed": false,
+  "recordings_removed": 0,
+  "local_artifact_sha256": {
+    "duplicate_groups.json": "3bfe78ccdb3a2ede37c0324d0e9f21f58430d027d5787d3d7840534394918b44",
+    "recordings.json": "bb8e4030742386d7799da623d649f9e337206515fc9302dff571d1e555cf6927"
+  },
+  "verified_date": "2026-10-17",
+  "validation": {
+    "tests_passed": 82,
+    "replayed_report_identical": true,
+    "replayed_per_record_fingerprints_identical": true,
+    "all_three_views_unique_recordings": 1400,
+    "full_official_metadata_matches_published_audit": true,
+    "feature_index_matches_published_metric_provenance": true,
+    "prior_model_artifact_checksums_unchanged": true,
+    "duplicate_review_cli_exit_status": 1,
+    "duplicate_report_preserved": true,
+    "recordings_removed": 0
+  }
+}

@@ -137,3 +137,25 @@ Future milestones will append their own explanations, actual observations, and l
 **Interview answer today:** "I separate global ranking quality from behavior at a chosen operating point. My forest has the best development AUC, but SVM detects more spoofs when each model is limited to one false alarm among 100 genuine development clips. Thresholds are selected from genuine development scores alone, ties stay together, and I do not claim that this small sample establishes the same rate in production."
 
 **Try explaining:** Why might a higher AUC fail to give higher low-FPR recall? Why can an interpolated EER lack a single usable threshold? Why does one false alarm among 100 development clips fail to establish a population guarantee? What would go wrong if you recalculated the threshold on evaluation genuine scores?
+
+## Day 8 — check whether recordings leak across partitions
+
+**What changed:** We audited all 1,400 existing train/dev recordings at three levels: file bytes, native decoded audio and processed model-input waveforms. No exact duplicate groups were found at any level. Every selected record matched the pinned official metadata, and its audio still matched the source and processed waveform recorded during feature extraction. All 82 tests pass. A full replay reproduces the report and every per-record fingerprint. The audit does not change the models, thresholds or previous measurements.
+
+**Why are different filenames insufficient?** Copying a recording and renaming it does not create an independent example. If a detector trains on that content and sees it again during model selection, the apparent generalization can be optimistic. A byte hash catches exact file copies; comparing only paths would miss them.
+
+**Why also decode the audio?** WAV and FLAC containers can contain the same samples while their file bytes differ. The native waveform fingerprint includes the sample rate, frame count, channel count/order and canonical float64 samples. A controlled test writes identical PCM samples in WAV and FLAC and confirms that their file hashes differ while their decoded fingerprints match.
+
+**Why hash after preprocessing too?** Different inputs can collapse to the same model input. For example, two stereo channels can average to an existing mono recording. Our fixture demonstrates this. Hashing the existing mono/resampled/cropped float32 waveform catches the collision. One real clip in this sample uses the established centre-crop rule; its processed hash matches the earlier feature evidence.
+
+**Why include rate and shape?** The same sequence of sample bytes can mean a different duration at another sample rate, or a different arrangement of channels. Hashing the header together with canonical little-endian sample bytes prevents those interpretations from being conflated. Positive and negative floating zero are treated as the same silence.
+
+**Why recheck all official metadata?** A tiny selected sample could omit the row that reveals a speaker overlap. The audit first verifies all three key-file hashes and validates all 121,461 source metadata records, then checks every selected path, label, speaker, attack and split against its official record. Evaluation keys are metadata only; no evaluation audio is opened.
+
+**What if duplicates appear?** The command preserves group details and returns a review status, including for within-partition duplicates or conflicting labels. It never repairs the experiment by quietly dropping or relabeling clips. Any necessary change must be documented so that old measurements remain attributable to the data they actually used.
+
+**What can I claim?** No exact content duplicates were found in these 1,400 clips under the recorded decoder and processing recipe. I cannot infer that the whole corpus has no overlap, or that shifted, gain-changed or compressed copies are absent. Exact hashes are not a perceptual similarity detector, and a clean audit does not itself improve model performance.
+
+**Interview answer today:** "I checked more than speaker IDs and filenames. My audit compares encoded files, native decoded audio and the processed waveforms the models actually used. All 1,400 train/dev clips passed without exact duplicate groups, and I can link them to the pinned official keys and original feature inputs. I keep that claim limited to this sample and exact equality."
+
+**Try explaining:** How can different file hashes hide identical audio? How can different stereo recordings become the same mono input? Why check complete source metadata before looking at a subset? Why must a duplicate finding preserve the original experiment history?

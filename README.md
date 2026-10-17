@@ -6,7 +6,7 @@ A reproducible ML benchmark for distinguishing genuine speech from synthetic or 
 
 ## Current stage
 
-Day 7: ROC-AUC, equal error rate and genuine-only development threshold selection are implemented. At a selected **1% development false-positive rate**, SVM detected **66.83% of 600 spoof clips**; random forest had the stronger overall ROC-AUC but lower recall at that operating point. Read [the metric results and exact conventions](docs/METRICS.md). These are development measurements on a subset, not final evaluation results. This repository is being built in small, tested daily increments; the [roadmap](docs/ROADMAP.md) records what comes next.
+Day 8: the [recording-content audit](docs/RECORDING_AUDIT.md) checked all **1,400 train/dev clips** against the pinned official metadata and their cached model inputs. No exact duplicate groups were found in encoded files, native decoded waveforms or processed waveforms. All 82 tests pass. The earlier [development metric results](docs/METRICS.md) are unchanged; final evaluation and audio-degradation experiments remain ahead. This repository is being built in small, tested daily increments; the [roadmap](docs/ROADMAP.md) records what comes next.
 
 ## What will be compared
 
@@ -43,7 +43,7 @@ python -m unittest discover -s tests -v
 
 Use `python -m voicefake import-protocols --help` for the new importer and [the dataset recipe](docs/DATASET.md) for a complete command. It preserves official partitions, checks all source metadata before sampling, and writes a manifest plus a provenance sidecar. The default smoke subset contains 2,800 entries; it is not a model-performance result.
 
-The [audio recipe](docs/AUDIO.md) defines mono conversion, 16 kHz resampling, silence/volume handling, and deterministic duration limits. The [real-clip audit](docs/AUDIO_SMOKE_AUDIT.json) records 14 successfully loaded official train/dev clips and repeatable decoding. The [feature recipe](docs/FEATURES.md) converts each clip into 40 MFCC summary values and caches them with provenance checks. The [feature smoke audit](docs/FEATURE_SMOKE_AUDIT.json) records a finite 14 × 40 matrix and 14 identical cache reuses. The [baseline recipe](docs/BASELINES.md) expands the real data to 1,400 clips and fits scaling on training features only. The [bounded model comparison](docs/MODEL_COMPARISON.md) reuses that exact sample and verifies every candidate and selected model. The [metric runner](docs/METRICS.md) audits those saved scores and records ranking metrics and development-selected thresholds. All 70 current tests pass; repeated model and metric outputs match. No evaluation audio has been processed.
+The [audio recipe](docs/AUDIO.md) defines mono conversion, 16 kHz resampling, silence/volume handling, and deterministic duration limits. The [real-clip audit](docs/AUDIO_SMOKE_AUDIT.json) records 14 successfully loaded official train/dev clips and repeatable decoding. The [feature recipe](docs/FEATURES.md) converts each clip into 40 MFCC summary values and caches them with provenance checks. The [feature smoke audit](docs/FEATURE_SMOKE_AUDIT.json) records a finite 14 × 40 matrix and 14 identical cache reuses. The [baseline recipe](docs/BASELINES.md) expands the real data to 1,400 clips and fits scaling on training features only. The [bounded model comparison](docs/MODEL_COMPARISON.md) reuses that exact sample and verifies every candidate and selected model. The [metric runner](docs/METRICS.md) audits those saved scores and records ranking metrics and development-selected thresholds. The [recording-content audit](docs/RECORDING_AUDIT.md) adds official-membership and exact-duplicate checks on all 1,400 local train/dev clips. All 82 current tests pass; model and metric outputs remain unchanged. No evaluation audio has been processed.
 
 The manifest schema is:
 
@@ -54,7 +54,7 @@ dev/flac/clip_002.flac,spoof,dev,speaker_002,A01
 eval/flac/clip_003.flac,spoof,eval,speaker_003,A07
 ```
 
-These are illustrative filenames, not real dataset entries. The validator rejects missing fields, invalid labels, repeated paths, and speakers appearing in multiple partitions. It does not yet read audio or identify duplicate recordings stored under different filenames.
+These are illustrative filenames, not real dataset entries. The validator rejects missing fields, invalid labels, repeated paths, and speakers appearing in multiple partitions. The metadata validator does not read audio. The separate recording audit now checks exact content duplicates under different filenames or encodings and after preprocessing.
 
 ## Explain it in an interview
 
