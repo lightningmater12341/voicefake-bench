@@ -55,6 +55,10 @@ def main() -> int:
     for split in ("train", "dev", "eval"):
         auditor.add_argument("--" + split + "-protocol", required=True, help="CM key; evaluation metadata only")
     auditor.add_argument("--audio-config", help="Must match the existing feature recipe")
+    perturb = commands.add_parser("audit-perturbations", help="Verify fixed noise/bandwidth recipes on audited train/dev audio")
+    for name in ("manifest", "audio-root", "audit-report", "recordings", "output-dir"):
+        perturb.add_argument("--" + name, required=True)
+    perturb.add_argument("--config", help="Perturbation recipe JSON")
     args = parser.parse_args()
     try:
         if args.command == "validate-manifest":
@@ -88,13 +92,18 @@ def main() -> int:
             from .metrics import MetricConfig, score_development
             config = MetricConfig.from_json(args.config) if args.config else MetricConfig()
             result = score_development(args.run_dir, args.manifest, args.output_dir, config)
-        else:
+        elif args.command == "audit-recordings":
             from .audio import AudioConfig
             from .audit import audit_recordings
             config = AudioConfig.from_json(args.audio_config) if args.audio_config else AudioConfig()
             result = audit_recordings(args.manifest, args.audio_root,
                                       {split: getattr(args, split + "_protocol") for split in ("train", "dev", "eval")},
                                       args.protocol_reference, args.index, args.cache_dir, args.output_dir, config)
+        else:
+            from .perturbations import PerturbationConfig, audit_perturbations
+            config = PerturbationConfig.from_json(args.config) if args.config else PerturbationConfig()
+            result = audit_perturbations(args.manifest, args.audio_root, args.audit_report,
+                                         args.recordings, args.output_dir, config)
     except ImportError:
         extras = "audio,models" if args.command in ("train-baselines", "compare-models", "score-development") else "audio"
         parser.exit(status=2, message=f'Required support: python -m pip install -e ".[{extras}]"\n')

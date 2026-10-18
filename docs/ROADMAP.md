@@ -12,7 +12,7 @@ Each milestone is one small, meaningful daily increment. A milestone can take mo
 | 6 | Add SVM and random forest with a bounded search | Same 700 train + 700 dev and 40 features; ten candidates; repeated metrics/scores and restored predictions match; 58 tests pass | Complete |
 | 7 | Implement EER, ROC-AUC, and development-selected operating threshold | Tie-grouped ROC/AUC and interpolated EER; genuine-only integer FPR budget; verified saved-score replay; 70 tests pass | Complete |
 | 8 | Audit recording hashes and data leakage | 1,400 train/dev clips; zero encoded/native/processed duplicate groups; pinned full-key membership and feature inputs verified; 82 tests pass | Complete |
-| 9 | Add fixed noise and bandwidth perturbations | Reproducibility and audio-property checks | Planned |
+| 9 | Add fixed noise and bandwidth perturbations | 4,200 transforms on 1,400 train/dev clips; measured SNR, exact shape/partition preservation and identical replays; 94 tests pass | Complete |
 | 10 | Add compression condition; freeze model/threshold/configuration choices | Codec/version record and frozen experiment specification | Planned |
 | 11 | Add paired robustness summaries and speaker-bootstrap uncertainty | Development checks; documented resampling assumptions | Planned |
 | 12 | Measure feature-extraction and model inference costs | Hardware, timing procedure, and actual runtime logs | Planned |

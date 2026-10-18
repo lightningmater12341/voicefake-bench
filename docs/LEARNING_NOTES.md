@@ -159,3 +159,25 @@ Future milestones will append their own explanations, actual observations, and l
 **Interview answer today:** "I checked more than speaker IDs and filenames. My audit compares encoded files, native decoded audio and the processed waveforms the models actually used. All 1,400 train/dev clips passed without exact duplicate groups, and I can link them to the pinned official keys and original feature inputs. I keep that claim limited to this sample and exact equality."
 
 **Try explaining:** How can different file hashes hide identical audio? How can different stereo recordings become the same mono input? Why check complete source metadata before looking at a subset? Why must a duplicate finding preserve the original experiment history?
+
+## Day 9 — change the audio in a controlled, repeatable way
+
+**What changed:** We added Gaussian noise at 20 and 10 dB SNR and a separate 16 -> 8 -> 16 kHz bandwidth condition. All 4,200 transforms on the existing 1,400 train/dev clips preserved their sample counts, produced finite float32 output and replayed identically. All 94 tests pass. No models were refitted, thresholds changed or detector scores calculated today.
+
+**What does SNR mean?** It compares signal power to noise power on a logarithmic scale. Here power is mean squared amplitude over the whole retained clip, including silence. At 20 dB, signal power is 100 times noise power; at 10 dB it is ten times. The lower-SNR noise has about 3.16 times the RMS amplitude. We scale a realized noise vector, then verify the ratio after casting the mixed output to float32.
+
+**Why not one global random seed?** A global generator advances as recordings are processed, so changing traversal order can change a clip's noise. We derive a separate seed from the base seed and clean waveform fingerprint. The same clean content gets the same noise direction, independent of filename, label or processing order. The two SNR levels share that direction and change only its scale, which keeps their comparison controlled.
+
+**Why round-trip through 8 kHz?** Downsampling with a low-pass filter removes high-frequency information; returning to 16 kHz restores the expected sample rate, not the removed detail. An 8 kHz rate has a 4 kHz Nyquist frequency. It is a limited bandwidth condition, not a complete telephone codec or network simulation.
+
+**What happens to odd-length clips?** Downsampling N samples by two gives ceil(N/2), and upsampling returns one extra sample when N is odd. We remove that final extra sample so duration and source pairing stay exact. This happened in 695 of the actual clips. The source clip itself is never trimmed further or overwritten.
+
+**Why record values above one?** Noise addition and FIR filtering can produce float32 peaks outside [-1, 1]. In this sample, 900 clips exceeded unit peak at 20 dB noise, 1,125 at 10 dB, and 655 after the bandwidth round trip. We preserve those values and record them. A bounded PCM encoder may clip them, so the compression milestone must specify headroom or clipping explicitly before freezing the experiment.
+
+**Does this prove the detector is robust?** No. Today proves that the audio changes are reproducible and match their stated properties. We still need to extract features and compare predictions using unchanged clean-trained models and stored development thresholds. We must not retune thresholds on every degraded condition or silently add noisy training examples while claiming an unchanged-model comparison.
+
+**How are the partitions protected?** The runner requires the prior clean recording audit, checks its evidence hashes and membership, and verifies each loaded source waveform. All transformed copies retain their source label and partition; none becomes an independent example in another partition. Evaluation audio is rejected before decoding.
+
+**Interview answer today:** "I defined the degradation recipes before measuring detector performance. Noise is keyed to the clean waveform and verified at its requested SNR after float32 conversion. Bandwidth changes preserve the original sample count. I validated all 4,200 transforms, documented peaks that matter for later encoding, and kept the clean models and thresholds unchanged."
+
+**Try explaining:** Why is 10 dB less clean than 20 dB? Why can a global random generator make results depend on file order? Why does upsampling fail to restore removed frequencies? Why must a compression experiment declare what happens to above-unit peaks?

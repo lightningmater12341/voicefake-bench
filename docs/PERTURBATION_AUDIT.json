@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "scope": "audio-property audit on the existing ASVspoof 2019 LA train/dev subset; no detector results",
+  "config": {
+    "schema_version": 1,
+    "seed": 42,
+    "sample_rate": 16000,
+    "noise_snrs_db": [
+      20,
+      10
+    ],
+    "bandwidth_rate": 8000
+  },
+  "conditions": {
+    "noise_20db": {
+      "recordings": 1400,
+      "shape_dtype_and_finite_checks_passed": 1400,
+      "identical_replays": 1400,
+      "above_unit_samples": 1529,
+      "recordings_above_unit_peak": 900,
+      "maximum_absolute_peak": 1.0822174549102783,
+      "minimum_measured_snr_db": 19.999999951836784,
+      "maximum_measured_snr_db": 20.00000003955749
+    },
+    "noise_10db": {
+      "recordings": 1400,
+      "shape_dtype_and_finite_checks_passed": 1400,
+      "identical_replays": 1400,
+      "above_unit_samples": 3859,
+      "recordings_above_unit_peak": 1125,
+      "maximum_absolute_peak": 1.2600603103637695,
+      "minimum_measured_snr_db": 9.999999986973778,
+      "maximum_measured_snr_db": 10.000000012208998
+    },
+    "bandwidth_8khz": {
+      "recordings": 1400,
+      "shape_dtype_and_finite_checks_passed": 1400,
+      "identical_replays": 1400,
+      "above_unit_samples": 1647,
+      "recordings_above_unit_peak": 655,
+      "maximum_absolute_peak": 1.148541808128357,
+      "odd_length_tail_trims": 695
+    }
+  },
+  "recordings_checked": 1400,
+  "transforms_checked": 4200,
+  "manifest_audit": {
+    "rows": 1400,
+    "speakers": 40,
+    "spoofing_methods": [
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06"
+    ],
+    "counts": {
+      "dev": {
+        "bonafide": 100,
+        "spoof": 600
+      },
+      "eval": {
+        "bonafide": 0,
+        "spoof": 0
+      },
+      "train": {
+        "bonafide": 100,
+        "spoof": 600
+      }
+    }
+  },
+  "source_manifest_sha256": "6656418785ebae485a73a317a4168323d482115b91891a9fed16a21f17210d71",
+  "source_recording_audit_sha256": "af099b23190f7b612c87a54af1785ff6ec44c116e3608cce5816d4efdd99c4f7",
+  "source_recording_evidence_sha256": "bb8e4030742386d7799da623d649f9e337206515fc9302dff571d1e555cf6927",
+  "source_feature_index_sha256": "4d06710d6aec5de572a2f0cd3a564d2493a3ef2974e60a90f8a9d3bdf86467ba",
+  "clean_audio_config": {
+    "schema_version": 1,
+    "target_sample_rate": 16000,
+    "min_duration_seconds": 0.25,
+    "max_duration_seconds": 10.0,
+    "max_source_duration_seconds": 120.0
+  },
+  "runtime": {
+    "python": "3.14.7",
+    "system": "Windows",
+    "machine": "AMD64",
+    "libsndfile": "1.2.2",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "soundfile": "0.13.1"
+    }
+  },
+  "source_code_sha256": {
+    "perturbations.py": "5362c54afdf5d68b527fa6c4b8dd822898f37e1e9b6c8f4907503e6d3d5406df",
+    "audio.py": "ec63f83c71656fa47ebe8079cef56929e20a8fb614582b735425b24d85e5a559",
+    "audit.py": "4ade8241c7b4a42ab8f8574a1e9fec2bea223ef9510cab44f6b95c4e9e153c57"
+  },
+  "partition_membership_preserved": true,
+  "clean_sources_unchanged": true,
+  "evaluation_audio_processed": false,
+  "models_refitted": false,
+  "thresholds_changed": false,
+  "detector_scores_computed": false,
+  "training_augmentation_performed": false,
+  "waveform_files_written": false,
+  "local_artifact_sha256": {
+    "transforms.json": "845dbe75b22406b4b38c321a49487e87634f90670b71c40dd45f36154dc73892"
+  },
+  "verified_date": "2026-10-18",
+  "validation": {
+    "tests_passed": 94,
+    "identical_per_transform_replays": 4200,
+    "measured_post_cast_snr_tolerance_db": 0.001,
+    "source_partition_metadata_matches_prior_audit": true,
+    "noise_realizations_shared_between_snr_levels": true,
+    "prior_model_checksums_unchanged": true,
+    "prior_threshold_document_unchanged": true,
+    "clean_feature_index_checksum_unchanged": true
+  }
+}

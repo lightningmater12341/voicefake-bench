@@ -38,7 +38,7 @@ Report per-attack fake recall with sample counts, plus runtime and hardware. A s
 
 ## Robustness conditions
 
-Apply identical predetermined transformations to genuine and spoof clips. Keep every transformed version in its source partition. Planned conditions are additive seeded noise at 20 and 10 dB SNR, a documented low-bandwidth resampling round trip, and MP3 compression at a fixed bitrate. Digital perturbations are approximations; they are not measurements of any particular messaging app or telephone network.
+Apply identical predetermined transformations to genuine and spoof clips. Keep every transformed version in its source partition. The implemented [perturbation recipes](PERTURBATIONS.md) add content-seeded Gaussian noise at 20 and 10 dB whole-clip SNR, plus a separate 16 -> 8 -> 16 kHz polyphase-filtered round trip. All conditions start from the clean processed waveform, retain its sample count and partition, and preserve float32 peaks without clipping or gain normalization. The two noise levels share a realization at different scales. Only waveform properties have been audited so far; no degraded detector scores are available. MP3 compression and an explicit headroom/clipping policy remain planned for the freeze milestone. Digital perturbations are approximations; they are not measurements of any particular messaging app or telephone network.
 
 Use clean-training models with unchanged thresholds initially. No tuning on evaluation or on its perturbed copies. Record codec versions and audio-transform settings. If a condition cannot be implemented reproducibly, label it unavailable rather than substituting an undocumented transformation.
 
