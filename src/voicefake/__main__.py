@@ -59,6 +59,17 @@ def main() -> int:
     for name in ("manifest", "audio-root", "audit-report", "recordings", "output-dir"):
         perturb.add_argument("--" + name, required=True)
     perturb.add_argument("--config", help="Perturbation recipe JSON")
+    codec = commands.add_parser("audit-compression", help="Audit deterministic gapless MP3 with fixed headroom")
+    for name in ("manifest", "audio-root", "recording-audit", "recordings", "output-dir"):
+        codec.add_argument("--" + name, required=True)
+    codec.add_argument("--config")
+    freeze = commands.add_parser("freeze-experiment", help="Seal the declared experiment before evaluation audio is scored")
+    freeze.add_argument("--root", default=".")
+    freeze.add_argument("--output", default="configs/frozen-experiment.json")
+    freeze.add_argument("--evaluation-manifest", default="data/manifests/frozen-eval.csv")
+    verifier = commands.add_parser("verify-freeze", help="Fail if frozen code, configs, runtime or local artifacts drift")
+    verifier.add_argument("--root", default=".")
+    verifier.add_argument("--specification", default="configs/frozen-experiment.json")
     args = parser.parse_args()
     try:
         if args.command == "validate-manifest":
@@ -99,13 +110,26 @@ def main() -> int:
             result = audit_recordings(args.manifest, args.audio_root,
                                       {split: getattr(args, split + "_protocol") for split in ("train", "dev", "eval")},
                                       args.protocol_reference, args.index, args.cache_dir, args.output_dir, config)
-        else:
+        elif args.command == "audit-perturbations":
             from .perturbations import PerturbationConfig, audit_perturbations
             config = PerturbationConfig.from_json(args.config) if args.config else PerturbationConfig()
             result = audit_perturbations(args.manifest, args.audio_root, args.audit_report,
                                          args.recordings, args.output_dir, config)
+        elif args.command == "audit-compression":
+            from .compression import CompressionConfig, audit_compression
+            config = CompressionConfig.from_json(args.config) if args.config else CompressionConfig()
+            result = audit_compression(args.manifest, args.audio_root, args.recording_audit,
+                                       args.recordings, args.output_dir, config)
+        elif args.command == "freeze-experiment":
+            from .freeze import create_freeze
+            result = create_freeze(args.root, args.output, args.evaluation_manifest)
+        else:
+            from .freeze import verify_freeze
+            result = verify_freeze(args.specification, args.root)
     except ImportError:
         extras = "audio,models" if args.command in ("train-baselines", "compare-models", "score-development") else "audio"
+        if args.command in ("audit-compression", "freeze-experiment", "verify-freeze"):
+            extras = "audio,models,compression"
         parser.exit(status=2, message=f'Required support: python -m pip install -e ".[{extras}]"\n')
     except (OSError, ValueError) as exc:
         parser.exit(status=2, message=f"Input validation failed: {exc}\n")

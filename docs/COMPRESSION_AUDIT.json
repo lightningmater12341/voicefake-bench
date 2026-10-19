@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "scope": "MP3 property audit on the existing ASVspoof 2019 LA train/dev subset",
+  "config": {
+    "schema_version": 1,
+    "sample_rate": 16000,
+    "bitrate_kbps": 32,
+    "algorithm_quality": 2,
+    "headroom_gain": 0.5
+  },
+  "codec": {
+    "package": "imageio-ffmpeg",
+    "package_version": "0.6.0",
+    "ffmpeg_version": "ffmpeg version 7.1-essentials_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers",
+    "binary_sha256": "2ce797a0f88d7f067180338fb227f7b1928ea727bd9a4d7a1d022f7c52af71a3",
+    "encoder": "libmp3lame",
+    "decoder": "mp3float",
+    "encoder_help_sha256": "a43b2056cd84b96f057b3cd980d2772ee4b3cd972310b95dc684478757b3dbbf"
+  },
+  "runtime": {
+    "python": "3.14.7",
+    "system": "Windows",
+    "machine": "AMD64",
+    "libsndfile": "1.2.2",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "soundfile": "0.13.1"
+    }
+  },
+  "manifest_audit": {
+    "rows": 1400,
+    "speakers": 40,
+    "spoofing_methods": [
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06"
+    ],
+    "counts": {
+      "dev": {
+        "bonafide": 100,
+        "spoof": 600
+      },
+      "eval": {
+        "bonafide": 0,
+        "spoof": 0
+      },
+      "train": {
+        "bonafide": 100,
+        "spoof": 600
+      }
+    }
+  },
+  "recordings_checked": 1400,
+  "identical_bitstream_and_sample_replays": 1400,
+  "maximum_headroom_input_peak": 0.5,
+  "maximum_decoded_output_peak": 1.1367206573486328,
+  "above_unit_output_samples": 115,
+  "gapless_sample_counts_verified": 1400,
+  "protocol_tail_padding_samples": 403775,
+  "source_manifest_sha256": "6656418785ebae485a73a317a4168323d482115b91891a9fed16a21f17210d71",
+  "source_recording_audit_sha256": "af099b23190f7b612c87a54af1785ff6ec44c116e3608cce5816d4efdd99c4f7",
+  "source_recordings_sha256": "bb8e4030742386d7799da623d649f9e337206515fc9302dff571d1e555cf6927",
+  "source_code_sha256": {
+    "compression.py": "152e68b2c5980a4a6885bd2d54f397068cd044c6ae8f62c9bc0f9a6eb4b4d30e",
+    "audio.py": "ec63f83c71656fa47ebe8079cef56929e20a8fb614582b735425b24d85e5a559",
+    "audit.py": "4ade8241c7b4a42ab8f8574a1e9fec2bea223ef9510cab44f6b95c4e9e153c57"
+  },
+  "evaluation_audio_processed": false,
+  "detector_scores_computed": false,
+  "models_refitted": false,
+  "thresholds_changed": false,
+  "waveform_or_mp3_files_retained": false,
+  "local_artifact_sha256": {
+    "recordings.json": "9bd4da76dbc4156f066496cf82fc4633c303173892ebd234fe1f61cfb585291b"
+  },
+  "verified_date": "2026-10-19",
+  "validation": {
+    "tests_passed": 105,
+    "original_partition_metadata_preserved": true,
+    "identical_bitstream_and_sample_replays": 1400,
+    "exact_original_output_lengths": 1400,
+    "frame_aligned_zero_extension_verified": true,
+    "fixed_headroom_verified": true,
+    "prior_model_checksums_unchanged": true,
+    "prior_threshold_document_unchanged": true
+  }
+}

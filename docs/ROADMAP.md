@@ -13,7 +13,7 @@ Each milestone is one small, meaningful daily increment. A milestone can take mo
 | 7 | Implement EER, ROC-AUC, and development-selected operating threshold | Tie-grouped ROC/AUC and interpolated EER; genuine-only integer FPR budget; verified saved-score replay; 70 tests pass | Complete |
 | 8 | Audit recording hashes and data leakage | 1,400 train/dev clips; zero encoded/native/processed duplicate groups; pinned full-key membership and feature inputs verified; 82 tests pass | Complete |
 | 9 | Add fixed noise and bandwidth perturbations | 4,200 transforms on 1,400 train/dev clips; measured SNR, exact shape/partition preservation and identical replays; 94 tests pass | Complete |
-| 10 | Add compression condition; freeze model/threshold/configuration choices | Codec/version record and frozen experiment specification | Planned |
+| 10 | Add compression condition; freeze model/threshold/configuration choices | 1,400 deterministic gapless MP3 checks; fixed headroom; frozen data/models/thresholds/conditions and 36 verified file bindings; 105 tests pass | Complete |
 | 11 | Add paired robustness summaries and speaker-bootstrap uncertainty | Development checks; documented resampling assumptions | Planned |
 | 12 | Measure feature-extraction and model inference costs | Hardware, timing procedure, and actual runtime logs | Planned |
 | 13 | Run frozen evaluation once and write failure analysis | Actual clean/degraded scores, per-attack counts, reproducible report | Planned |

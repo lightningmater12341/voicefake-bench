@@ -181,3 +181,25 @@ Future milestones will append their own explanations, actual observations, and l
 **Interview answer today:** "I defined the degradation recipes before measuring detector performance. Noise is keyed to the clean waveform and verified at its requested SNR after float32 conversion. Bandwidth changes preserve the original sample count. I validated all 4,200 transforms, documented peaks that matter for later encoding, and kept the clean models and thresholds unchanged."
 
 **Try explaining:** Why is 10 dB less clean than 20 dB? Why can a global random generator make results depend on file order? Why does upsampling fail to restore removed frequencies? Why must a compression experiment declare what happens to above-unit peaks?
+
+## Day 10 — make compression explicit and freeze the experiment
+
+**What changed:** The fixed 32 kbps mono MP3 condition passed replay and original-length checks on all 1,400 train/dev clips. All 105 tests pass. We sealed the original data selection, model artifacts, clean-development thresholds, condition recipes and runtimes before touching evaluation audio. No new detector scores were computed.
+
+**Why does compression need a recipe?** Codec name alone is incomplete. Bitrate, encoder implementation/build, algorithm quality, sample format, gain, metadata and decoder delay handling can all affect samples. We pin these choices and hash the actual bundled FFmpeg binary. MP3 bytes and decoded samples repeat exactly under this recorded build.
+
+**What happened to above-unit peaks?** For the MP3 branch, we multiply by 0.5 before encoding and undo that fixed gain after decoding. This is not per-clip peak normalization. Encoder inputs reached at most 0.5 in the actual sample; decoded output reached 1.136721 after inverse gain, with 115 above-unit samples retained as float32. Noise and bandwidth remain separate conditions. If the fixed encoder headroom is exhausted later, the experiment stops and reports the failure instead of changing gain or silently clipping.
+
+**What did real audio reveal?** An initially unaligned 28,827-sample input decoded to 28,847 samples, although several tone probes had passed. We rejected that run. The final declared codec input always adds a known zero tail to reach a multiple of 576 samples, verifies that exact padded decoded length, then removes only our known extension. This is a fixed length-based boundary rule, not a search for an alignment that makes results look better. Regression tests cover the discovered case and impulse alignment.
+
+**What exactly is frozen?** The primary Day 6 SVM, three comparison models, their file hashes, the Day 7 thresholds, official metadata selection, clean audio/MFCC settings, separate degradation conditions and runtime identities. The primary choice still follows the original development balanced-accuracy rule; we did not switch models after seeing degraded results. A verifier checks 36 local file bindings and runtime identities.
+
+**What about evaluation data?** We created only a metadata manifest for the original 100-genuine/1,300-spoof evaluation subset, preserving official membership. Its audio is still unacquired and unprocessed. It needs a content audit before later scoring. A 100-genuine-clip subset still cannot establish a precise production false-positive rate.
+
+**Why freeze now?** After viewing evaluation results, changing a threshold, model or condition would make evaluation part of model selection. The content/file hashes make accidental drift visible and the published Git history records what was committed before evaluation. A hash is not a digital signature or a substitute for honest reporting.
+
+**What remains to build?** Paired development robustness summaries and speaker-bootstrap uncertainty, cost measurement, the one frozen evaluation report and the small demo. The uncertainty plan is declared now: 1,000 paired speaker-block draws, seed 42, 95% percentile intervals, fixed thresholds and explicit invalid-draw counts.
+
+**Interview answer today:** "I froze the experiment before evaluation: the same model files, clean-development thresholds and preprocessing must apply to every condition. I also tested the actual codec path, found a boundary-length discrepancy, and replaced guesswork with a declared frame-alignment rule. My verifier detects changed inputs, and my report distinguishes codec validation from detector performance."
+
+**Try explaining:** Why can two implementations of MP3 define different experiments? Why is a fixed headroom gain different from peak normalization? What makes a documented padding rule different from silently repairing output lengths? Which choices become invalid if changed after viewing evaluation?

@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "sample_rate": 16000,
+  "bitrate_kbps": 32,
+  "algorithm_quality": 2,
+  "headroom_gain": 0.5
+}

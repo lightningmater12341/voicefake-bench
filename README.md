@@ -6,7 +6,7 @@ A reproducible ML benchmark for distinguishing genuine speech from synthetic or 
 
 ## Current stage
 
-Day 9: fixed **20 dB and 10 dB noise** and a **16 -> 8 -> 16 kHz bandwidth round trip** are implemented. The [property audit](docs/PERTURBATIONS.md) checked 4,200 transforms on the existing 1,400 train/dev clips: sample counts stayed unchanged and every replay matched. All 94 tests pass. These are audio-property checks; degraded detector performance has not been measured yet. The earlier [development metrics](docs/METRICS.md) remain unchanged. The [roadmap](docs/ROADMAP.md) records the next daily increments.
+Day 10: a fixed [32 kbps MP3 condition](docs/COMPRESSION.md) passed sample-count and identical-replay checks on all 1,400 train/dev clips. The [experiment is frozen](docs/FROZEN_EXPERIMENT.md): data selection, primary SVM and comparisons, exact thresholds, audio/features, degradation recipes and runtime identities are pinned before evaluation. All 105 tests pass. No evaluation audio or degraded detector results have been processed yet. The [roadmap](docs/ROADMAP.md) records the remaining daily increments.
 
 ## What will be compared
 
@@ -34,7 +34,7 @@ Requires Python 3.10 or newer. Metadata tools use only the Python standard libra
 From the repository root:
 
 ```bash
-python -m pip install -e ".[audio,models]"
+python -m pip install -e ".[audio,models,compression]"
 python -m voicefake --help
 python -m voicefake validate-manifest path/to/manifest.csv
 python -m voicefake inspect-audio path/to/recording.flac --config configs/audio.json
@@ -43,7 +43,7 @@ python -m unittest discover -s tests -v
 
 Use `python -m voicefake import-protocols --help` for the new importer and [the dataset recipe](docs/DATASET.md) for a complete command. It preserves official partitions, checks all source metadata before sampling, and writes a manifest plus a provenance sidecar. The default smoke subset contains 2,800 entries; it is not a model-performance result.
 
-The [audio recipe](docs/AUDIO.md) defines mono conversion, 16 kHz resampling, silence/volume handling, and deterministic duration limits. The [real-clip audit](docs/AUDIO_SMOKE_AUDIT.json) records 14 successfully loaded official train/dev clips and repeatable decoding. The [feature recipe](docs/FEATURES.md) converts each clip into 40 MFCC summary values and caches them with provenance checks. The [feature smoke audit](docs/FEATURE_SMOKE_AUDIT.json) records a finite 14 × 40 matrix and 14 identical cache reuses. The [baseline recipe](docs/BASELINES.md) expands the real data to 1,400 clips and fits scaling on training features only. The [bounded model comparison](docs/MODEL_COMPARISON.md) reuses that exact sample and verifies every candidate and selected model. The [metric runner](docs/METRICS.md) audits those saved scores and records ranking metrics and development-selected thresholds. The [recording-content audit](docs/RECORDING_AUDIT.md) adds official-membership and exact-duplicate checks on all 1,400 local train/dev clips. The [perturbation property audit](docs/PERTURBATIONS.md) verifies fixed noise and bandwidth changes without modifying clean sources. All 94 current tests pass; model and metric outputs remain unchanged. No evaluation audio has been processed.
+The [audio recipe](docs/AUDIO.md) defines mono conversion, 16 kHz resampling, silence/volume handling, and deterministic duration limits. The [real-clip audit](docs/AUDIO_SMOKE_AUDIT.json) records 14 successfully loaded official train/dev clips and repeatable decoding. The [feature recipe](docs/FEATURES.md) converts each clip into 40 MFCC summary values and caches them with provenance checks. The [feature smoke audit](docs/FEATURE_SMOKE_AUDIT.json) records a finite 14 × 40 matrix and 14 identical cache reuses. The [baseline recipe](docs/BASELINES.md) expands the real data to 1,400 clips and fits scaling on training features only. The [bounded model comparison](docs/MODEL_COMPARISON.md) reuses that exact sample and verifies every candidate and selected model. The [metric runner](docs/METRICS.md) audits those saved scores and records ranking metrics and development-selected thresholds. The [recording-content audit](docs/RECORDING_AUDIT.md) adds official-membership and exact-duplicate checks on all 1,400 local train/dev clips. The [perturbation property audit](docs/PERTURBATIONS.md) verifies fixed noise and bandwidth changes without modifying clean sources. The [MP3 audit](docs/COMPRESSION.md) adds a declared headroom and codec-boundary policy. The [freeze verifier](docs/FROZEN_EXPERIMENT.md) detects computational input or runtime drift. All 105 current tests pass; existing model and metric outputs remain unchanged. No evaluation audio has been processed.
 
 The manifest schema is:
 
