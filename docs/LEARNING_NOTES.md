@@ -203,3 +203,25 @@ Future milestones will append their own explanations, actual observations, and l
 **Interview answer today:** "I froze the experiment before evaluation: the same model files, clean-development thresholds and preprocessing must apply to every condition. I also tested the actual codec path, found a boundary-length discrepancy, and replaced guesswork with a declared frame-alignment rule. My verifier detects changed inputs, and my report distinguishes codec validation from detector performance."
 
 **Try explaining:** Why can two implementations of MP3 define different experiments? Why is a fixed headroom gain different from peak normalization? What makes a documented padding rule different from silently repairing output lengths? Which choices become invalid if changed after viewing evaluation?
+
+## Day 11 — measure robustness without moving the goalposts
+
+**What changed:** We ran all four fixed models on the same 700 development recordings under clean, 20/10 dB noise, bandwidth reduction and MP3 conditions. We added 1,000 paired speaker-block bootstrap draws across 20 speakers, with 95% percentile intervals and explicit valid/invalid counts. Every draw was valid. All 115 tests pass; the 36 frozen bindings still verify. Evaluation audio remains untouched.
+
+**What actually failed?** The primary SVM falsely flags 1/100 genuine clean clips, 11/100 after MP3 and 98/100 at 20 dB noise. At 10 dB and under bandwidth reduction it calls all 700 recordings spoof. This achieves 100% spoof recall while also flagging every genuine voice. Logistic fails differently: it calls every noisy clip genuine and misses all 600 spoofs. Low false alarms alone and high recall alone are both incomplete measures.
+
+**Can AUC still look reasonable?** Yes. Bandwidth SVM AUC is 0.862983, yet every score lies above its original decision threshold. Scores can preserve useful ordering while shifting relative to the operating point. We report both ranking metrics and behavior at the unchanged threshold. We do not repair the result by choosing a new threshold for each condition.
+
+**What does pairing reveal?** MP3 SVM detects 439/600 spoofs versus 401/600 clean. That net gain is 61 newly detected spoofs minus 23 previously detected spoofs now missed. Ten new genuine false alarms accompany it. A06 recall falls from 6/100 to 2/100 even though overall recall rises. Preserving source identity and attack counts exposes changes hidden by the aggregate rate.
+
+**Why resample speakers?** Clips from one voice may share properties. Sampling 700 clips independently would ignore that grouping. We sample 20 speaker blocks with replacement, include every clip in each sampled block and retain duplicate-speaker multiplicity. All models and conditions use the same draw. Rates remain weighted by clip counts, not an equal average of per-speaker rates.
+
+**What does a paired interval mean?** For each speaker draw, compute degraded minus clean, then take the declared percentiles of those differences. MP3 SVM FPR rises by 10 percentage points, with a paired 95% interval of [4.30, 16.81] points. Recall rises by 6.33 points, interval [1.75, 11.28]. Those are conditional development diagnostics, not population guarantees or an invitation to retune.
+
+**Why are some intervals zero-width?** Every observed clip in that class receives the same fixed decision, so resampling existing blocks cannot create a different rate. An observed 100% rate and [100%, 100%] interval do not establish exact population certainty. Few speakers, 100 genuine clips, shared attack systems and model/threshold selection limit these intervals. We never refit or reselect inside a draw, so selection uncertainty is not covered.
+
+**How were results checked?** All clean vectors and scores match their original evidence; all transformed waveforms match pre-freeze fingerprints. Predictions replay identically. An independent scikit-learn check reproduces all 20 AUCs, and a separate weighted-speaker calculation reproduces 80 rate/paired-change interval sets. Confusion matrices and per-attack counts match the actual saved score arrays, which remain local.
+
+**Interview answer today:** "The interesting result is that my clean threshold does not survive degraded audio. SVM can detect every fake while falsely rejecting every genuine recording, and a respectable AUC can hide that failure. I kept the model and threshold fixed, compared the same recordings, and used shared speaker-block resampling to describe uncertainty. These are development diagnostics; the final evaluation is still untouched."
+
+**Try explaining:** Why is 100% spoof recall insufficient? How can a useful ranking have a bad fixed threshold? Why must duplicated bootstrap speakers retain all their clips? Why is a paired interval different from subtracting two interval endpoints? Which uncertainty does a post-selection development bootstrap miss?

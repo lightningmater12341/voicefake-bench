@@ -70,6 +70,9 @@ def main() -> int:
     verifier = commands.add_parser("verify-freeze", help="Fail if frozen code, configs, runtime or local artifacts drift")
     verifier.add_argument("--root", default=".")
     verifier.add_argument("--specification", default="configs/frozen-experiment.json")
+    robustness = commands.add_parser("development-robustness", help="Paired fixed-model development diagnostics and speaker bootstrap")
+    robustness.add_argument("--root", default=".")
+    robustness.add_argument("--output-dir", default="artifacts/robustness/day11")
     args = parser.parse_args()
     try:
         if args.command == "validate-manifest":
@@ -123,12 +126,15 @@ def main() -> int:
         elif args.command == "freeze-experiment":
             from .freeze import create_freeze
             result = create_freeze(args.root, args.output, args.evaluation_manifest)
+        elif args.command == "development-robustness":
+            from .robustness import run_robustness
+            result = run_robustness(args.root, args.output_dir)
         else:
             from .freeze import verify_freeze
             result = verify_freeze(args.specification, args.root)
     except ImportError:
         extras = "audio,models" if args.command in ("train-baselines", "compare-models", "score-development") else "audio"
-        if args.command in ("audit-compression", "freeze-experiment", "verify-freeze"):
+        if args.command in ("audit-compression", "freeze-experiment", "verify-freeze", "development-robustness"):
             extras = "audio,models,compression"
         parser.exit(status=2, message=f'Required support: python -m pip install -e ".[{extras}]"\n')
     except (OSError, ValueError) as exc:
