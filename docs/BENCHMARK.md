@@ -48,6 +48,10 @@ The implemented [paired development analysis](ROBUSTNESS.md) compares clean and 
 
 Publish real experiment outputs with dataset provenance, exact commands, package versions, configuration hashes, model seeds, sample counts, and measured runtimes. Distinguish metadata fixtures, pipeline smoke checks, development results, and final evaluation results. Do not generate illustrative detection scores or backfill a results table.
 
+## Computational cost
+
+The implemented [cost measurement](COSTS.md) separates complete MFCC extraction on preloaded clean waveforms from fixed-model inference on materialized float64 vectors. It measures warm one-clip latency and full-700-row batch throughput separately, records hardware/native threads, retains pass/call timings, and verifies features and scores against their original evidence. Component costs exclude audio I/O, degradation, model loading, queueing and network/UI work; batch cost per row is not single-request latency. Actual timing varies by machine and load. All measurements use the existing development subset and leave model/threshold choices and evaluation audio unchanged.
+
 ## Sources
 
 - [ASVspoof 2019 official dataset record](https://doi.org/10.7488/ds/2555)

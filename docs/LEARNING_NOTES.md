@@ -225,3 +225,25 @@ Future milestones will append their own explanations, actual observations, and l
 **Interview answer today:** "The interesting result is that my clean threshold does not survive degraded audio. SVM can detect every fake while falsely rejecting every genuine recording, and a respectable AUC can hide that failure. I kept the model and threshold fixed, compared the same recordings, and used shared speaker-block resampling to describe uncertainty. These are development diagnostics; the final evaluation is still untouched."
 
 **Try explaining:** Why is 100% spoof recall insufficient? How can a useful ranking have a bad fixed threshold? Why must duplicated bootstrap speakers retain all their clips? Why is a paired interval different from subtracting two interval endpoints? Which uncertainty does a post-selection development bootstrap miss?
+
+## Day 12 — explain what “fast” actually measured
+
+**What changed:** We measured feature extraction and prediction separately on all 700 clean development clips, using one native thread, warm-up calls and a fixed repeat procedure. The run retained 10,528 measured durations across 43 passes. Hardware details, aggregate results and pass logs are published. All 126 tests pass and the original 36 frozen bindings still verify. Evaluation audio remains untouched.
+
+**What are the actual costs?** On the recorded i5-1135G7 laptop, median MFCC extraction is 1.7839 ms per clip. Median one-clip prediction is 0.2807 ms for logistic regression, 0.4144 ms for SVM and 10.0606 ms for the forest. That comparison includes each existing fitted pipeline. Predicting from already available features is only one component of processing audio.
+
+**Why separate latency from throughput?** A single SVM call for 700 clips has median latency 25.3412 ms, while mean elapsed time amortized over the seven batch calls is 0.035477 ms per clip. That per-clip cost is not the response time of a request that arrives alone. Batching shares overhead across rows and may involve waiting to collect them. Forest is slower than SVM for one clip here, yet its measured bulk cost per row is lower.
+
+**What is excluded?** Imports, model loading, acquisition, decoding/resampling/cropping, hashes, degradation transforms, cache lookup, output validation, threshold application, logging, network/UI work and queueing. Clean waveforms and numeric inputs are already in RAM. MFCC allocations and the existing model pipeline are included. Summing component medians or p95 values would not create a measured end-to-end percentile.
+
+**Why warm up and repeat?** First calls can include initialization, and desktop load or scheduling can vary. We warm the first five feature/single inputs and one batch per model, then record three feature/single passes and seven batches. We report pooled medians, p95 and maxima without dropping slow calls. The SVM maximum was 26.8512 ms despite its 0.4144 ms median; this run does not identify the cause. Seven batches cannot establish a reliable service tail-latency guarantee.
+
+**Does a low real-time factor prove live detection?** No. Feature compute seconds divided by processed audio seconds is about 0.000583 here, but this full-clip summary detector still needs the recording. Audio capture, preprocessing, transport and scheduling add time. Hardware memory capacity and model-file bytes are also not peak runtime-memory measurements.
+
+**Did batching change predictions?** Every full-batch score matches the original run exactly. Logistic single-clip computation differs by at most 4.44e-16, consistent with floating-point operation-order sensitivity; all fixed decisions remain unchanged. Other models had zero observed drift. The runner reports such differences rather than changing thresholds or pretending all computation shapes must be bit-identical.
+
+**How can someone check the numbers?** The aggregate report hashes the raw local timing log and public 43-row pass log. A separate standard-library calculation checked all 10,528 durations, pass totals, nine groups, 18 quantiles, throughput and real-time-factor denominators. The original feature hashes and score artifact tie the measured operations to the same frozen experiment. Timings can vary on another run while the procedure and prediction checks remain reproducible.
+
+**Interview answer today:** "I report computation cost with a precise boundary: MFCC extraction, one-clip prediction and full-batch throughput are separate measurements. On my laptop SVM prediction has a 0.41 ms median, but that excludes reading and preprocessing audio. I record hardware, warm-up, threads, outliers and repeat logs, and verify the benchmark still computes the original features and scores. Fast computation does not fix the robustness failures I measured earlier."
+
+**Try explaining:** Why can a forest's speed ordering reverse between one clip and a large batch? Why is batch milliseconds divided by rows not single-request latency? What does p95 from only seven calls fail to establish? Why is real-time factor not streaming delay? Why must cost measurements check prediction identity too?

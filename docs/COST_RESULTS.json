@@ -1,0 +1,310 @@
+{
+  "schema_version": 1,
+  "scope": "warm-process component costs on 700 clean ASVspoof 2019 LA development clips; no evaluation audio",
+  "started_utc": "2026-10-21T13:37:45.026309+00:00",
+  "finished_utc": "2026-10-21T13:38:13.050164+00:00",
+  "config": {
+    "schema_version": 1,
+    "feature_repeats": 3,
+    "single_clip_repeats": 3,
+    "batch_repeats": 7,
+    "warmup_clips": 5,
+    "thread_limit": 1
+  },
+  "hardware": {
+    "system": "Windows",
+    "release": "11",
+    "os_version": "10.0.26200",
+    "machine": "AMD64",
+    "cpu_description": "11th Gen Intel(R) Core(TM) i5-1135G7 @ 2.40GHz",
+    "logical_cpus": 8,
+    "physical_memory_bytes": 16913522688,
+    "power_ac_online": true
+  },
+  "native_threadpools": [
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "prefix": "libscipy_openblas",
+      "version": "0.3.34.106.0",
+      "num_threads": 1,
+      "architecture": "SkylakeX",
+      "threading_layer": "pthreads"
+    },
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "prefix": "libscipy_openblas",
+      "version": "0.3.31.dev",
+      "num_threads": 1,
+      "architecture": "SkylakeX",
+      "threading_layer": "pthreads"
+    },
+    {
+      "user_api": "openmp",
+      "internal_api": "openmp",
+      "prefix": "vcomp",
+      "version": null,
+      "num_threads": 1
+    }
+  ],
+  "python": "3.14.7",
+  "audio_runtime": {
+    "python": "3.14.7",
+    "system": "Windows",
+    "machine": "AMD64",
+    "libsndfile": "1.2.2",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "soundfile": "0.13.1"
+    }
+  },
+  "model_runtime": {
+    "scikit-learn": "1.9.1",
+    "joblib": "1.6.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "threadpoolctl": "3.7.0"
+  },
+  "timer": {
+    "name": "time.perf_counter_ns",
+    "implementation": "QueryPerformanceCounter()",
+    "resolution_seconds": 1e-07,
+    "monotonic": true,
+    "overhead_subtracted": false
+  },
+  "gc_enabled": true,
+  "procedure": {
+    "warmup": "first five manifest clips for features and each single model; one full-batch call per model",
+    "input_order": "original development manifest order in every pass; model order rotates by repeat",
+    "features": "complete frozen extract_features call on preloaded processed float32 waveforms; includes feature allocations",
+    "inference": "frozen model_scores including fitted pipeline and class/finite checks; contiguous float64 input already materialized",
+    "excluded": [
+      "imports and warm-up",
+      "audio acquisition/decoding/preprocessing/hashing",
+      "codec/noise/bandwidth transformations",
+      "cache lookup and model loading",
+      "score comparison, threshold application and logging",
+      "HTTP/UI, concurrency and queuing"
+    ],
+    "quantiles": "numpy linear on pooled measured calls; batch percentiles use only seven calls",
+    "timed_totals": "sum of measured call durations, not complete pass or job elapsed time",
+    "batch_amortization": "batch elapsed / 700 is throughput-derived cost, not one-clip latency"
+  },
+  "recordings": 700,
+  "processed_audio_seconds": 2399.2248125,
+  "processed_frame_range": [
+    13123,
+    149501
+  ],
+  "source_manifest_sha256": "6656418785ebae485a73a317a4168323d482115b91891a9fed16a21f17210d71",
+  "source_recording_evidence_sha256": "bb8e4030742386d7799da623d649f9e337206515fc9302dff571d1e555cf6927",
+  "source_clean_scores_sha256": "261be7c3e102db92823fac06c8b37b53c1daa981b7b0239e523fc1e8fed77a5f",
+  "source_code_sha256": {
+    "costs.py": "7e20227e970cbfd38efd6c52e9236c6c936c7bc60dba873b3f483facf81a5ad8"
+  },
+  "source_cost_config_sha256": "6357855889c392b9866f8944c9a7eff3efab1f889c7bb3df96d6e191d932965a",
+  "frozen_lock_sha256": "54ed0f229730513ea6aa6f5f405b358c2fae2e9e39428ad480a77d7d7a1ce346",
+  "frozen_file_bindings_verified": 36,
+  "all_feature_vectors_match_original_evidence": true,
+  "all_batch_scores_identical_to_original": true,
+  "one_clip_score_absolute_tolerance": 1e-12,
+  "one_clip_numerical_checks": {
+    "majority": {
+      "maximum_absolute_single_vs_batch_score_difference": 0.0,
+      "decision_difference_call_count": 0,
+      "decision_difference_record_indices": []
+    },
+    "logistic": {
+      "maximum_absolute_single_vs_batch_score_difference": 4.440892098500626e-16,
+      "decision_difference_call_count": 0,
+      "decision_difference_record_indices": []
+    },
+    "svm": {
+      "maximum_absolute_single_vs_batch_score_difference": 0.0,
+      "decision_difference_call_count": 0,
+      "decision_difference_record_indices": []
+    },
+    "random_forest": {
+      "maximum_absolute_single_vs_batch_score_difference": 0.0,
+      "decision_difference_call_count": 0,
+      "decision_difference_record_indices": []
+    }
+  },
+  "one_clip_fixed_decisions_unchanged": true,
+  "models_refitted": false,
+  "thresholds_changed": false,
+  "evaluation_audio_processed": false,
+  "waveform_files_retained": false,
+  "summary": {
+    "features": {
+      "timed_calls": 2100,
+      "processed_rows_with_repeats": 2100,
+      "timed_total_ns": 4195829400,
+      "call_latency_ms": {
+        "minimum": 0.5528,
+        "p50": 1.7839,
+        "p95": 4.081384999999999,
+        "maximum": 7.1775
+      },
+      "amortized_ms_per_clip": 1.9980139999999997,
+      "clips_per_timed_second": 500.49699351455996,
+      "processed_audio_seconds_with_repeats": 7197.6744375,
+      "real_time_factor": 0.0005829423706829057
+    },
+    "models": {
+      "majority": {
+        "one_clip": {
+          "timed_calls": 2100,
+          "processed_rows_with_repeats": 2100,
+          "timed_total_ns": 27627000,
+          "call_latency_ms": {
+            "minimum": 0.0117,
+            "p50": 0.0125,
+            "p95": 0.0146,
+            "maximum": 0.3401
+          },
+          "amortized_ms_per_clip": 0.013155714285714284,
+          "clips_per_timed_second": 76012.59637311327,
+          "processed_audio_seconds_with_repeats": 7197.6744375,
+          "real_time_factor": 3.838323091700686e-06
+        },
+        "batch_700": {
+          "timed_calls": 7,
+          "processed_rows_with_repeats": 4900,
+          "timed_total_ns": 340600,
+          "call_latency_ms": {
+            "minimum": 0.0352,
+            "p50": 0.0493,
+            "p95": 0.07272999999999998,
+            "maximum": 0.0823
+          },
+          "amortized_ms_per_clip": 6.951020408163266e-05,
+          "clips_per_timed_second": 14386376.981796829,
+          "processed_audio_seconds_with_repeats": 16794.5736875,
+          "real_time_factor": 2.0280359974454395e-08
+        },
+        "artifact_bytes": 583
+      },
+      "logistic": {
+        "one_clip": {
+          "timed_calls": 2100,
+          "processed_rows_with_repeats": 2100,
+          "timed_total_ns": 599560300,
+          "call_latency_ms": {
+            "minimum": 0.274,
+            "p50": 0.2807,
+            "p95": 0.303405,
+            "maximum": 0.585
+          },
+          "amortized_ms_per_clip": 0.28550490476190477,
+          "clips_per_timed_second": 3502.566797701582,
+          "processed_audio_seconds_with_repeats": 7197.6744375,
+          "real_time_factor": 8.329916908665405e-05
+        },
+        "batch_700": {
+          "timed_calls": 7,
+          "processed_rows_with_repeats": 4900,
+          "timed_total_ns": 4654500,
+          "call_latency_ms": {
+            "minimum": 0.5818,
+            "p50": 0.6874,
+            "p95": 0.73687,
+            "maximum": 0.739
+          },
+          "amortized_ms_per_clip": 0.0009498979591836734,
+          "clips_per_timed_second": 1052744.6557095284,
+          "processed_audio_seconds_with_repeats": 16794.5736875,
+          "real_time_factor": 2.7714308720228415e-07
+        },
+        "artifact_bytes": 2849
+      },
+      "svm": {
+        "one_clip": {
+          "timed_calls": 2100,
+          "processed_rows_with_repeats": 2100,
+          "timed_total_ns": 931626000,
+          "call_latency_ms": {
+            "minimum": 0.3962,
+            "p50": 0.4144,
+            "p95": 0.50675,
+            "maximum": 26.8512
+          },
+          "amortized_ms_per_clip": 0.44363142857142857,
+          "clips_per_timed_second": 2254.1234357993444,
+          "processed_audio_seconds_with_repeats": 7197.6744375,
+          "real_time_factor": 0.000129434306606897
+        },
+        "batch_700": {
+          "timed_calls": 7,
+          "processed_rows_with_repeats": 4900,
+          "timed_total_ns": 173835900,
+          "call_latency_ms": {
+            "minimum": 23.3727,
+            "p50": 25.3412,
+            "p95": 26.44393,
+            "maximum": 26.7295
+          },
+          "amortized_ms_per_clip": 0.035476714285714285,
+          "clips_per_timed_second": 28187.503271763773,
+          "processed_audio_seconds_with_repeats": 16794.5736875,
+          "real_time_factor": 1.0350718228077677e-05
+        },
+        "artifact_bytes": 182525
+      },
+      "random_forest": {
+        "one_clip": {
+          "timed_calls": 2100,
+          "processed_rows_with_repeats": 2100,
+          "timed_total_ns": 21346996600,
+          "call_latency_ms": {
+            "minimum": 9.8508,
+            "p50": 10.0606,
+            "p95": 10.59583,
+            "maximum": 18.4718
+          },
+          "amortized_ms_per_clip": 10.165236476190476,
+          "clips_per_timed_second": 98.37449451788454,
+          "processed_audio_seconds_with_repeats": 7197.6744375,
+          "real_time_factor": 0.002965818582844176
+        },
+        "batch_700": {
+          "timed_calls": 7,
+          "processed_rows_with_repeats": 4900,
+          "timed_total_ns": 121354000,
+          "call_latency_ms": {
+            "minimum": 16.2855,
+            "p50": 17.5064,
+            "p95": 18.213520000000003,
+            "maximum": 18.2935
+          },
+          "amortized_ms_per_clip": 0.02476612244897959,
+          "clips_per_timed_second": 40377.7378578374,
+          "processed_audio_seconds_with_repeats": 16794.5736875,
+          "real_time_factor": 7.225786272284025e-06
+        },
+        "artifact_bytes": 1227330
+      }
+    }
+  },
+  "measured_calls": 10528,
+  "measured_passes": 43,
+  "local_artifact_sha256": {
+    "passes.csv": "04b03a3f1129f2d76e809f0f0ee38c72d18b9a281a92493f1f7e6f33b5f78e1d",
+    "recordings.json": "32e4752aaa3c693cbcd37db8af742a7756cdfee7496c2d1d989dc226854c75ec",
+    "timings.csv": "ca8ea83b098d50c9f33bbe361d74e50a3937204dc3bd3bcc6759d59c5f2f08d3"
+  },
+  "validation": {
+    "tests_passed": 126,
+    "verified_date": "2026-10-21",
+    "timed_calls_reaggregated": 10528,
+    "pass_logs_verified": 43,
+    "component_groups_verified": 9,
+    "independent_linear_quantiles_verified": 18,
+    "feature_and_batch_prediction_evidence_checks_passed": true,
+    "single_clip_decisions_unchanged": true,
+    "frozen_file_bindings_verified": 36,
+    "evaluation_audio_processed": false
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "feature_repeats": 3,
+  "single_clip_repeats": 3,
+  "batch_repeats": 7,
+  "warmup_clips": 5,
+  "thread_limit": 1
+}

@@ -73,6 +73,9 @@ def main() -> int:
     robustness = commands.add_parser("development-robustness", help="Paired fixed-model development diagnostics and speaker bootstrap")
     robustness.add_argument("--root", default=".")
     robustness.add_argument("--output-dir", default="artifacts/robustness/day11")
+    costs = commands.add_parser("benchmark-costs", help="Measure frozen clean-dev feature and single/batch inference costs")
+    costs.add_argument("--root", default=".")
+    costs.add_argument("--output-dir", default="artifacts/costs/day12")
     args = parser.parse_args()
     try:
         if args.command == "validate-manifest":
@@ -129,12 +132,15 @@ def main() -> int:
         elif args.command == "development-robustness":
             from .robustness import run_robustness
             result = run_robustness(args.root, args.output_dir)
+        elif args.command == "benchmark-costs":
+            from .costs import run_costs
+            result = run_costs(args.root, args.output_dir)
         else:
             from .freeze import verify_freeze
             result = verify_freeze(args.specification, args.root)
     except ImportError:
         extras = "audio,models" if args.command in ("train-baselines", "compare-models", "score-development") else "audio"
-        if args.command in ("audit-compression", "freeze-experiment", "verify-freeze", "development-robustness"):
+        if args.command in ("audit-compression", "freeze-experiment", "verify-freeze", "development-robustness", "benchmark-costs"):
             extras = "audio,models,compression"
         parser.exit(status=2, message=f'Required support: python -m pip install -e ".[{extras}]"\n')
     except (OSError, ValueError) as exc:
