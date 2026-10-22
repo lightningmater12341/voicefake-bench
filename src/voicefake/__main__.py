@@ -76,6 +76,14 @@ def main() -> int:
     costs = commands.add_parser("benchmark-costs", help="Measure frozen clean-dev feature and single/batch inference costs")
     costs.add_argument("--root", default=".")
     costs.add_argument("--output-dir", default="artifacts/costs/day12")
+    eval_audit = commands.add_parser("audit-evaluation", help="Verify frozen evaluation content and exact duplicates against train/dev")
+    eval_audit.add_argument("--root", default=".")
+    eval_audit.add_argument("--output-dir", default="artifacts/evaluation-audit/day13")
+    evaluation = commands.add_parser("evaluate-frozen", help="One journaled evaluation of all frozen models and conditions")
+    evaluation.add_argument("--root", default=".")
+    evaluation.add_argument("--audit-dir", default="artifacts/evaluation-audit/day13")
+    evaluation.add_argument("--output-dir", default="artifacts/evaluation/frozen-v1")
+    evaluation.add_argument("--resume", action="store_true", help="Resume only the same interrupted run and exact inputs/code")
     args = parser.parse_args()
     try:
         if args.command == "validate-manifest":
@@ -135,12 +143,18 @@ def main() -> int:
         elif args.command == "benchmark-costs":
             from .costs import run_costs
             result = run_costs(args.root, args.output_dir)
+        elif args.command == "audit-evaluation":
+            from .evaluation import audit_evaluation
+            result = audit_evaluation(args.root, args.output_dir)
+        elif args.command == "evaluate-frozen":
+            from .evaluation import run_evaluation
+            result = run_evaluation(args.root, args.output_dir, args.audit_dir, args.resume)
         else:
             from .freeze import verify_freeze
             result = verify_freeze(args.specification, args.root)
     except ImportError:
         extras = "audio,models" if args.command in ("train-baselines", "compare-models", "score-development") else "audio"
-        if args.command in ("audit-compression", "freeze-experiment", "verify-freeze", "development-robustness", "benchmark-costs"):
+        if args.command in ("audit-compression", "freeze-experiment", "verify-freeze", "development-robustness", "benchmark-costs", "audit-evaluation", "evaluate-frozen"):
             extras = "audio,models,compression"
         parser.exit(status=2, message=f'Required support: python -m pip install -e ".[{extras}]"\n')
     except (OSError, ValueError) as exc:

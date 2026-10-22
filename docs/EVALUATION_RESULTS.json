@@ -1,0 +1,2833 @@
+{
+  "schema_version": 1,
+  "scope": "single frozen ASVspoof 2019 LA evaluation subset; 100 genuine and 100 per attack A07-A19; not full challenge",
+  "status": "complete",
+  "started_utc": "2026-10-21T15:30:27.171834+00:00",
+  "finished_utc": "2026-10-21T15:33:56.016101+00:00",
+  "frozen_lock_sha256": "54ed0f229730513ea6aa6f5f405b358c2fae2e9e39428ad480a77d7d7a1ce346",
+  "frozen_file_bindings_verified": 36,
+  "primary_model": "svm",
+  "recordings": 1400,
+  "genuine": 100,
+  "spoof": 1300,
+  "conditions": [
+    "clean",
+    "noise_20db",
+    "noise_10db",
+    "bandwidth_8khz",
+    "mp3_32kbps"
+  ],
+  "decision_rules": {
+    "majority": {
+      "mode": "score_at_least",
+      "threshold": 1.0000000000000002
+    },
+    "logistic": {
+      "mode": "score_at_least",
+      "threshold": 0.9898484358811777
+    },
+    "svm": {
+      "mode": "score_at_least",
+      "threshold": 0.262431783372518
+    },
+    "random_forest": {
+      "mode": "score_at_least",
+      "threshold": 0.7851178731435121
+    }
+  },
+  "identity": {
+    "frozen_lock_sha256": "54ed0f229730513ea6aa6f5f405b358c2fae2e9e39428ad480a77d7d7a1ce346",
+    "evaluation_manifest_sha256": "eb8100d17dff341e4ea81f8890a51613eb40848089675218716d5e28dceb6543",
+    "content_audit_sha256": "cb072da91c63f11d0dad465c554752612f4181061c22df382509109c2ebf8433",
+    "source_code_sha256": {
+      "evaluation.py": "23f03b663c92e754c6e4009f01f9691cab429926313537ef80c372407d0f6166",
+      "robustness.py": "1686b3a1d9d1a5a827f1c9b5234362a11b531a5bb4942cfd9dc31359d3cf4d61"
+    }
+  },
+  "source_content_audit_sha256": "cb072da91c63f11d0dad465c554752612f4181061c22df382509109c2ebf8433",
+  "audio_runtime": {
+    "python": "3.14.7",
+    "system": "Windows",
+    "machine": "AMD64",
+    "libsndfile": "1.2.2",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "soundfile": "0.13.1"
+    }
+  },
+  "model_runtime": {
+    "scikit-learn": "1.9.1",
+    "joblib": "1.6.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "threadpoolctl": "3.7.0"
+  },
+  "codec": {
+    "package": "imageio-ffmpeg",
+    "package_version": "0.6.0",
+    "ffmpeg_version": "ffmpeg version 7.1-essentials_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers",
+    "binary_sha256": "2ce797a0f88d7f067180338fb227f7b1928ea727bd9a4d7a1d022f7c52af71a3",
+    "encoder": "libmp3lame",
+    "decoder": "mp3float",
+    "encoder_help_sha256": "a43b2056cd84b96f057b3cd980d2772ee4b3cd972310b95dc684478757b3dbbf"
+  },
+  "evaluation_audio_processed": true,
+  "models_refitted": false,
+  "thresholds_changed": false,
+  "evaluation_used_for_selection": false,
+  "recordings_removed": 0,
+  "processing_failures": 0,
+  "waveform_files_retained": false,
+  "bootstrap_thresholds_reselected": false,
+  "models": {
+    "majority": {
+      "clean": {
+        "statistics": {
+          "roc_auc": {
+            "estimate": 0.5,
+            "interval_95": [
+              0.5,
+              0.5
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          },
+          "eer": {
+            "estimate": 0.5,
+            "interval_95": [
+              0.5,
+              0.5
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          },
+          "false_positive_rate": {
+            "estimate": 0.0,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          },
+          "spoof_recall": {
+            "estimate": 0.0,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "confusion_matrix": [
+          [
+            100,
+            0
+          ],
+          [
+            1300,
+            0
+          ]
+        ],
+        "per_attack": {
+          "A07": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A08": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A09": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A10": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A11": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A12": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A13": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A14": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A15": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A16": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A17": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A18": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A19": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          }
+        },
+        "paired_decision_changes": {
+          "genuine_new_false_alarms": 0,
+          "genuine_false_alarms_removed": 0,
+          "spoofs_newly_detected": 0,
+          "spoofs_no_longer_detected": 0
+        }
+      },
+      "noise_20db": {
+        "statistics": {
+          "roc_auc": {
+            "estimate": 0.5,
+            "interval_95": [
+              0.5,
+              0.5
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          },
+          "eer": {
+            "estimate": 0.5,
+            "interval_95": [
+              0.5,
+              0.5
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          },
+          "false_positive_rate": {
+            "estimate": 0.0,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          },
+          "spoof_recall": {
+            "estimate": 0.0,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "confusion_matrix": [
+          [
+            100,
+            0
+          ],
+          [
+            1300,
+            0
+          ]
+        ],
+        "per_attack": {
+          "A07": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A08": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A09": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A10": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A11": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A12": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A13": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A14": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A15": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A16": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A17": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A18": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A19": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          }
+        },
+        "paired_decision_changes": {
+          "genuine_new_false_alarms": 0,
+          "genuine_false_alarms_removed": 0,
+          "spoofs_newly_detected": 0,
+          "spoofs_no_longer_detected": 0
+        }
+      },
+      "noise_10db": {
+        "statistics": {
+          "roc_auc": {
+            "estimate": 0.5,
+            "interval_95": [
+              0.5,
+              0.5
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          },
+          "eer": {
+            "estimate": 0.5,
+            "interval_95": [
+              0.5,
+              0.5
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          },
+          "false_positive_rate": {
+            "estimate": 0.0,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          },
+          "spoof_recall": {
+            "estimate": 0.0,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "confusion_matrix": [
+          [
+            100,
+            0
+          ],
+          [
+            1300,
+            0
+          ]
+        ],
+        "per_attack": {
+          "A07": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A08": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A09": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A10": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A11": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A12": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A13": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A14": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A15": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A16": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A17": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A18": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A19": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          }
+        },
+        "paired_decision_changes": {
+          "genuine_new_false_alarms": 0,
+          "genuine_false_alarms_removed": 0,
+          "spoofs_newly_detected": 0,
+          "spoofs_no_longer_detected": 0
+        }
+      },
+      "bandwidth_8khz": {
+        "statistics": {
+          "roc_auc": {
+            "estimate": 0.5,
+            "interval_95": [
+              0.5,
+              0.5
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          },
+          "eer": {
+            "estimate": 0.5,
+            "interval_95": [
+              0.5,
+              0.5
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          },
+          "false_positive_rate": {
+            "estimate": 0.0,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          },
+          "spoof_recall": {
+            "estimate": 0.0,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "confusion_matrix": [
+          [
+            100,
+            0
+          ],
+          [
+            1300,
+            0
+          ]
+        ],
+        "per_attack": {
+          "A07": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A08": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A09": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A10": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A11": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A12": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A13": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A14": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A15": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A16": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A17": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A18": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A19": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          }
+        },
+        "paired_decision_changes": {
+          "genuine_new_false_alarms": 0,
+          "genuine_false_alarms_removed": 0,
+          "spoofs_newly_detected": 0,
+          "spoofs_no_longer_detected": 0
+        }
+      },
+      "mp3_32kbps": {
+        "statistics": {
+          "roc_auc": {
+            "estimate": 0.5,
+            "interval_95": [
+              0.5,
+              0.5
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          },
+          "eer": {
+            "estimate": 0.5,
+            "interval_95": [
+              0.5,
+              0.5
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          },
+          "false_positive_rate": {
+            "estimate": 0.0,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          },
+          "spoof_recall": {
+            "estimate": 0.0,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "confusion_matrix": [
+          [
+            100,
+            0
+          ],
+          [
+            1300,
+            0
+          ]
+        ],
+        "per_attack": {
+          "A07": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A08": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A09": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A10": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A11": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A12": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A13": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A14": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A15": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A16": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A17": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A18": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A19": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          }
+        },
+        "paired_decision_changes": {
+          "genuine_new_false_alarms": 0,
+          "genuine_false_alarms_removed": 0,
+          "spoofs_newly_detected": 0,
+          "spoofs_no_longer_detected": 0
+        }
+      }
+    },
+    "logistic": {
+      "clean": {
+        "statistics": {
+          "roc_auc": {
+            "estimate": 0.8687538461538461,
+            "interval_95": [
+              0.8324477101766657,
+              0.9014379855790904
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          },
+          "eer": {
+            "estimate": 0.21692307692307689,
+            "interval_95": [
+              0.18158709688739166,
+              0.2618080357142857
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          },
+          "false_positive_rate": {
+            "estimate": 0.01,
+            "interval_95": [
+              0.0,
+              0.03614457831325301
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          },
+          "spoof_recall": {
+            "estimate": 0.35,
+            "interval_95": [
+              0.299893157538386,
+              0.3986518617802585
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "confusion_matrix": [
+          [
+            99,
+            1
+          ],
+          [
+            845,
+            455
+          ]
+        ],
+        "per_attack": {
+          "A07": {
+            "spoof_count": 100,
+            "detected": 25,
+            "spoof_recall": 0.25
+          },
+          "A08": {
+            "spoof_count": 100,
+            "detected": 81,
+            "spoof_recall": 0.81
+          },
+          "A09": {
+            "spoof_count": 100,
+            "detected": 99,
+            "spoof_recall": 0.99
+          },
+          "A10": {
+            "spoof_count": 100,
+            "detected": 16,
+            "spoof_recall": 0.16
+          },
+          "A11": {
+            "spoof_count": 100,
+            "detected": 30,
+            "spoof_recall": 0.3
+          },
+          "A12": {
+            "spoof_count": 100,
+            "detected": 21,
+            "spoof_recall": 0.21
+          },
+          "A13": {
+            "spoof_count": 100,
+            "detected": 22,
+            "spoof_recall": 0.22
+          },
+          "A14": {
+            "spoof_count": 100,
+            "detected": 71,
+            "spoof_recall": 0.71
+          },
+          "A15": {
+            "spoof_count": 100,
+            "detected": 71,
+            "spoof_recall": 0.71
+          },
+          "A16": {
+            "spoof_count": 100,
+            "detected": 10,
+            "spoof_recall": 0.1
+          },
+          "A17": {
+            "spoof_count": 100,
+            "detected": 5,
+            "spoof_recall": 0.05
+          },
+          "A18": {
+            "spoof_count": 100,
+            "detected": 1,
+            "spoof_recall": 0.01
+          },
+          "A19": {
+            "spoof_count": 100,
+            "detected": 3,
+            "spoof_recall": 0.03
+          }
+        },
+        "paired_decision_changes": {
+          "genuine_new_false_alarms": 0,
+          "genuine_false_alarms_removed": 0,
+          "spoofs_newly_detected": 0,
+          "spoofs_no_longer_detected": 0
+        }
+      },
+      "noise_20db": {
+        "statistics": {
+          "roc_auc": {
+            "estimate": 0.8551692307692308,
+            "interval_95": [
+              0.8147182923945347,
+              0.8904840443018519
+            ],
+            "difference_from_clean": -0.013584615384615306,
+            "paired_difference_interval_95": [
+              -0.04963819500070934,
+              0.018581818280036428
+            ]
+          },
+          "eer": {
+            "estimate": 0.25,
+            "interval_95": [
+              0.19883287779932998,
+              0.2944134668593212
+            ],
+            "difference_from_clean": 0.033076923076923115,
+            "paired_difference_interval_95": [
+              -0.02537419091125213,
+              0.07214078147829951
+            ]
+          },
+          "false_positive_rate": {
+            "estimate": 0.0,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "difference_from_clean": -0.01,
+            "paired_difference_interval_95": [
+              -0.03614457831325301,
+              0.0
+            ]
+          },
+          "spoof_recall": {
+            "estimate": 0.006923076923076923,
+            "interval_95": [
+              0.0027313804693949767,
+              0.011682798474044397
+            ],
+            "difference_from_clean": -0.34307692307692306,
+            "paired_difference_interval_95": [
+              -0.39217300243221337,
+              -0.29343166576037705
+            ]
+          }
+        },
+        "confusion_matrix": [
+          [
+            100,
+            0
+          ],
+          [
+            1291,
+            9
+          ]
+        ],
+        "per_attack": {
+          "A07": {
+            "spoof_count": 100,
+            "detected": 1,
+            "spoof_recall": 0.01
+          },
+          "A08": {
+            "spoof_count": 100,
+            "detected": 1,
+            "spoof_recall": 0.01
+          },
+          "A09": {
+            "spoof_count": 100,
+            "detected": 4,
+            "spoof_recall": 0.04
+          },
+          "A10": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A11": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A12": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A13": {
+            "spoof_count": 100,
+            "detected": 3,
+            "spoof_recall": 0.03
+          },
+          "A14": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A15": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A16": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A17": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A18": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A19": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          }
+        },
+        "paired_decision_changes": {
+          "genuine_new_false_alarms": 0,
+          "genuine_false_alarms_removed": 1,
+          "spoofs_newly_detected": 0,
+          "spoofs_no_longer_detected": 446
+        }
+      },
+      "noise_10db": {
+        "statistics": {
+          "roc_auc": {
+            "estimate": 0.8130538461538461,
+            "interval_95": [
+              0.7622890397484233,
+              0.8571289700139882
+            ],
+            "difference_from_clean": -0.05569999999999997,
+            "paired_difference_interval_95": [
+              -0.09986515394343899,
+              -0.012429619083796629
+            ]
+          },
+          "eer": {
+            "estimate": 0.3,
+            "interval_95": [
+              0.22999731903485257,
+              0.35780035139045685
+            ],
+            "difference_from_clean": 0.0830769230769231,
+            "paired_difference_interval_95": [
+              0.006754792597212661,
+              0.13853816893758722
+            ]
+          },
+          "false_positive_rate": {
+            "estimate": 0.0,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "difference_from_clean": -0.01,
+            "paired_difference_interval_95": [
+              -0.03614457831325301,
+              0.0
+            ]
+          },
+          "spoof_recall": {
+            "estimate": 0.0,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "difference_from_clean": -0.35,
+            "paired_difference_interval_95": [
+              -0.3986518617802585,
+              -0.299893157538386
+            ]
+          }
+        },
+        "confusion_matrix": [
+          [
+            100,
+            0
+          ],
+          [
+            1300,
+            0
+          ]
+        ],
+        "per_attack": {
+          "A07": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A08": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A09": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A10": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A11": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A12": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A13": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A14": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A15": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A16": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A17": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A18": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A19": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          }
+        },
+        "paired_decision_changes": {
+          "genuine_new_false_alarms": 0,
+          "genuine_false_alarms_removed": 1,
+          "spoofs_newly_detected": 0,
+          "spoofs_no_longer_detected": 455
+        }
+      },
+      "bandwidth_8khz": {
+        "statistics": {
+          "roc_auc": {
+            "estimate": 0.8397769230769231,
+            "interval_95": [
+              0.7986188114623648,
+              0.8773756606243983
+            ],
+            "difference_from_clean": -0.02897692307692301,
+            "paired_difference_interval_95": [
+              -0.05512848662741752,
+              -0.0034638333145809107
+            ]
+          },
+          "eer": {
+            "estimate": 0.24230769230769234,
+            "interval_95": [
+              0.20594029381221865,
+              0.28957359392506793
+            ],
+            "difference_from_clean": 0.02538461538461545,
+            "paired_difference_interval_95": [
+              -0.011778361823974749,
+              0.05882655413176754
+            ]
+          },
+          "false_positive_rate": {
+            "estimate": 0.03,
+            "interval_95": [
+              0.0,
+              0.06452359617682198
+            ],
+            "difference_from_clean": 0.019999999999999997,
+            "paired_difference_interval_95": [
+              0.0,
+              0.04807692307692308
+            ]
+          },
+          "spoof_recall": {
+            "estimate": 0.5384615384615384,
+            "interval_95": [
+              0.477009853220984,
+              0.5919182921070792
+            ],
+            "difference_from_clean": 0.18846153846153846,
+            "paired_difference_interval_95": [
+              0.15451616245337751,
+              0.21822586728527749
+            ]
+          }
+        },
+        "confusion_matrix": [
+          [
+            97,
+            3
+          ],
+          [
+            600,
+            700
+          ]
+        ],
+        "per_attack": {
+          "A07": {
+            "spoof_count": 100,
+            "detected": 43,
+            "spoof_recall": 0.43
+          },
+          "A08": {
+            "spoof_count": 100,
+            "detected": 74,
+            "spoof_recall": 0.74
+          },
+          "A09": {
+            "spoof_count": 100,
+            "detected": 99,
+            "spoof_recall": 0.99
+          },
+          "A10": {
+            "spoof_count": 100,
+            "detected": 44,
+            "spoof_recall": 0.44
+          },
+          "A11": {
+            "spoof_count": 100,
+            "detected": 46,
+            "spoof_recall": 0.46
+          },
+          "A12": {
+            "spoof_count": 100,
+            "detected": 75,
+            "spoof_recall": 0.75
+          },
+          "A13": {
+            "spoof_count": 100,
+            "detected": 59,
+            "spoof_recall": 0.59
+          },
+          "A14": {
+            "spoof_count": 100,
+            "detected": 75,
+            "spoof_recall": 0.75
+          },
+          "A15": {
+            "spoof_count": 100,
+            "detected": 71,
+            "spoof_recall": 0.71
+          },
+          "A16": {
+            "spoof_count": 100,
+            "detected": 53,
+            "spoof_recall": 0.53
+          },
+          "A17": {
+            "spoof_count": 100,
+            "detected": 34,
+            "spoof_recall": 0.34
+          },
+          "A18": {
+            "spoof_count": 100,
+            "detected": 19,
+            "spoof_recall": 0.19
+          },
+          "A19": {
+            "spoof_count": 100,
+            "detected": 8,
+            "spoof_recall": 0.08
+          }
+        },
+        "paired_decision_changes": {
+          "genuine_new_false_alarms": 2,
+          "genuine_false_alarms_removed": 0,
+          "spoofs_newly_detected": 271,
+          "spoofs_no_longer_detected": 26
+        }
+      },
+      "mp3_32kbps": {
+        "statistics": {
+          "roc_auc": {
+            "estimate": 0.779723076923077,
+            "interval_95": [
+              0.7303669180261881,
+              0.8226861306286658
+            ],
+            "difference_from_clean": -0.08903076923076914,
+            "paired_difference_interval_95": [
+              -0.12008524060827223,
+              -0.0599968740008847
+            ]
+          },
+          "eer": {
+            "estimate": 0.29,
+            "interval_95": [
+              0.2385282169335455,
+              0.34105405482744805
+            ],
+            "difference_from_clean": 0.0730769230769231,
+            "paired_difference_interval_95": [
+              0.025948292380916074,
+              0.11633036260671542
+            ]
+          },
+          "false_positive_rate": {
+            "estimate": 0.0,
+            "interval_95": [
+              0.0,
+              0.0
+            ],
+            "difference_from_clean": -0.01,
+            "paired_difference_interval_95": [
+              -0.03614457831325301,
+              0.0
+            ]
+          },
+          "spoof_recall": {
+            "estimate": 0.12230769230769231,
+            "interval_95": [
+              0.09786962606842463,
+              0.14907473094699705
+            ],
+            "difference_from_clean": -0.22769230769230767,
+            "paired_difference_interval_95": [
+              -0.2621509956094243,
+              -0.1939784598904497
+            ]
+          }
+        },
+        "confusion_matrix": [
+          [
+            100,
+            0
+          ],
+          [
+            1141,
+            159
+          ]
+        ],
+        "per_attack": {
+          "A07": {
+            "spoof_count": 100,
+            "detected": 5,
+            "spoof_recall": 0.05
+          },
+          "A08": {
+            "spoof_count": 100,
+            "detected": 28,
+            "spoof_recall": 0.28
+          },
+          "A09": {
+            "spoof_count": 100,
+            "detected": 85,
+            "spoof_recall": 0.85
+          },
+          "A10": {
+            "spoof_count": 100,
+            "detected": 1,
+            "spoof_recall": 0.01
+          },
+          "A11": {
+            "spoof_count": 100,
+            "detected": 7,
+            "spoof_recall": 0.07
+          },
+          "A12": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A13": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A14": {
+            "spoof_count": 100,
+            "detected": 9,
+            "spoof_recall": 0.09
+          },
+          "A15": {
+            "spoof_count": 100,
+            "detected": 23,
+            "spoof_recall": 0.23
+          },
+          "A16": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A17": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          },
+          "A18": {
+            "spoof_count": 100,
+            "detected": 1,
+            "spoof_recall": 0.01
+          },
+          "A19": {
+            "spoof_count": 100,
+            "detected": 0,
+            "spoof_recall": 0.0
+          }
+        },
+        "paired_decision_changes": {
+          "genuine_new_false_alarms": 0,
+          "genuine_false_alarms_removed": 1,
+          "spoofs_newly_detected": 1,
+          "spoofs_no_longer_detected": 297
+        }
+      }
+    },
+    "svm": {
+      "clean": {
+        "statistics": {
+          "roc_auc": {
+            "estimate": 0.8915,
+            "interval_95": [
+              0.869830156361489,
+              0.9138962995921517
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          },
+          "eer": {
+            "estimate": 0.17692307692307696,
+            "interval_95": [
+              0.15043958586384407,
+              0.2024456837457883
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          },
+          "false_positive_rate": {
+            "estimate": 0.01,
+            "interval_95": [
+              0.0,
+              0.030326704545454525
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          },
+          "spoof_recall": {
+            "estimate": 0.6276923076923077,
+            "interval_95": [
+              0.5843214120499609,
+              0.6682576884920635
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "confusion_matrix": [
+          [
+            99,
+            1
+          ],
+          [
+            484,
+            816
+          ]
+        ],
+        "per_attack": {
+          "A07": {
+            "spoof_count": 100,
+            "detected": 88,
+            "spoof_recall": 0.88
+          },
+          "A08": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A09": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A10": {
+            "spoof_count": 100,
+            "detected": 72,
+            "spoof_recall": 0.72
+          },
+          "A11": {
+            "spoof_count": 100,
+            "detected": 91,
+            "spoof_recall": 0.91
+          },
+          "A12": {
+            "spoof_count": 100,
+            "detected": 50,
+            "spoof_recall": 0.5
+          },
+          "A13": {
+            "spoof_count": 100,
+            "detected": 89,
+            "spoof_recall": 0.89
+          },
+          "A14": {
+            "spoof_count": 100,
+            "detected": 95,
+            "spoof_recall": 0.95
+          },
+          "A15": {
+            "spoof_count": 100,
+            "detected": 91,
+            "spoof_recall": 0.91
+          },
+          "A16": {
+            "spoof_count": 100,
+            "detected": 33,
+            "spoof_recall": 0.33
+          },
+          "A17": {
+            "spoof_count": 100,
+            "detected": 2,
+            "spoof_recall": 0.02
+          },
+          "A18": {
+            "spoof_count": 100,
+            "detected": 2,
+            "spoof_recall": 0.02
+          },
+          "A19": {
+            "spoof_count": 100,
+            "detected": 3,
+            "spoof_recall": 0.03
+          }
+        },
+        "paired_decision_changes": {
+          "genuine_new_false_alarms": 0,
+          "genuine_false_alarms_removed": 0,
+          "spoofs_newly_detected": 0,
+          "spoofs_no_longer_detected": 0
+        }
+      },
+      "noise_20db": {
+        "statistics": {
+          "roc_auc": {
+            "estimate": 0.6950615384615385,
+            "interval_95": [
+              0.6193828170563677,
+              0.7571717882373458
+            ],
+            "difference_from_clean": -0.19643846153846145,
+            "paired_difference_interval_95": [
+              -0.2720684846444524,
+              -0.13639616254013867
+            ]
+          },
+          "eer": {
+            "estimate": 0.3407692307692308,
+            "interval_95": [
+              0.2888042569372451,
+              0.4003682190422458
+            ],
+            "difference_from_clean": 0.16384615384615386,
+            "paired_difference_interval_95": [
+              0.11247237446193217,
+              0.2291352241772804
+            ]
+          },
+          "false_positive_rate": {
+            "estimate": 0.94,
+            "interval_95": [
+              0.8952255639097745,
+              0.9802076324137268
+            ],
+            "difference_from_clean": 0.9299999999999999,
+            "paired_difference_interval_95": [
+              0.8854166666666666,
+              0.9761974789915966
+            ]
+          },
+          "spoof_recall": {
+            "estimate": 0.9869230769230769,
+            "interval_95": [
+              0.9798769513198441,
+              0.9936310787584673
+            ],
+            "difference_from_clean": 0.35923076923076924,
+            "paired_difference_interval_95": [
+              0.3161289041481975,
+              0.40387934742426956
+            ]
+          }
+        },
+        "confusion_matrix": [
+          [
+            6,
+            94
+          ],
+          [
+            17,
+            1283
+          ]
+        ],
+        "per_attack": {
+          "A07": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A08": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A09": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A10": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A11": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A12": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A13": {
+            "spoof_count": 100,
+            "detected": 98,
+            "spoof_recall": 0.98
+          },
+          "A14": {
+            "spoof_count": 100,
+            "detected": 97,
+            "spoof_recall": 0.97
+          },
+          "A15": {
+            "spoof_count": 100,
+            "detected": 99,
+            "spoof_recall": 0.99
+          },
+          "A16": {
+            "spoof_count": 100,
+            "detected": 98,
+            "spoof_recall": 0.98
+          },
+          "A17": {
+            "spoof_count": 100,
+            "detected": 96,
+            "spoof_recall": 0.96
+          },
+          "A18": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A19": {
+            "spoof_count": 100,
+            "detected": 95,
+            "spoof_recall": 0.95
+          }
+        },
+        "paired_decision_changes": {
+          "genuine_new_false_alarms": 93,
+          "genuine_false_alarms_removed": 0,
+          "spoofs_newly_detected": 470,
+          "spoofs_no_longer_detected": 3
+        }
+      },
+      "noise_10db": {
+        "statistics": {
+          "roc_auc": {
+            "estimate": 0.5774538461538462,
+            "interval_95": [
+              0.5031530371446492,
+              0.6411668617430186
+            ],
+            "difference_from_clean": -0.31404615384615375,
+            "paired_difference_interval_95": [
+              -0.389001519828128,
+              -0.25132434235427653
+            ]
+          },
+          "eer": {
+            "estimate": 0.41,
+            "interval_95": [
+              0.3626373626373626,
+              0.48890025575447565
+            ],
+            "difference_from_clean": 0.23307692307692301,
+            "paired_difference_interval_95": [
+              0.1830859953683372,
+              0.3184741522990357
+            ]
+          },
+          "false_positive_rate": {
+            "estimate": 1.0,
+            "interval_95": [
+              1.0,
+              1.0
+            ],
+            "difference_from_clean": 0.99,
+            "paired_difference_interval_95": [
+              0.9696732954545455,
+              1.0
+            ]
+          },
+          "spoof_recall": {
+            "estimate": 1.0,
+            "interval_95": [
+              1.0,
+              1.0
+            ],
+            "difference_from_clean": 0.37230769230769234,
+            "paired_difference_interval_95": [
+              0.33174231150793654,
+              0.4156785879500391
+            ]
+          }
+        },
+        "confusion_matrix": [
+          [
+            0,
+            100
+          ],
+          [
+            0,
+            1300
+          ]
+        ],
+        "per_attack": {
+          "A07": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A08": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A09": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A10": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A11": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A12": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A13": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A14": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A15": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A16": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A17": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A18": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A19": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          }
+        },
+        "paired_decision_changes": {
+          "genuine_new_false_alarms": 99,
+          "genuine_false_alarms_removed": 0,
+          "spoofs_newly_detected": 484,
+          "spoofs_no_longer_detected": 0
+        }
+      },
+      "bandwidth_8khz": {
+        "statistics": {
+          "roc_auc": {
+            "estimate": 0.8992538461538462,
+            "interval_95": [
+              0.8717749828719809,
+              0.9239514191740602
+            ],
+            "difference_from_clean": 0.007753846153846222,
+            "paired_difference_interval_95": [
+              -0.02249312358148494,
+              0.03659208581482307
+            ]
+          },
+          "eer": {
+            "estimate": 0.18000000000000005,
+            "interval_95": [
+              0.14149733913884857,
+              0.20482262097064602
+            ],
+            "difference_from_clean": 0.003076923076923088,
+            "paired_difference_interval_95": [
+              -0.039613861386138614,
+              0.03631952607960939
+            ]
+          },
+          "false_positive_rate": {
+            "estimate": 1.0,
+            "interval_95": [
+              1.0,
+              1.0
+            ],
+            "difference_from_clean": 0.99,
+            "paired_difference_interval_95": [
+              0.9696732954545455,
+              1.0
+            ]
+          },
+          "spoof_recall": {
+            "estimate": 1.0,
+            "interval_95": [
+              1.0,
+              1.0
+            ],
+            "difference_from_clean": 0.37230769230769234,
+            "paired_difference_interval_95": [
+              0.33174231150793654,
+              0.4156785879500391
+            ]
+          }
+        },
+        "confusion_matrix": [
+          [
+            0,
+            100
+          ],
+          [
+            0,
+            1300
+          ]
+        ],
+        "per_attack": {
+          "A07": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A08": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A09": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A10": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A11": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A12": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A13": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A14": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A15": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A16": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A17": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A18": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A19": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          }
+        },
+        "paired_decision_changes": {
+          "genuine_new_false_alarms": 99,
+          "genuine_false_alarms_removed": 0,
+          "spoofs_newly_detected": 484,
+          "spoofs_no_longer_detected": 0
+        }
+      },
+      "mp3_32kbps": {
+        "statistics": {
+          "roc_auc": {
+            "estimate": 0.8031384615384616,
+            "interval_95": [
+              0.7672736213015319,
+              0.8398698084754082
+            ],
+            "difference_from_clean": -0.08836153846153838,
+            "paired_difference_interval_95": [
+              -0.11821842893244316,
+              -0.05788970716792087
+            ]
+          },
+          "eer": {
+            "estimate": 0.25769230769230766,
+            "interval_95": [
+              0.22,
+              0.29069616006887233
+            ],
+            "difference_from_clean": 0.0807692307692307,
+            "paired_difference_interval_95": [
+              0.047084667775054476,
+              0.11247440125825282
+            ]
+          },
+          "false_positive_rate": {
+            "estimate": 0.22,
+            "interval_95": [
+              0.12146999211800476,
+              0.31824966078697414
+            ],
+            "difference_from_clean": 0.21,
+            "paired_difference_interval_95": [
+              0.1099381720430108,
+              0.31313131313131315
+            ]
+          },
+          "spoof_recall": {
+            "estimate": 0.7315384615384616,
+            "interval_95": [
+              0.6902720171582047,
+              0.7672757528284828
+            ],
+            "difference_from_clean": 0.10384615384615392,
+            "paired_difference_interval_95": [
+              0.08101011375601067,
+              0.12544475145460826
+            ]
+          }
+        },
+        "confusion_matrix": [
+          [
+            78,
+            22
+          ],
+          [
+            349,
+            951
+          ]
+        ],
+        "per_attack": {
+          "A07": {
+            "spoof_count": 100,
+            "detected": 93,
+            "spoof_recall": 0.93
+          },
+          "A08": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A09": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A10": {
+            "spoof_count": 100,
+            "detected": 87,
+            "spoof_recall": 0.87
+          },
+          "A11": {
+            "spoof_count": 100,
+            "detected": 95,
+            "spoof_recall": 0.95
+          },
+          "A12": {
+            "spoof_count": 100,
+            "detected": 81,
+            "spoof_recall": 0.81
+          },
+          "A13": {
+            "spoof_count": 100,
+            "detected": 99,
+            "spoof_recall": 0.99
+          },
+          "A14": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A15": {
+            "spoof_count": 100,
+            "detected": 95,
+            "spoof_recall": 0.95
+          },
+          "A16": {
+            "spoof_count": 100,
+            "detected": 76,
+            "spoof_recall": 0.76
+          },
+          "A17": {
+            "spoof_count": 100,
+            "detected": 17,
+            "spoof_recall": 0.17
+          },
+          "A18": {
+            "spoof_count": 100,
+            "detected": 2,
+            "spoof_recall": 0.02
+          },
+          "A19": {
+            "spoof_count": 100,
+            "detected": 6,
+            "spoof_recall": 0.06
+          }
+        },
+        "paired_decision_changes": {
+          "genuine_new_false_alarms": 21,
+          "genuine_false_alarms_removed": 0,
+          "spoofs_newly_detected": 144,
+          "spoofs_no_longer_detected": 9
+        }
+      }
+    },
+    "random_forest": {
+      "clean": {
+        "statistics": {
+          "roc_auc": {
+            "estimate": 0.8937461538461539,
+            "interval_95": [
+              0.8655235049526809,
+              0.9187625498872631
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          },
+          "eer": {
+            "estimate": 0.17461538461538462,
+            "interval_95": [
+              0.1346153846153846,
+              0.20458730657226062
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          },
+          "false_positive_rate": {
+            "estimate": 0.05,
+            "interval_95": [
+              0.011235955056179775,
+              0.09615384615384616
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          },
+          "spoof_recall": {
+            "estimate": 0.57,
+            "interval_95": [
+              0.5197546396044533,
+              0.6167758109825552
+            ],
+            "difference_from_clean": 0.0,
+            "paired_difference_interval_95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "confusion_matrix": [
+          [
+            95,
+            5
+          ],
+          [
+            559,
+            741
+          ]
+        ],
+        "per_attack": {
+          "A07": {
+            "spoof_count": 100,
+            "detected": 73,
+            "spoof_recall": 0.73
+          },
+          "A08": {
+            "spoof_count": 100,
+            "detected": 94,
+            "spoof_recall": 0.94
+          },
+          "A09": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A10": {
+            "spoof_count": 100,
+            "detected": 55,
+            "spoof_recall": 0.55
+          },
+          "A11": {
+            "spoof_count": 100,
+            "detected": 69,
+            "spoof_recall": 0.69
+          },
+          "A12": {
+            "spoof_count": 100,
+            "detected": 41,
+            "spoof_recall": 0.41
+          },
+          "A13": {
+            "spoof_count": 100,
+            "detected": 80,
+            "spoof_recall": 0.8
+          },
+          "A14": {
+            "spoof_count": 100,
+            "detected": 94,
+            "spoof_recall": 0.94
+          },
+          "A15": {
+            "spoof_count": 100,
+            "detected": 84,
+            "spoof_recall": 0.84
+          },
+          "A16": {
+            "spoof_count": 100,
+            "detected": 24,
+            "spoof_recall": 0.24
+          },
+          "A17": {
+            "spoof_count": 100,
+            "detected": 8,
+            "spoof_recall": 0.08
+          },
+          "A18": {
+            "spoof_count": 100,
+            "detected": 12,
+            "spoof_recall": 0.12
+          },
+          "A19": {
+            "spoof_count": 100,
+            "detected": 7,
+            "spoof_recall": 0.07
+          }
+        },
+        "paired_decision_changes": {
+          "genuine_new_false_alarms": 0,
+          "genuine_false_alarms_removed": 0,
+          "spoofs_newly_detected": 0,
+          "spoofs_no_longer_detected": 0
+        }
+      },
+      "noise_20db": {
+        "statistics": {
+          "roc_auc": {
+            "estimate": 0.6287769230769231,
+            "interval_95": [
+              0.5508511214094324,
+              0.6960764266399141
+            ],
+            "difference_from_clean": -0.26496923076923073,
+            "paired_difference_interval_95": [
+              -0.345484517521221,
+              -0.19818311560680205
+            ]
+          },
+          "eer": {
+            "estimate": 0.38,
+            "interval_95": [
+              0.3103448275862069,
+              0.46080316742081445
+            ],
+            "difference_from_clean": 0.2053846153846154,
+            "paired_difference_interval_95": [
+              0.1354172839290216,
+              0.2889760672955394
+            ]
+          },
+          "false_positive_rate": {
+            "estimate": 0.4,
+            "interval_95": [
+              0.2844807813982917,
+              0.5242838604248774
+            ],
+            "difference_from_clean": 0.35000000000000003,
+            "paired_difference_interval_95": [
+              0.2413793103448276,
+              0.465360598559856
+            ]
+          },
+          "spoof_recall": {
+            "estimate": 0.6407692307692308,
+            "interval_95": [
+              0.5888946744276362,
+              0.6983374585532154
+            ],
+            "difference_from_clean": 0.0707692307692308,
+            "paired_difference_interval_95": [
+              -0.008600661222980614,
+              0.16022955678729087
+            ]
+          }
+        },
+        "confusion_matrix": [
+          [
+            60,
+            40
+          ],
+          [
+            467,
+            833
+          ]
+        ],
+        "per_attack": {
+          "A07": {
+            "spoof_count": 100,
+            "detected": 78,
+            "spoof_recall": 0.78
+          },
+          "A08": {
+            "spoof_count": 100,
+            "detected": 65,
+            "spoof_recall": 0.65
+          },
+          "A09": {
+            "spoof_count": 100,
+            "detected": 85,
+            "spoof_recall": 0.85
+          },
+          "A10": {
+            "spoof_count": 100,
+            "detected": 60,
+            "spoof_recall": 0.6
+          },
+          "A11": {
+            "spoof_count": 100,
+            "detected": 72,
+            "spoof_recall": 0.72
+          },
+          "A12": {
+            "spoof_count": 100,
+            "detected": 42,
+            "spoof_recall": 0.42
+          },
+          "A13": {
+            "spoof_count": 100,
+            "detected": 54,
+            "spoof_recall": 0.54
+          },
+          "A14": {
+            "spoof_count": 100,
+            "detected": 58,
+            "spoof_recall": 0.58
+          },
+          "A15": {
+            "spoof_count": 100,
+            "detected": 68,
+            "spoof_recall": 0.68
+          },
+          "A16": {
+            "spoof_count": 100,
+            "detected": 51,
+            "spoof_recall": 0.51
+          },
+          "A17": {
+            "spoof_count": 100,
+            "detected": 65,
+            "spoof_recall": 0.65
+          },
+          "A18": {
+            "spoof_count": 100,
+            "detected": 78,
+            "spoof_recall": 0.78
+          },
+          "A19": {
+            "spoof_count": 100,
+            "detected": 57,
+            "spoof_recall": 0.57
+          }
+        },
+        "paired_decision_changes": {
+          "genuine_new_false_alarms": 36,
+          "genuine_false_alarms_removed": 1,
+          "spoofs_newly_detected": 341,
+          "spoofs_no_longer_detected": 249
+        }
+      },
+      "noise_10db": {
+        "statistics": {
+          "roc_auc": {
+            "estimate": 0.5635923076923077,
+            "interval_95": [
+              0.49430052650936157,
+              0.6319181882407074
+            ],
+            "difference_from_clean": -0.33015384615384613,
+            "paired_difference_interval_95": [
+              -0.4050162319296619,
+              -0.26235017685213624
+            ]
+          },
+          "eer": {
+            "estimate": 0.46,
+            "interval_95": [
+              0.4013159667261644,
+              0.5276317759808327
+            ],
+            "difference_from_clean": 0.2853846153846154,
+            "paired_difference_interval_95": [
+              0.22579854522454146,
+              0.36842243426931937
+            ]
+          },
+          "false_positive_rate": {
+            "estimate": 0.81,
+            "interval_95": [
+              0.7108433734939759,
+              0.8990825688073395
+            ],
+            "difference_from_clean": 0.76,
+            "paired_difference_interval_95": [
+              0.6666666666666667,
+              0.8505747126436781
+            ]
+          },
+          "spoof_recall": {
+            "estimate": 0.8853846153846154,
+            "interval_95": [
+              0.8429507057142674,
+              0.9246007264042987
+            ],
+            "difference_from_clean": 0.3153846153846155,
+            "paired_difference_interval_95": [
+              0.24398516678824522,
+              0.38702854658104624
+            ]
+          }
+        },
+        "confusion_matrix": [
+          [
+            19,
+            81
+          ],
+          [
+            149,
+            1151
+          ]
+        ],
+        "per_attack": {
+          "A07": {
+            "spoof_count": 100,
+            "detected": 94,
+            "spoof_recall": 0.94
+          },
+          "A08": {
+            "spoof_count": 100,
+            "detected": 82,
+            "spoof_recall": 0.82
+          },
+          "A09": {
+            "spoof_count": 100,
+            "detected": 94,
+            "spoof_recall": 0.94
+          },
+          "A10": {
+            "spoof_count": 100,
+            "detected": 89,
+            "spoof_recall": 0.89
+          },
+          "A11": {
+            "spoof_count": 100,
+            "detected": 93,
+            "spoof_recall": 0.93
+          },
+          "A12": {
+            "spoof_count": 100,
+            "detected": 83,
+            "spoof_recall": 0.83
+          },
+          "A13": {
+            "spoof_count": 100,
+            "detected": 80,
+            "spoof_recall": 0.8
+          },
+          "A14": {
+            "spoof_count": 100,
+            "detected": 86,
+            "spoof_recall": 0.86
+          },
+          "A15": {
+            "spoof_count": 100,
+            "detected": 85,
+            "spoof_recall": 0.85
+          },
+          "A16": {
+            "spoof_count": 100,
+            "detected": 86,
+            "spoof_recall": 0.86
+          },
+          "A17": {
+            "spoof_count": 100,
+            "detected": 91,
+            "spoof_recall": 0.91
+          },
+          "A18": {
+            "spoof_count": 100,
+            "detected": 98,
+            "spoof_recall": 0.98
+          },
+          "A19": {
+            "spoof_count": 100,
+            "detected": 90,
+            "spoof_recall": 0.9
+          }
+        },
+        "paired_decision_changes": {
+          "genuine_new_false_alarms": 76,
+          "genuine_false_alarms_removed": 0,
+          "spoofs_newly_detected": 511,
+          "spoofs_no_longer_detected": 101
+        }
+      },
+      "bandwidth_8khz": {
+        "statistics": {
+          "roc_auc": {
+            "estimate": 0.8166615384615384,
+            "interval_95": [
+              0.7759571417809147,
+              0.8569743639462386
+            ],
+            "difference_from_clean": -0.07708461538461542,
+            "paired_difference_interval_95": [
+              -0.11041153208595962,
+              -0.04442361542726442
+            ]
+          },
+          "eer": {
+            "estimate": 0.25,
+            "interval_95": [
+              0.21715173077483887,
+              0.3076923076923077
+            ],
+            "difference_from_clean": 0.07538461538461538,
+            "paired_difference_interval_95": [
+              0.04450622727265092,
+              0.1368788928682653
+            ]
+          },
+          "false_positive_rate": {
+            "estimate": 0.21,
+            "interval_95": [
+              0.1340183173784978,
+              0.29
+            ],
+            "difference_from_clean": 0.15999999999999998,
+            "paired_difference_interval_95": [
+              0.0908886158886159,
+              0.23368609125893344
+            ]
+          },
+          "spoof_recall": {
+            "estimate": 0.6807692307692308,
+            "interval_95": [
+              0.6405140551991466,
+              0.7162839159006612
+            ],
+            "difference_from_clean": 0.11076923076923084,
+            "paired_difference_interval_95": [
+              0.06817587899904978,
+              0.15059349746577153
+            ]
+          }
+        },
+        "confusion_matrix": [
+          [
+            79,
+            21
+          ],
+          [
+            415,
+            885
+          ]
+        ],
+        "per_attack": {
+          "A07": {
+            "spoof_count": 100,
+            "detected": 59,
+            "spoof_recall": 0.59
+          },
+          "A08": {
+            "spoof_count": 100,
+            "detected": 97,
+            "spoof_recall": 0.97
+          },
+          "A09": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A10": {
+            "spoof_count": 100,
+            "detected": 60,
+            "spoof_recall": 0.6
+          },
+          "A11": {
+            "spoof_count": 100,
+            "detected": 59,
+            "spoof_recall": 0.59
+          },
+          "A12": {
+            "spoof_count": 100,
+            "detected": 94,
+            "spoof_recall": 0.94
+          },
+          "A13": {
+            "spoof_count": 100,
+            "detected": 56,
+            "spoof_recall": 0.56
+          },
+          "A14": {
+            "spoof_count": 100,
+            "detected": 88,
+            "spoof_recall": 0.88
+          },
+          "A15": {
+            "spoof_count": 100,
+            "detected": 93,
+            "spoof_recall": 0.93
+          },
+          "A16": {
+            "spoof_count": 100,
+            "detected": 68,
+            "spoof_recall": 0.68
+          },
+          "A17": {
+            "spoof_count": 100,
+            "detected": 46,
+            "spoof_recall": 0.46
+          },
+          "A18": {
+            "spoof_count": 100,
+            "detected": 43,
+            "spoof_recall": 0.43
+          },
+          "A19": {
+            "spoof_count": 100,
+            "detected": 22,
+            "spoof_recall": 0.22
+          }
+        },
+        "paired_decision_changes": {
+          "genuine_new_false_alarms": 16,
+          "genuine_false_alarms_removed": 0,
+          "spoofs_newly_detected": 270,
+          "spoofs_no_longer_detected": 126
+        }
+      },
+      "mp3_32kbps": {
+        "statistics": {
+          "roc_auc": {
+            "estimate": 0.8458076923076924,
+            "interval_95": [
+              0.8087289055939166,
+              0.8791244726743622
+            ],
+            "difference_from_clean": -0.047938461538461485,
+            "paired_difference_interval_95": [
+              -0.08588830125993745,
+              -0.0130729950493741
+            ]
+          },
+          "eer": {
+            "estimate": 0.21846153846153848,
+            "interval_95": [
+              0.17734053599683547,
+              0.26360134986427997
+            ],
+            "difference_from_clean": 0.04384615384615387,
+            "paired_difference_interval_95": [
+              0.0012643286871579233,
+              0.09608938075074702
+            ]
+          },
+          "false_positive_rate": {
+            "estimate": 0.09,
+            "interval_95": [
+              0.031914893617021274,
+              0.15789473684210525
+            ],
+            "difference_from_clean": 0.039999999999999994,
+            "paired_difference_interval_95": [
+              -0.031914893617021274,
+              0.11843671679197992
+            ]
+          },
+          "spoof_recall": {
+            "estimate": 0.6469230769230769,
+            "interval_95": [
+              0.5971403135795907,
+              0.694540280577957
+            ],
+            "difference_from_clean": 0.07692307692307698,
+            "paired_difference_interval_95": [
+              0.0515849324804548,
+              0.10185617860851506
+            ]
+          }
+        },
+        "confusion_matrix": [
+          [
+            91,
+            9
+          ],
+          [
+            459,
+            841
+          ]
+        ],
+        "per_attack": {
+          "A07": {
+            "spoof_count": 100,
+            "detected": 75,
+            "spoof_recall": 0.75
+          },
+          "A08": {
+            "spoof_count": 100,
+            "detected": 97,
+            "spoof_recall": 0.97
+          },
+          "A09": {
+            "spoof_count": 100,
+            "detected": 100,
+            "spoof_recall": 1.0
+          },
+          "A10": {
+            "spoof_count": 100,
+            "detected": 70,
+            "spoof_recall": 0.7
+          },
+          "A11": {
+            "spoof_count": 100,
+            "detected": 78,
+            "spoof_recall": 0.78
+          },
+          "A12": {
+            "spoof_count": 100,
+            "detected": 69,
+            "spoof_recall": 0.69
+          },
+          "A13": {
+            "spoof_count": 100,
+            "detected": 92,
+            "spoof_recall": 0.92
+          },
+          "A14": {
+            "spoof_count": 100,
+            "detected": 96,
+            "spoof_recall": 0.96
+          },
+          "A15": {
+            "spoof_count": 100,
+            "detected": 88,
+            "spoof_recall": 0.88
+          },
+          "A16": {
+            "spoof_count": 100,
+            "detected": 51,
+            "spoof_recall": 0.51
+          },
+          "A17": {
+            "spoof_count": 100,
+            "detected": 17,
+            "spoof_recall": 0.17
+          },
+          "A18": {
+            "spoof_count": 100,
+            "detected": 1,
+            "spoof_recall": 0.01
+          },
+          "A19": {
+            "spoof_count": 100,
+            "detected": 7,
+            "spoof_recall": 0.07
+          }
+        },
+        "paired_decision_changes": {
+          "genuine_new_false_alarms": 7,
+          "genuine_false_alarms_removed": 3,
+          "spoofs_newly_detected": 146,
+          "spoofs_no_longer_detected": 46
+        }
+      }
+    }
+  },
+  "bootstrap": {
+    "method": "paired speaker-block bootstrap",
+    "replicates": 1000,
+    "seed": 42,
+    "confidence": 0.95,
+    "interval": "percentile; numpy quantile method=linear",
+    "threshold_reselection": false,
+    "invalid_draws": 0,
+    "speakers": 64,
+    "requested_draws": 1000,
+    "valid_draws": 1000,
+    "invalid_draw_policy": "exclude draws missing either class; report invalid/valid counts without replacing draws",
+    "draw_indices_sha256": "c18cbd413a3318926f63d214ccda0b5c48f678c42661db3acfbbd93a26c46620",
+    "rng": "numpy.Generator(PCG64)",
+    "speaker_order": "sorted IDs; uniform sampling with replacement; S blocks per draw",
+    "estimand": "clip-weighted metrics after speaker-block resampling; all conditions and models share draws",
+    "per_attack_intervals_computed": false
+  },
+  "local_artifact_sha256": {
+    "scores.npz": "02fbfe162c4b05406f455a5540f6449cc6a9a21c955a7e13f0f13a2a617b6204",
+    "features.npz": "9dd92aeda1e2caa506eb548ea5ed21338b91c8fea03c7a08d3d63f89dd3c738f",
+    "recordings.json": "9cfe8102fe20a4a5854e50aa08b2bc68a708e1298df1589bbd7f408d0becb82f",
+    "processing_failures.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "validation": {
+    "tests_passed_before_scoring": 136,
+    "verified_date": "2026-10-21",
+    "evaluation_recordings": 1400,
+    "feature_vectors": 7000,
+    "independent_auc_checks": 20,
+    "independent_eer_checks": 20,
+    "independent_weighted_speaker_interval_checks": 80,
+    "independent_per_attack_count_checks": 260,
+    "confusion_counts_verified": true,
+    "completed_claim_verified": true,
+    "frozen_file_bindings_verified": 36,
+    "models_refitted": false,
+    "thresholds_changed": false,
+    "evaluation_used_for_selection": false
+  }
+}

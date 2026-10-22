@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "scope": "frozen evaluation recording-content audit against selected train/dev; no detector scores",
+  "status": "pass",
+  "frozen_lock_sha256": "54ed0f229730513ea6aa6f5f405b358c2fae2e9e39428ad480a77d7d7a1ce346",
+  "source_eval_manifest_sha256": "eb8100d17dff341e4ea81f8890a51613eb40848089675218716d5e28dceb6543",
+  "selected_evaluation_recordings": 1400,
+  "evaluation_recordings_fingerprinted": 1400,
+  "baseline_recordings_reverified": 1400,
+  "recordings_checked_in_union": 2800,
+  "failures": 0,
+  "selected_union_manifest_audit": {
+    "rows": 2800,
+    "speakers": 104,
+    "spoofing_methods": [
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06",
+      "A07",
+      "A08",
+      "A09",
+      "A10",
+      "A11",
+      "A12",
+      "A13",
+      "A14",
+      "A15",
+      "A16",
+      "A17",
+      "A18",
+      "A19"
+    ],
+    "counts": {
+      "dev": {
+        "bonafide": 100,
+        "spoof": 600
+      },
+      "eval": {
+        "bonafide": 100,
+        "spoof": 1300
+      },
+      "train": {
+        "bonafide": 100,
+        "spoof": 600
+      }
+    }
+  },
+  "sources": {
+    "train": {
+      "sha256": "65a289e4009400b42bb4f1e47ac60938d93f7f595452d1f220d35defc3de8ab8",
+      "rows": 25380
+    },
+    "dev": {
+      "sha256": "2fedaebf1ba3ae1a9bb7d3ec916804ac237b4eee063a27fa92e6549f03d129c7",
+      "rows": 24844
+    },
+    "eval": {
+      "sha256": "84fce576efff092269a0a6ad247d2e9f2f7b4d4e25a4545efb2518da92708036",
+      "rows": 71237
+    }
+  },
+  "full_source_metadata_audit": {
+    "rows": 121461,
+    "speakers": 107,
+    "spoofing_methods": [
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06",
+      "A07",
+      "A08",
+      "A09",
+      "A10",
+      "A11",
+      "A12",
+      "A13",
+      "A14",
+      "A15",
+      "A16",
+      "A17",
+      "A18",
+      "A19"
+    ],
+    "counts": {
+      "dev": {
+        "bonafide": 2548,
+        "spoof": 22296
+      },
+      "eval": {
+        "bonafide": 7355,
+        "spoof": 63882
+      },
+      "train": {
+        "bonafide": 2580,
+        "spoof": 22800
+      }
+    }
+  },
+  "official_rows_matched": 1400,
+  "full_source_speaker_separation_verified": true,
+  "duplicate_summary": {
+    "encoded_sha256": {
+      "groups": 0,
+      "affected_recordings": 0,
+      "redundant_rows": 0,
+      "cross_split_groups": 0,
+      "within_split_groups": 0,
+      "label_conflict_groups": 0
+    },
+    "decoded_sha256": {
+      "groups": 0,
+      "affected_recordings": 0,
+      "redundant_rows": 0,
+      "cross_split_groups": 0,
+      "within_split_groups": 0,
+      "label_conflict_groups": 0
+    },
+    "processed_sha256": {
+      "groups": 0,
+      "affected_recordings": 0,
+      "redundant_rows": 0,
+      "cross_split_groups": 0,
+      "within_split_groups": 0,
+      "label_conflict_groups": 0
+    }
+  },
+  "prior_recordings_sha256": "bb8e4030742386d7799da623d649f9e337206515fc9302dff571d1e555cf6927",
+  "acquisition_report_sha256": "ff4a3ed8dc8246ba28e518e7a20e98cee3b5b76c93a17773c8dd91d9f38c85da",
+  "source_code_sha256": {
+    "evaluation.py": "23f03b663c92e754c6e4009f01f9691cab429926313537ef80c372407d0f6166"
+  },
+  "runtime": {
+    "python": "3.14.7",
+    "system": "Windows",
+    "machine": "AMD64",
+    "libsndfile": "1.2.2",
+    "packages": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "soundfile": "0.13.1"
+    }
+  },
+  "evaluation_audio_processed": true,
+  "detector_scores_computed": false,
+  "models_refitted": false,
+  "thresholds_changed": false,
+  "recordings_removed": 0,
+  "near_duplicate_detection_performed": false,
+  "encoded_eval_bytes": 85358353,
+  "resampled_recordings": 0,
+  "cropped_recordings": 1,
+  "local_artifact_sha256": {
+    "duplicate_groups.json": "e066f01da3fb37dbf16e4582fd3c8090104787676335a9933d3d1b6634bd7bca",
+    "failures.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "recordings.json": "9b067402275d0306525a7555a50ff893290c84a0de8ffa28c76de4084964d51f"
+  },
+  "verified_date": "2026-10-21",
+  "tests_passed_before_scoring": 136
+}

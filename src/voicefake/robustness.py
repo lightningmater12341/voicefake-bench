@@ -46,10 +46,10 @@ def _statistics(labels, scores, rule):
             "false_positive_rate": operating["false_positive_rate"], "spoof_recall": operating["spoof_recall"]}
 
 
-def summarize_paired(rows, scores, model_definitions, plan):
+def summarize_paired(rows, scores, model_definitions, plan, partition="dev"):
     """All intervals and degraded-minus-clean differences use the same speaker draws."""
-    if not rows or any(row["split"] != "dev" for row in rows):
-        raise ValueError("Paired diagnostics require development only; reject evaluation before processing")
+    if partition not in ("dev", "eval") or not rows or any(row["split"] != partition for row in rows):
+        raise ValueError("Paired diagnostics require only the explicitly declared dev/eval partition")
     if len({row["audio_path"] for row in rows}) != len(rows):
         raise ValueError("Repeated source recording in paired input")
     if any(row["label"] not in ("bonafide", "spoof") for row in rows):

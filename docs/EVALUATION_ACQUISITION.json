@@ -1,0 +1,53 @@
+{
+  "verified_date": "2026-10-21",
+  "dataset_doi": "https://doi.org/10.7488/ds/2555",
+  "dataset_license": "https://opendatacommons.org/licenses/by/1.0/",
+  "archive_url": "https://datashare.ed.ac.uk/server/api/core/bitstreams/a9f87c35-f055-4015-80e2-2fdff0d46269/content",
+  "archive_size_bytes": 7640952520,
+  "archive_md5_published": "30c98f11d8b2bc21f2c257bfd78bb5c5",
+  "full_archive_md5_verified": false,
+  "full_archive_downloaded": false,
+  "frozen_lock_sha256": "54ed0f229730513ea6aa6f5f405b358c2fae2e9e39428ad480a77d7d7a1ce346",
+  "source_manifest_sha256": "eb8100d17dff341e4ea81f8890a51613eb40848089675218716d5e28dceb6543",
+  "selection": {
+    "algorithm": "sha256-ranking-v1",
+    "seed": 42,
+    "per_split_label_attack_cap": 100,
+    "splits": [
+      "eval"
+    ],
+    "rule": "retain every evaluation entry from the original frozen subset; no additional sampling"
+  },
+  "official_protocol_sources": {
+    "train": {
+      "filename": "ASVspoof2019.LA.cm.train.trn.txt",
+      "sha256": "65a289e4009400b42bb4f1e47ac60938d93f7f595452d1f220d35defc3de8ab8",
+      "rows": 25380
+    },
+    "dev": {
+      "filename": "ASVspoof2019.LA.cm.dev.trl.txt",
+      "sha256": "2fedaebf1ba3ae1a9bb7d3ec916804ac237b4eee063a27fa92e6549f03d129c7",
+      "rows": 24844
+    },
+    "eval": {
+      "filename": "ASVspoof2019.LA.cm.eval.trl.txt",
+      "sha256": "84fce576efff092269a0a6ad247d2e9f2f7b4d4e25a4545efb2518da92708036",
+      "rows": 71237
+    }
+  },
+  "free_disk_bytes_before": 182596665344,
+  "clips": 1400,
+  "clips_reused": 0,
+  "audio_bytes": 85358353,
+  "range_bytes_transferred": 99635760,
+  "evaluation_audio_acquired": true,
+  "detector_scores_computed": false,
+  "all_crc_checks_passed": true,
+  "attribution_and_license_retained": true,
+  "local_acquisition_report_sha256": "ff4a3ed8dc8246ba28e518e7a20e98cee3b5b76c93a17773c8dd91d9f38c85da",
+  "retained_terms_sha256": {
+    "README.txt": "aa72c9527424585688697d18d51dfcab1828040e48d2aed5d12f190333935207",
+    "LICENSE_text.txt": "99a4d3e0db6f9a5cd8871f9737b207af01de333f57c6269a11ce755227c1555d"
+  },
+  "partial_archive_integrity_note": "Each selected ZIP member passed CRC and length checks; the full archive MD5 was not verified because the full archive was not downloaded."
+}

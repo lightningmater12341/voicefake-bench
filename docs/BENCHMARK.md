@@ -1,6 +1,6 @@
 # Experiment design, version 0.1
 
-This design records the experiment boundaries. The [experiment specification is now frozen](FROZEN_EXPERIMENT.md) before evaluation audio is acquired or scored. Measured development results are linked below; final evaluation remains prospective.
+This design records the experiment boundaries. The [experiment specification is now frozen](FROZEN_EXPERIMENT.md) before evaluation audio is acquired or scored. Measured development and [frozen evaluation results](EVALUATION.md) are linked below; no choices are retuned from the evaluation report.
 
 ## Question and task
 
@@ -44,9 +44,13 @@ Use clean-training models with unchanged thresholds initially. No tuning on eval
 
 ## Uncertainty and reporting
 
-The implemented [paired development analysis](ROBUSTNESS.md) compares clean and degraded scores for the same source clips. It resamples whole speakers with replacement for 1,000 shared draws (seed 42), calculates 95% percentile intervals and paired changes, keeps thresholds fixed and counts invalid draws without replacement. Metrics are clip-weighted within each draw. Intervals are conditional on the selected models and thresholds; they do not account for development selection or quantify uncertainty across all possible future generators. Evaluation remains reserved for its later reporting milestone.
+The implemented [paired development analysis](ROBUSTNESS.md) compares clean and degraded scores for the same source clips. It resamples whole speakers with replacement for 1,000 shared draws (seed 42), calculates 95% percentile intervals and paired changes, keeps thresholds fixed and counts invalid draws without replacement. Metrics are clip-weighted within each draw. Intervals are conditional on the selected models and thresholds; they do not account for development selection or quantify uncertainty across all possible future generators. The [frozen evaluation report](EVALUATION.md) now applies this same declared plan to the original held-out subset, with no threshold reselection.
 
 Publish real experiment outputs with dataset provenance, exact commands, package versions, configuration hashes, model seeds, sample counts, and measured runtimes. Distinguish metadata fixtures, pipeline smoke checks, development results, and final evaluation results. Do not generate illustrative detection scores or backfill a results table.
+
+## Frozen evaluation outcome
+
+The [held-out report](EVALUATION.md) uses the original 100-genuine/1,300-spoof evaluation subset and all five fixed conditions after an exact-content audit across 2,800 selected recordings. Primary SVM clean recall is 62.77% at 1% observed FPR; compression raises observed FPR to 22%, and 10 dB/bandwidth conditions produce all-spoof decisions. Per-attack counts expose near-complete misses on A17-A19. The original primary model and every saved threshold remain unchanged. Evaluation includes eleven unknown systems and two known algorithm references; it is not thirteen wholly unseen algorithms. Results are for the declared subset and interpolation conventions, not official challenge scoring or current-generator guarantees.
 
 ## Computational cost
 

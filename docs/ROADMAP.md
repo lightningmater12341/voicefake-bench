@@ -16,7 +16,7 @@ Each milestone is one small, meaningful daily increment. A milestone can take mo
 | 10 | Add compression condition; freeze model/threshold/configuration choices | 1,400 deterministic gapless MP3 checks; fixed headroom; frozen data/models/thresholds/conditions and 36 verified file bindings; 105 tests pass | Complete |
 | 11 | Add paired robustness summaries and speaker-bootstrap uncertainty | Same 700 dev clips across five conditions and four frozen models; 1,000 paired speaker draws; independent AUC/count/interval checks; 115 tests pass | Complete |
 | 12 | Measure feature-extraction and model inference costs | Hardware and one-thread warm procedure; 10,528 calls/43 passes independently reaggregated; checked original features/predictions; 126 tests pass | Complete |
-| 13 | Run frozen evaluation once and write failure analysis | Actual clean/degraded scores, per-attack counts, reproducible report | Planned |
+| 13 | Run frozen evaluation once and write failure analysis | 1,400 frozen eval clips; 2,800-recording content audit; five conditions/four models; independent metric/count/interval checks; 136 tests pass | Complete |
 | 14 | Add a small local demo and finish interview walkthrough | Demo tested; explanation matches implemented work and limitations | Planned |
 
 The initial scope uses classical models on a laptop. A neural comparison or a newer external corpus is a later extension, justified by the first benchmark's findings.
