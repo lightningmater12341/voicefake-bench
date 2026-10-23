@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "verified_date": "2026-10-23",
+  "scope": "local demo integration; development replay only, no new benchmark performance measurement",
+  "selection": "first two entries of each label in existing development feature-index order",
+  "development_clips_checked": 4,
+  "identical_repeat_outputs": 4,
+  "cli_matches_library_outputs": 4,
+  "saved_svm_score_matches_absolute_tolerance": 1e-12,
+  "original_feature_hash_matches": 4,
+  "original_threshold_decisions_match": 4,
+  "evaluation_cli_refusal_exit_status": 2,
+  "evaluation_files_rehashed_unchanged": 32,
+  "evaluation_audio_decoded": false,
+  "evaluation_rescored": false,
+  "models_refitted": false,
+  "thresholds_changed": false,
+  "frozen_lock_sha256": "54ed0f229730513ea6aa6f5f405b358c2fae2e9e39428ad480a77d7d7a1ce346",
+  "local_evidence_sha256": "e4d5a3059a33e0680d7f865e3e9beeeb0e75948b13606ec64ced6db6a85b6fa1",
+  "tests_passed": 146,
+  "new_demo_boundary_tests": 10
+}

@@ -84,6 +84,9 @@ def main() -> int:
     evaluation.add_argument("--audit-dir", default="artifacts/evaluation-audit/day13")
     evaluation.add_argument("--output-dir", default="artifacts/evaluation/frozen-v1")
     evaluation.add_argument("--resume", action="store_true", help="Resume only the same interrupted run and exact inputs/code")
+    demo = commands.add_parser("demo-audio", help="Local single-clip inference using the frozen primary SVM")
+    demo.add_argument("path", help="Development or personal audio; evaluation content is refused")
+    demo.add_argument("--root", default=".")
     args = parser.parse_args()
     try:
         if args.command == "validate-manifest":
@@ -149,12 +152,15 @@ def main() -> int:
         elif args.command == "evaluate-frozen":
             from .evaluation import run_evaluation
             result = run_evaluation(args.root, args.output_dir, args.audit_dir, args.resume)
+        elif args.command == "demo-audio":
+            from .demo import demo_audio
+            result = demo_audio(args.path, args.root)
         else:
             from .freeze import verify_freeze
             result = verify_freeze(args.specification, args.root)
     except ImportError:
         extras = "audio,models" if args.command in ("train-baselines", "compare-models", "score-development") else "audio"
-        if args.command in ("audit-compression", "freeze-experiment", "verify-freeze", "development-robustness", "benchmark-costs", "audit-evaluation", "evaluate-frozen"):
+        if args.command in ("audit-compression", "freeze-experiment", "verify-freeze", "development-robustness", "benchmark-costs", "audit-evaluation", "evaluate-frozen", "demo-audio"):
             extras = "audio,models,compression"
         parser.exit(status=2, message=f'Required support: python -m pip install -e ".[{extras}]"\n')
     except (OSError, ValueError) as exc:

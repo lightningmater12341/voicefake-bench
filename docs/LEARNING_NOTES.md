@@ -271,3 +271,22 @@ Future milestones will append their own explanations, actual observations, and l
 **Interview answer today:** "I froze the complete experiment before opening evaluation audio, then reported what it actually did. The SVM detects roughly 63% of clean held-out spoofs at one false alarm among 100 genuine clips, but detects only two examples out of 100 for two attack systems. Compression raises false alarms to 22%, and some conditions make it label every voice fake. My benchmark's value is reproducible evaluation and exposing those failures, not pretending one accuracy score makes it deployable."
 
 **Try explaining:** Why can a new attack ID still represent a known algorithm? Why must evaluation false alarms be measured rather than assumed from development? Why is 100% spoof recall sometimes a useless result? What does an exact-content audit miss? Why may metric verification read saved scores without becoming another model-selection run?
+
+
+## Day 14 - Local demo and final explanation (23 October 2026)
+
+**What changed?** A single-recording command now reuses the frozen primary SVM, its training-fitted scaler, 40 MFCC statistics and original development-selected threshold. It returns a signed margin, explicit flag and processing/provenance details. The final interview walkthrough connects data, fitting, thresholds, failure analysis, uncertainty, costs and the demo.
+
+**Why not show a confidence percentage?** The SVM margin is not calibrated as a probability. A score above 0.262431783372518 triggers a flag; a score below it does not authenticate speech. Calling it 90% confident would invent a meaning the experiment never established.
+
+**Why keep the demo separate from evaluation?** We already completed the held-out report. The command verifies the original freeze before decoding/loading a model and checks existing audit fingerprints to reject selected evaluation paths, encoded copies and exact processed-waveform matches. It never changes a model or threshold. The guard is exact-content protection, not perceptual near-duplicate detection.
+
+**How was it checked?** All 146 tests pass, including ten demo boundary tests. Four development clips, chosen as the first two entries of each label in the original index, reproduced saved feature hashes, threshold decisions and margins within 1e-12; repeats and CLI outputs matched. The evaluation CLI example was refused without decoding, and 32 evaluation evidence files stayed byte-identical. These four plumbing checks are not a new performance estimate.
+
+**What does reproducibility require?** A Git clone has code, configs and aggregate evidence, but deliberately lacks audio/model/cache binaries. The strict frozen demo also needs the original local artifacts and matching runtime, including the completed audit fingerprints. Missing evidence is a clear error, not permission to replace the frozen model or silently retrain.
+
+**Interview answer:** "My demo shows the exact frozen model decision and the recipe that produced it. I can reproduce its feature hashes and development scores, but I cannot turn a margin into a confidence percentage or promise authenticity. The held-out report shows substantial misses and false-alarm shifts; the demo makes that experiment inspectable without changing it."
+
+**Try explaining:** Why does a fresh clone not contain everything needed for frozen inference? What is the difference between a margin and a probability? Why does a correct demonstration on two clips say little about accuracy? How can ranking remain useful while a fixed threshold fails? What evidence supports the failure analysis, and which causal claims were never tested?
+
+All fourteen planned milestones are complete; no additional experiments or extensions are part of this build.

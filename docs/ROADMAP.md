@@ -17,6 +17,6 @@ Each milestone is one small, meaningful daily increment. A milestone can take mo
 | 11 | Add paired robustness summaries and speaker-bootstrap uncertainty | Same 700 dev clips across five conditions and four frozen models; 1,000 paired speaker draws; independent AUC/count/interval checks; 115 tests pass | Complete |
 | 12 | Measure feature-extraction and model inference costs | Hardware and one-thread warm procedure; 10,528 calls/43 passes independently reaggregated; checked original features/predictions; 126 tests pass | Complete |
 | 13 | Run frozen evaluation once and write failure analysis | 1,400 frozen eval clips; 2,800-recording content audit; five conditions/four models; independent metric/count/interval checks; 136 tests pass | Complete |
-| 14 | Add a small local demo and finish interview walkthrough | Demo tested; explanation matches implemented work and limitations | Planned |
+| 14 | Add a small local demo and finish interview walkthrough | Four development-score/feature/CLI replays; evaluation guard; 146 tests pass; final walkthrough matches frozen results and limits | Complete |
 
-The initial scope uses classical models on a laptop. A neural comparison or a newer external corpus is a later extension, justified by the first benchmark's findings.
+All fourteen milestones are complete. The final scope is the classical laptop benchmark, frozen evaluation, local demo and interview walkthrough. The daily build automation stops after the final publication.
